@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: Peyda;
+  font-display: swap;
+  src: url(./assets/font/Peyda/ttf/Peyda-Regular.ttf) format('truetype'),
+  url(./assets/font/Peyda/eot/PeydaWeb-Regular.eot) format('embedded-opentype'),
+  url(./assets/font/Peyda/woff/PeydaWeb-Regular.woff) format('woff'),
+  url(./assets/font/Peyda/woff2/PeydaWeb-Regular.woff2) format('woff2');
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+*{
+  font-family: Peyda;
+  direction: rtl;
+  transition: all 0.2s;
+}
+* ::-webkit-scrollbar{
+  display: none;
+}
+
+#chart *{
+  direction: ltr;
+}
+
+.grid-cols-1{
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.grid-cols-2{
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.grid-cols-3{
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.grid-cols-4{
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.grid-cols-5{
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.grid-cols-6{
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+.grid-cols-7{
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+.grid-cols-8{
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+}
+
+.rmdp-container {
+  width: 100%;
+}

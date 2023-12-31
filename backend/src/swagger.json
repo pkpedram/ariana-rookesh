@@ -1,0 +1,3879 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "ariana API Document",
+        "description": "",
+        "termsOfService":  "https://www.google.com/policies/terms/",
+        "contact": {
+            "email": "contact@snippets.local"
+          },
+          "license": {
+            "name": "BSD License"
+          },
+          "version": "v1"
+        },
+        "host": "localhost:5000",
+    "schemes": [
+        "http"
+      ],
+      "basePath": "/api",
+      "consumes": [
+        "application/json",
+        "multipart/form-data"
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "securityDefinitions": {
+        "bearerAuth": {
+          "type": "apiKey",
+          "in": "header",
+          "name": "Authorization"
+        }
+      },
+      "components": {
+        "securitySchemes": {
+          "bearerAuth": {
+            "type": "http",
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token to access these api endpoints",
+            "scheme": "bearer",
+            "bearerFormat": "JWT"
+          }
+        }
+      },
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "paths": {
+        "/login": {
+          "post": {
+            "operationId": "userlogin",
+            "description": "",
+            "parameters": [
+              {
+                "name": "data",
+                "in": "body",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/login"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "",
+                "schema": {
+                  "$ref": "#/definitions/loginresponse"
+                }
+              },
+              "201": {
+                "description": "",
+                "schema": {
+                  "$ref": "#/definitions/loginresponse"
+                }
+              }
+            },
+            "tags": [
+              "login-register"
+            ]
+          }
+        },
+        "/login/admin": {
+          "post": {
+            "operationId": "adminlogin",
+            "description": "",
+            "parameters": [
+              {
+                "name": "data",
+                "in": "body",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/login"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "",
+                "schema": {
+                  "$ref": "#/definitions/loginresponse"
+                }
+              },
+              "201": {
+                "description": "",
+                "schema": {
+                  "$ref": "#/definitions/loginresponse"
+                }
+              }
+            },
+            "tags": [
+              "login-register"
+            ]
+          }
+        },
+        "/register": {
+          "post": {
+            "operationId": "userRegister",
+            "description": "",
+            "parameters": [
+              {
+                "name": "data",
+                "in": "body",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/register"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "",
+                "schema": {
+                  "$ref": "#/definitions/register"
+                }
+              },
+              "201": {
+                "description": "",
+                "schema": {
+                  "$ref": "#/definitions/register"
+                }
+              }
+            },
+            "tags": [
+              "login-register"
+            ]
+          }
+        },
+        
+                "/contactUsFormCategory": {
+                    "get": {
+                        "operationId": "contactUsFormCategory_get_list",
+                        "description": "contactUsFormCategory get list",
+                        "parameters": [{
+                                    "name": "title",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "ordering",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ],
+                        "responses":{
+                            "200": {
+                                "description": "",
+                                "schema": {
+                                    "requried": [
+                                        "count",
+                                        "result"
+                                    ]
+                                },
+                                "type": "object",
+                                "properties": {
+                                    "count": {
+                                        "type": "integer"
+                                    },
+                                    "results": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "#/definitions/contactUsFormCategory"
+                                        }
+                            
+                                }
+                            }
+                        }
+                    },
+                    "tags": [
+                        "contactUsFormCategory"
+                    ]
+                   
+                    },
+                    "post": {
+                        "operationId": "contactUsFormCategory_create",
+                        "description": "",
+                        "parameters": [
+                         
+                          {
+                              "name": "data",
+                              "in": "body",
+                              "required": true,
+                              "schema": {
+                                "$ref": "#/definitions/contactUsFormCategory"
+                              }
+                            }
+                          
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/contactUsFormCategory"
+                            }
+                          },
+                          "201": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/contactUsFormCategory"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "contactUsFormCategory"
+                        ]
+                      },
+                      "parameters": [ ]
+                },
+                "/contactUsFormCategory/{id}": {
+                    "get": {
+                        "operationId": "contactUsFormCategory_get_detail",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/contactUsFormCategory"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "contactUsFormCategory"
+                        ]
+                      },
+                      "put": {
+                        "operationId": "contactUsFormCategory_update",
+                        "description": "",
+                        "parameters": [
+                          
+                          
+                          {
+                            "name": "data",
+                            "in": "body",
+                            "required": true,
+                            "schema": {
+                              "$ref": "#/definitions/contactUsFormCategory"
+                            }
+                          }
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/contactUsFormCategory"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "contactUsFormCategory"
+                        ]
+                      },
+                      "delete": {
+                        "operationId": "contactUsFormCategory_delete",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "204": {
+                            "description": ""
+                          }
+                        },
+                        "tags": [
+                          "contactUsFormCategory"
+                        ]
+                      },
+                      "parameters": [
+                        {
+                          "name": "id",
+                          "in": "path",
+                          "description": "A unique integer value identifying this contactUsFormCategory",
+                          "required": true,
+                          "type": "string"
+                        }
+                    ]
+                }
+                ,
+                "/category": {
+                    "get": {
+                        "operationId": "category_get_list",
+                        "description": "category get list",
+                        "parameters": [{
+                                    "name": "banner",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "icon",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "name",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "en_name",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "showOnHomePage",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "slug",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "showProductPrices",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "catalog",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ],
+                        "responses":{
+                            "200": {
+                                "description": "",
+                                "schema": {
+                                    "requried": [
+                                        "count",
+                                        "result"
+                                    ]
+                                },
+                                "type": "object",
+                                "properties": {
+                                    "count": {
+                                        "type": "integer"
+                                    },
+                                    "results": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "#/definitions/category"
+                                        }
+                            
+                                }
+                            }
+                        }
+                    },
+                    "tags": [
+                        "category"
+                    ]
+                   
+                    },
+                    "post": {
+                        "operationId": "category_create",
+                        "description": "",
+                        "parameters": [
+                         
+                          
+{
+                              "name": "banner",
+                              "in": "formData",
+                              "type": "file"
+                            },
+{
+                              "name": "icon",
+                              "in": "formData",
+                              "type": "file"
+                            },
+{
+                              "name": "name",
+                              "in": "formData",
+                              "type": "string"
+                            },
+{
+                              "name": "en_name",
+                              "in": "formData",
+                              "type": "string"
+                            },
+{
+                              "name": "showOnHomePage",
+                              "in": "formData",
+                              "type": "boolean"
+                            },
+{
+                              "name": "slug",
+                              "in": "formData",
+                              "type": "string"
+                            },
+{
+                              "name": "showProductPrices",
+                              "in": "formData",
+                              "type": "boolean"
+                            },
+{
+                              "name": "catalog",
+                              "in": "formData",
+                              "type": "file"
+                            }
+                          
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/category"
+                            }
+                          },
+                          "201": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/category"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "category"
+                        ]
+                      },
+                      "parameters": [ ]
+                },
+                "/category/{id}": {
+                    "get": {
+                        "operationId": "category_get_detail",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/category"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "category"
+                        ]
+                      },
+                      "put": {
+                        "operationId": "category_update",
+                        "description": "",
+                        "parameters": [
+                          
+{
+                              "name": "banner",
+                              "in": "formData",
+                              "type": "file"
+                            },
+{
+                              "name": "icon",
+                              "in": "formData",
+                              "type": "file"
+                            },
+{
+                              "name": "catalog",
+                              "in": "formData",
+                              "type": "file"
+                            }
+                          ,
+                          {
+                            "name": "data",
+                            "in": "body",
+                            "required": true,
+                            "schema": {
+                              "$ref": "#/definitions/category"
+                            }
+                          }
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/category"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "category"
+                        ]
+                      },
+                      "delete": {
+                        "operationId": "category_delete",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "204": {
+                            "description": ""
+                          }
+                        },
+                        "tags": [
+                          "category"
+                        ]
+                      },
+                      "parameters": [
+                        {
+                          "name": "id",
+                          "in": "path",
+                          "description": "A unique integer value identifying this category",
+                          "required": true,
+                          "type": "string"
+                        }
+                    ]
+                }
+                ,
+                "/contactUsForm": {
+                    "get": {
+                        "operationId": "contactUsForm_get_list",
+                        "description": "contactUsForm get list",
+                        "parameters": [{
+                                    "name": "relatedContactUsFormCategory",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "fullName",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "phoneNumber",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "companyName",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "relatedProductCategory",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "message",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ],
+                        "responses":{
+                            "200": {
+                                "description": "",
+                                "schema": {
+                                    "requried": [
+                                        "count",
+                                        "result"
+                                    ]
+                                },
+                                "type": "object",
+                                "properties": {
+                                    "count": {
+                                        "type": "integer"
+                                    },
+                                    "results": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "#/definitions/contactUsForm"
+                                        }
+                            
+                                }
+                            }
+                        }
+                    },
+                    "tags": [
+                        "contactUsForm"
+                    ]
+                   
+                    },
+                    "post": {
+                        "operationId": "contactUsForm_create",
+                        "description": "",
+                        "parameters": [
+                         
+                          {
+                              "name": "data",
+                              "in": "body",
+                              "required": true,
+                              "schema": {
+                                "$ref": "#/definitions/contactUsForm"
+                              }
+                            }
+                          
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/contactUsForm"
+                            }
+                          },
+                          "201": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/contactUsForm"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "contactUsForm"
+                        ]
+                      },
+                      "parameters": [ ]
+                },
+                "/contactUsForm/{id}": {
+                    "get": {
+                        "operationId": "contactUsForm_get_detail",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/contactUsForm"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "contactUsForm"
+                        ]
+                      },
+                      "put": {
+                        "operationId": "contactUsForm_update",
+                        "description": "",
+                        "parameters": [
+                          
+                          
+                          {
+                            "name": "data",
+                            "in": "body",
+                            "required": true,
+                            "schema": {
+                              "$ref": "#/definitions/contactUsForm"
+                            }
+                          }
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/contactUsForm"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "contactUsForm"
+                        ]
+                      },
+                      "delete": {
+                        "operationId": "contactUsForm_delete",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "204": {
+                            "description": ""
+                          }
+                        },
+                        "tags": [
+                          "contactUsForm"
+                        ]
+                      },
+                      "parameters": [
+                        {
+                          "name": "id",
+                          "in": "path",
+                          "description": "A unique integer value identifying this contactUsForm",
+                          "required": true,
+                          "type": "string"
+                        }
+                    ]
+                }
+                ,
+                "/province": {
+                    "get": {
+                        "operationId": "province_get_list",
+                        "description": "province get list",
+                        "parameters": [{
+                                    "name": "name",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "en_name",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "ordering",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ],
+                        "responses":{
+                            "200": {
+                                "description": "",
+                                "schema": {
+                                    "requried": [
+                                        "count",
+                                        "result"
+                                    ]
+                                },
+                                "type": "object",
+                                "properties": {
+                                    "count": {
+                                        "type": "integer"
+                                    },
+                                    "results": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "#/definitions/province"
+                                        }
+                            
+                                }
+                            }
+                        }
+                    },
+                    "tags": [
+                        "province"
+                    ]
+                   
+                    },
+                    "post": {
+                        "operationId": "province_create",
+                        "description": "",
+                        "parameters": [
+                         
+                          {
+                              "name": "data",
+                              "in": "body",
+                              "required": true,
+                              "schema": {
+                                "$ref": "#/definitions/province"
+                              }
+                            }
+                          
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/province"
+                            }
+                          },
+                          "201": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/province"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "province"
+                        ]
+                      },
+                      "parameters": [ ]
+                },
+                "/province/{id}": {
+                    "get": {
+                        "operationId": "province_get_detail",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/province"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "province"
+                        ]
+                      },
+                      "put": {
+                        "operationId": "province_update",
+                        "description": "",
+                        "parameters": [
+                          
+                          
+                          {
+                            "name": "data",
+                            "in": "body",
+                            "required": true,
+                            "schema": {
+                              "$ref": "#/definitions/province"
+                            }
+                          }
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/province"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "province"
+                        ]
+                      },
+                      "delete": {
+                        "operationId": "province_delete",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "204": {
+                            "description": ""
+                          }
+                        },
+                        "tags": [
+                          "province"
+                        ]
+                      },
+                      "parameters": [
+                        {
+                          "name": "id",
+                          "in": "path",
+                          "description": "A unique integer value identifying this province",
+                          "required": true,
+                          "type": "string"
+                        }
+                    ]
+                }
+                ,
+                "/city": {
+                    "get": {
+                        "operationId": "city_get_list",
+                        "description": "city get list",
+                        "parameters": [{
+                                    "name": "name",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "en_name",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "ordering",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "relatedProvince",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ],
+                        "responses":{
+                            "200": {
+                                "description": "",
+                                "schema": {
+                                    "requried": [
+                                        "count",
+                                        "result"
+                                    ]
+                                },
+                                "type": "object",
+                                "properties": {
+                                    "count": {
+                                        "type": "integer"
+                                    },
+                                    "results": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "#/definitions/city"
+                                        }
+                            
+                                }
+                            }
+                        }
+                    },
+                    "tags": [
+                        "city"
+                    ]
+                   
+                    },
+                    "post": {
+                        "operationId": "city_create",
+                        "description": "",
+                        "parameters": [
+                         
+                          {
+                              "name": "data",
+                              "in": "body",
+                              "required": true,
+                              "schema": {
+                                "$ref": "#/definitions/city"
+                              }
+                            }
+                          
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/city"
+                            }
+                          },
+                          "201": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/city"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "city"
+                        ]
+                      },
+                      "parameters": [ ]
+                },
+                "/city/{id}": {
+                    "get": {
+                        "operationId": "city_get_detail",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/city"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "city"
+                        ]
+                      },
+                      "put": {
+                        "operationId": "city_update",
+                        "description": "",
+                        "parameters": [
+                          
+                          
+                          {
+                            "name": "data",
+                            "in": "body",
+                            "required": true,
+                            "schema": {
+                              "$ref": "#/definitions/city"
+                            }
+                          }
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/city"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "city"
+                        ]
+                      },
+                      "delete": {
+                        "operationId": "city_delete",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "204": {
+                            "description": ""
+                          }
+                        },
+                        "tags": [
+                          "city"
+                        ]
+                      },
+                      "parameters": [
+                        {
+                          "name": "id",
+                          "in": "path",
+                          "description": "A unique integer value identifying this city",
+                          "required": true,
+                          "type": "string"
+                        }
+                    ]
+                }
+                ,
+                "/staticAttribute": {
+                    "get": {
+                        "operationId": "staticAttribute_get_list",
+                        "description": "staticAttribute get list",
+                        "parameters": [{
+                                    "name": "title",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "en_title",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "icon",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ],
+                        "responses":{
+                            "200": {
+                                "description": "",
+                                "schema": {
+                                    "requried": [
+                                        "count",
+                                        "result"
+                                    ]
+                                },
+                                "type": "object",
+                                "properties": {
+                                    "count": {
+                                        "type": "integer"
+                                    },
+                                    "results": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "#/definitions/staticAttribute"
+                                        }
+                            
+                                }
+                            }
+                        }
+                    },
+                    "tags": [
+                        "staticAttribute"
+                    ]
+                   
+                    },
+                    "post": {
+                        "operationId": "staticAttribute_create",
+                        "description": "",
+                        "parameters": [
+                         
+                          
+{
+                              "name": "title",
+                              "in": "formData",
+                              "type": "string"
+                            },
+{
+                              "name": "en_title",
+                              "in": "formData",
+                              "type": "string"
+                            },
+{
+                              "name": "icon",
+                              "in": "formData",
+                              "type": "file"
+                            }
+                          
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/staticAttribute"
+                            }
+                          },
+                          "201": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/staticAttribute"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "staticAttribute"
+                        ]
+                      },
+                      "parameters": [ ]
+                },
+                "/staticAttribute/{id}": {
+                    "get": {
+                        "operationId": "staticAttribute_get_detail",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/staticAttribute"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "staticAttribute"
+                        ]
+                      },
+                      "put": {
+                        "operationId": "staticAttribute_update",
+                        "description": "",
+                        "parameters": [
+                          
+{
+                              "name": "icon",
+                              "in": "formData",
+                              "type": "file"
+                            }
+                          ,
+                          {
+                            "name": "data",
+                            "in": "body",
+                            "required": true,
+                            "schema": {
+                              "$ref": "#/definitions/staticAttribute"
+                            }
+                          }
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/staticAttribute"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "staticAttribute"
+                        ]
+                      },
+                      "delete": {
+                        "operationId": "staticAttribute_delete",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "204": {
+                            "description": ""
+                          }
+                        },
+                        "tags": [
+                          "staticAttribute"
+                        ]
+                      },
+                      "parameters": [
+                        {
+                          "name": "id",
+                          "in": "path",
+                          "description": "A unique integer value identifying this staticAttribute",
+                          "required": true,
+                          "type": "string"
+                        }
+                    ]
+                }
+                ,
+                "/product": {
+                    "get": {
+                        "operationId": "product_get_list",
+                        "description": "product get list",
+                        "parameters": [{
+                                    "name": "name",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "en_name",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "description",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "en_description",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "price",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "showPrice",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ],
+                        "responses":{
+                            "200": {
+                                "description": "",
+                                "schema": {
+                                    "requried": [
+                                        "count",
+                                        "result"
+                                    ]
+                                },
+                                "type": "object",
+                                "properties": {
+                                    "count": {
+                                        "type": "integer"
+                                    },
+                                    "results": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "#/definitions/product"
+                                        }
+                            
+                                }
+                            }
+                        }
+                    },
+                    "tags": [
+                        "product"
+                    ]
+                   
+                    },
+                    "post": {
+                        "operationId": "product_create",
+                        "description": "",
+                        "parameters": [
+                         
+                          {
+                              "name": "data",
+                              "in": "body",
+                              "required": true,
+                              "schema": {
+                                "$ref": "#/definitions/product"
+                              }
+                            }
+                          
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/product"
+                            }
+                          },
+                          "201": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/product"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "product"
+                        ]
+                      },
+                      "parameters": [ ]
+                },
+                "/product/{id}": {
+                    "get": {
+                        "operationId": "product_get_detail",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/product"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "product"
+                        ]
+                      },
+                      "put": {
+                        "operationId": "product_update",
+                        "description": "",
+                        "parameters": [
+                          
+                          
+                          {
+                            "name": "data",
+                            "in": "body",
+                            "required": true,
+                            "schema": {
+                              "$ref": "#/definitions/product"
+                            }
+                          }
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/product"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "product"
+                        ]
+                      },
+                      "delete": {
+                        "operationId": "product_delete",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "204": {
+                            "description": ""
+                          }
+                        },
+                        "tags": [
+                          "product"
+                        ]
+                      },
+                      "parameters": [
+                        {
+                          "name": "id",
+                          "in": "path",
+                          "description": "A unique integer value identifying this product",
+                          "required": true,
+                          "type": "string"
+                        }
+                    ]
+                }
+                ,
+                "/productAttribute": {
+                    "get": {
+                        "operationId": "productAttribute_get_list",
+                        "description": "productAttribute get list",
+                        "parameters": [{
+                                    "name": "relatedProduct",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "title",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "value",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "en_title",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "en_value",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ],
+                        "responses":{
+                            "200": {
+                                "description": "",
+                                "schema": {
+                                    "requried": [
+                                        "count",
+                                        "result"
+                                    ]
+                                },
+                                "type": "object",
+                                "properties": {
+                                    "count": {
+                                        "type": "integer"
+                                    },
+                                    "results": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "#/definitions/productAttribute"
+                                        }
+                            
+                                }
+                            }
+                        }
+                    },
+                    "tags": [
+                        "productAttribute"
+                    ]
+                   
+                    },
+                    "post": {
+                        "operationId": "productAttribute_create",
+                        "description": "",
+                        "parameters": [
+                         
+                          {
+                              "name": "data",
+                              "in": "body",
+                              "required": true,
+                              "schema": {
+                                "$ref": "#/definitions/productAttribute"
+                              }
+                            }
+                          
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/productAttribute"
+                            }
+                          },
+                          "201": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/productAttribute"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "productAttribute"
+                        ]
+                      },
+                      "parameters": [ ]
+                },
+                "/productAttribute/{id}": {
+                    "get": {
+                        "operationId": "productAttribute_get_detail",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/productAttribute"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "productAttribute"
+                        ]
+                      },
+                      "put": {
+                        "operationId": "productAttribute_update",
+                        "description": "",
+                        "parameters": [
+                          
+                          
+                          {
+                            "name": "data",
+                            "in": "body",
+                            "required": true,
+                            "schema": {
+                              "$ref": "#/definitions/productAttribute"
+                            }
+                          }
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/productAttribute"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "productAttribute"
+                        ]
+                      },
+                      "delete": {
+                        "operationId": "productAttribute_delete",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "204": {
+                            "description": ""
+                          }
+                        },
+                        "tags": [
+                          "productAttribute"
+                        ]
+                      },
+                      "parameters": [
+                        {
+                          "name": "id",
+                          "in": "path",
+                          "description": "A unique integer value identifying this productAttribute",
+                          "required": true,
+                          "type": "string"
+                        }
+                    ]
+                }
+                ,
+                "/productStaticAttributes": {
+                    "get": {
+                        "operationId": "productStaticAttributes_get_list",
+                        "description": "productStaticAttributes get list",
+                        "parameters": [{
+                                    "name": "relatedProduct",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "relatedStaticAttribute",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ],
+                        "responses":{
+                            "200": {
+                                "description": "",
+                                "schema": {
+                                    "requried": [
+                                        "count",
+                                        "result"
+                                    ]
+                                },
+                                "type": "object",
+                                "properties": {
+                                    "count": {
+                                        "type": "integer"
+                                    },
+                                    "results": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "#/definitions/productStaticAttributes"
+                                        }
+                            
+                                }
+                            }
+                        }
+                    },
+                    "tags": [
+                        "productStaticAttributes"
+                    ]
+                   
+                    },
+                    "post": {
+                        "operationId": "productStaticAttributes_create",
+                        "description": "",
+                        "parameters": [
+                         
+                          {
+                              "name": "data",
+                              "in": "body",
+                              "required": true,
+                              "schema": {
+                                "$ref": "#/definitions/productStaticAttributes"
+                              }
+                            }
+                          
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/productStaticAttributes"
+                            }
+                          },
+                          "201": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/productStaticAttributes"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "productStaticAttributes"
+                        ]
+                      },
+                      "parameters": [ ]
+                },
+                "/productStaticAttributes/{id}": {
+                    "get": {
+                        "operationId": "productStaticAttributes_get_detail",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/productStaticAttributes"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "productStaticAttributes"
+                        ]
+                      },
+                      "put": {
+                        "operationId": "productStaticAttributes_update",
+                        "description": "",
+                        "parameters": [
+                          
+                          
+                          {
+                            "name": "data",
+                            "in": "body",
+                            "required": true,
+                            "schema": {
+                              "$ref": "#/definitions/productStaticAttributes"
+                            }
+                          }
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/productStaticAttributes"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "productStaticAttributes"
+                        ]
+                      },
+                      "delete": {
+                        "operationId": "productStaticAttributes_delete",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "204": {
+                            "description": ""
+                          }
+                        },
+                        "tags": [
+                          "productStaticAttributes"
+                        ]
+                      },
+                      "parameters": [
+                        {
+                          "name": "id",
+                          "in": "path",
+                          "description": "A unique integer value identifying this productStaticAttributes",
+                          "required": true,
+                          "type": "string"
+                        }
+                    ]
+                }
+                ,
+                "/productImage": {
+                    "get": {
+                        "operationId": "productImage_get_list",
+                        "description": "productImage get list",
+                        "parameters": [{
+                                    "name": "relatedProduct",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "image",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ],
+                        "responses":{
+                            "200": {
+                                "description": "",
+                                "schema": {
+                                    "requried": [
+                                        "count",
+                                        "result"
+                                    ]
+                                },
+                                "type": "object",
+                                "properties": {
+                                    "count": {
+                                        "type": "integer"
+                                    },
+                                    "results": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "#/definitions/productImage"
+                                        }
+                            
+                                }
+                            }
+                        }
+                    },
+                    "tags": [
+                        "productImage"
+                    ]
+                   
+                    },
+                    "post": {
+                        "operationId": "productImage_create",
+                        "description": "",
+                        "parameters": [
+                         
+                          
+{
+                              "name": "relatedProduct",
+                              "in": "formData",
+                              "type": "string"
+                            },
+{
+                              "name": "image",
+                              "in": "formData",
+                              "type": "file"
+                            }
+                          
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/productImage"
+                            }
+                          },
+                          "201": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/productImage"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "productImage"
+                        ]
+                      },
+                      "parameters": [ ]
+                },
+                "/productImage/{id}": {
+                    "get": {
+                        "operationId": "productImage_get_detail",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/productImage"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "productImage"
+                        ]
+                      },
+                      "put": {
+                        "operationId": "productImage_update",
+                        "description": "",
+                        "parameters": [
+                          
+{
+                              "name": "image",
+                              "in": "formData",
+                              "type": "file"
+                            }
+                          ,
+                          {
+                            "name": "data",
+                            "in": "body",
+                            "required": true,
+                            "schema": {
+                              "$ref": "#/definitions/productImage"
+                            }
+                          }
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/productImage"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "productImage"
+                        ]
+                      },
+                      "delete": {
+                        "operationId": "productImage_delete",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "204": {
+                            "description": ""
+                          }
+                        },
+                        "tags": [
+                          "productImage"
+                        ]
+                      },
+                      "parameters": [
+                        {
+                          "name": "id",
+                          "in": "path",
+                          "description": "A unique integer value identifying this productImage",
+                          "required": true,
+                          "type": "string"
+                        }
+                    ]
+                }
+                ,
+                "/seller": {
+                    "get": {
+                        "operationId": "seller_get_list",
+                        "description": "seller get list",
+                        "parameters": [{
+                                    "name": "name",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "relatedCity",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "description",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "en_name",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "en_description",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "phoneNumber",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "code",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "address",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "agentName",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ],
+                        "responses":{
+                            "200": {
+                                "description": "",
+                                "schema": {
+                                    "requried": [
+                                        "count",
+                                        "result"
+                                    ]
+                                },
+                                "type": "object",
+                                "properties": {
+                                    "count": {
+                                        "type": "integer"
+                                    },
+                                    "results": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "#/definitions/seller"
+                                        }
+                            
+                                }
+                            }
+                        }
+                    },
+                    "tags": [
+                        "seller"
+                    ]
+                   
+                    },
+                    "post": {
+                        "operationId": "seller_create",
+                        "description": "",
+                        "parameters": [
+                         
+                          {
+                              "name": "data",
+                              "in": "body",
+                              "required": true,
+                              "schema": {
+                                "$ref": "#/definitions/seller"
+                              }
+                            }
+                          
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/seller"
+                            }
+                          },
+                          "201": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/seller"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "seller"
+                        ]
+                      },
+                      "parameters": [ ]
+                },
+                "/seller/{id}": {
+                    "get": {
+                        "operationId": "seller_get_detail",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/seller"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "seller"
+                        ]
+                      },
+                      "put": {
+                        "operationId": "seller_update",
+                        "description": "",
+                        "parameters": [
+                          
+                          
+                          {
+                            "name": "data",
+                            "in": "body",
+                            "required": true,
+                            "schema": {
+                              "$ref": "#/definitions/seller"
+                            }
+                          }
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/seller"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "seller"
+                        ]
+                      },
+                      "delete": {
+                        "operationId": "seller_delete",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "204": {
+                            "description": ""
+                          }
+                        },
+                        "tags": [
+                          "seller"
+                        ]
+                      },
+                      "parameters": [
+                        {
+                          "name": "id",
+                          "in": "path",
+                          "description": "A unique integer value identifying this seller",
+                          "required": true,
+                          "type": "string"
+                        }
+                    ]
+                }
+                ,
+                "/productSeller": {
+                    "get": {
+                        "operationId": "productSeller_get_list",
+                        "description": "productSeller get list",
+                        "parameters": [{
+                                    "name": "relatedProduct",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "relatedSeller",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ],
+                        "responses":{
+                            "200": {
+                                "description": "",
+                                "schema": {
+                                    "requried": [
+                                        "count",
+                                        "result"
+                                    ]
+                                },
+                                "type": "object",
+                                "properties": {
+                                    "count": {
+                                        "type": "integer"
+                                    },
+                                    "results": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "#/definitions/productSeller"
+                                        }
+                            
+                                }
+                            }
+                        }
+                    },
+                    "tags": [
+                        "productSeller"
+                    ]
+                   
+                    },
+                    "post": {
+                        "operationId": "productSeller_create",
+                        "description": "",
+                        "parameters": [
+                         
+                          {
+                              "name": "data",
+                              "in": "body",
+                              "required": true,
+                              "schema": {
+                                "$ref": "#/definitions/productSeller"
+                              }
+                            }
+                          
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/productSeller"
+                            }
+                          },
+                          "201": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/productSeller"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "productSeller"
+                        ]
+                      },
+                      "parameters": [ ]
+                },
+                "/productSeller/{id}": {
+                    "get": {
+                        "operationId": "productSeller_get_detail",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/productSeller"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "productSeller"
+                        ]
+                      },
+                      "put": {
+                        "operationId": "productSeller_update",
+                        "description": "",
+                        "parameters": [
+                          
+                          
+                          {
+                            "name": "data",
+                            "in": "body",
+                            "required": true,
+                            "schema": {
+                              "$ref": "#/definitions/productSeller"
+                            }
+                          }
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/productSeller"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "productSeller"
+                        ]
+                      },
+                      "delete": {
+                        "operationId": "productSeller_delete",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "204": {
+                            "description": ""
+                          }
+                        },
+                        "tags": [
+                          "productSeller"
+                        ]
+                      },
+                      "parameters": [
+                        {
+                          "name": "id",
+                          "in": "path",
+                          "description": "A unique integer value identifying this productSeller",
+                          "required": true,
+                          "type": "string"
+                        }
+                    ]
+                }
+                ,
+                "/blogCategory": {
+                    "get": {
+                        "operationId": "blogCategory_get_list",
+                        "description": "blogCategory get list",
+                        "parameters": [{
+                                    "name": "title",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "en_title",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "image",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ],
+                        "responses":{
+                            "200": {
+                                "description": "",
+                                "schema": {
+                                    "requried": [
+                                        "count",
+                                        "result"
+                                    ]
+                                },
+                                "type": "object",
+                                "properties": {
+                                    "count": {
+                                        "type": "integer"
+                                    },
+                                    "results": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "#/definitions/blogCategory"
+                                        }
+                            
+                                }
+                            }
+                        }
+                    },
+                    "tags": [
+                        "blogCategory"
+                    ]
+                   
+                    },
+                    "post": {
+                        "operationId": "blogCategory_create",
+                        "description": "",
+                        "parameters": [
+                         
+                          {
+                              "name": "data",
+                              "in": "body",
+                              "required": true,
+                              "schema": {
+                                "$ref": "#/definitions/blogCategory"
+                              }
+                            }
+                          
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/blogCategory"
+                            }
+                          },
+                          "201": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/blogCategory"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "blogCategory"
+                        ]
+                      },
+                      "parameters": [ ]
+                },
+                "/blogCategory/{id}": {
+                    "get": {
+                        "operationId": "blogCategory_get_detail",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/blogCategory"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "blogCategory"
+                        ]
+                      },
+                      "put": {
+                        "operationId": "blogCategory_update",
+                        "description": "",
+                        "parameters": [
+                          
+                          
+                          {
+                            "name": "data",
+                            "in": "body",
+                            "required": true,
+                            "schema": {
+                              "$ref": "#/definitions/blogCategory"
+                            }
+                          }
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/blogCategory"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "blogCategory"
+                        ]
+                      },
+                      "delete": {
+                        "operationId": "blogCategory_delete",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "204": {
+                            "description": ""
+                          }
+                        },
+                        "tags": [
+                          "blogCategory"
+                        ]
+                      },
+                      "parameters": [
+                        {
+                          "name": "id",
+                          "in": "path",
+                          "description": "A unique integer value identifying this blogCategory",
+                          "required": true,
+                          "type": "string"
+                        }
+                    ]
+                }
+                ,
+                "/blogPost": {
+                    "get": {
+                        "operationId": "blogPost_get_list",
+                        "description": "blogPost get list",
+                        "parameters": [{
+                                    "name": "title",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "en_title",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "content",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "en_content",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "image",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ],
+                        "responses":{
+                            "200": {
+                                "description": "",
+                                "schema": {
+                                    "requried": [
+                                        "count",
+                                        "result"
+                                    ]
+                                },
+                                "type": "object",
+                                "properties": {
+                                    "count": {
+                                        "type": "integer"
+                                    },
+                                    "results": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "#/definitions/blogPost"
+                                        }
+                            
+                                }
+                            }
+                        }
+                    },
+                    "tags": [
+                        "blogPost"
+                    ]
+                   
+                    },
+                    "post": {
+                        "operationId": "blogPost_create",
+                        "description": "",
+                        "parameters": [
+                         
+                          
+{
+                              "name": "title",
+                              "in": "formData",
+                              "type": "string"
+                            },
+{
+                              "name": "en_title",
+                              "in": "formData",
+                              "type": "string"
+                            },
+{
+                              "name": "content",
+                              "in": "formData",
+                              "type": "string"
+                            },
+{
+                              "name": "en_content",
+                              "in": "formData",
+                              "type": "string"
+                            },
+{
+                              "name": "image",
+                              "in": "formData",
+                              "type": "file"
+                            }
+                          
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/blogPost"
+                            }
+                          },
+                          "201": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/blogPost"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "blogPost"
+                        ]
+                      },
+                      "parameters": [ ]
+                },
+                "/blogPost/{id}": {
+                    "get": {
+                        "operationId": "blogPost_get_detail",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/blogPost"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "blogPost"
+                        ]
+                      },
+                      "put": {
+                        "operationId": "blogPost_update",
+                        "description": "",
+                        "parameters": [
+                          
+{
+                              "name": "image",
+                              "in": "formData",
+                              "type": "file"
+                            }
+                          ,
+                          {
+                            "name": "data",
+                            "in": "body",
+                            "required": true,
+                            "schema": {
+                              "$ref": "#/definitions/blogPost"
+                            }
+                          }
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/blogPost"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "blogPost"
+                        ]
+                      },
+                      "delete": {
+                        "operationId": "blogPost_delete",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "204": {
+                            "description": ""
+                          }
+                        },
+                        "tags": [
+                          "blogPost"
+                        ]
+                      },
+                      "parameters": [
+                        {
+                          "name": "id",
+                          "in": "path",
+                          "description": "A unique integer value identifying this blogPost",
+                          "required": true,
+                          "type": "string"
+                        }
+                    ]
+                }
+                ,
+                "/generalSetting": {
+                    "get": {
+                        "operationId": "generalSetting_get_list",
+                        "description": "generalSetting get list",
+                        "parameters": [{
+                                    "name": "title",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "en_title",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "phoneNumber",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "logo",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "secondaryColor",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "catalog",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "aboutUs",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "en_aboutUs",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "contactUs",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "en_contactUs",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "email",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "address",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ,{
+                                    "name": "en_address",
+                                    "in":"query",
+                                    "description": "",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                                ],
+                        "responses":{
+                            "200": {
+                                "description": "",
+                                "schema": {
+                                    "requried": [
+                                        "count",
+                                        "result"
+                                    ]
+                                },
+                                "type": "object",
+                                "properties": {
+                                    "count": {
+                                        "type": "integer"
+                                    },
+                                    "results": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "#/definitions/generalSetting"
+                                        }
+                            
+                                }
+                            }
+                        }
+                    },
+                    "tags": [
+                        "generalSetting"
+                    ]
+                   
+                    },
+                    "post": {
+                        "operationId": "generalSetting_create",
+                        "description": "",
+                        "parameters": [
+                         
+                          
+{
+                              "name": "title",
+                              "in": "formData",
+                              "type": "string"
+                            },
+{
+                              "name": "en_title",
+                              "in": "formData",
+                              "type": "string"
+                            },
+{
+                              "name": "phoneNumber",
+                              "in": "formData",
+                              "type": "string"
+                            },
+{
+                              "name": "logo",
+                              "in": "formData",
+                              "type": "file"
+                            },
+{
+                              "name": "secondaryColor",
+                              "in": "formData",
+                              "type": "string"
+                            },
+{
+                              "name": "catalog",
+                              "in": "formData",
+                              "type": "file"
+                            },
+{
+                              "name": "aboutUs",
+                              "in": "formData",
+                              "type": "string"
+                            },
+{
+                              "name": "en_aboutUs",
+                              "in": "formData",
+                              "type": "string"
+                            },
+{
+                              "name": "contactUs",
+                              "in": "formData",
+                              "type": "string"
+                            },
+{
+                              "name": "en_contactUs",
+                              "in": "formData",
+                              "type": "string"
+                            },
+{
+                              "name": "email",
+                              "in": "formData",
+                              "type": "string"
+                            },
+{
+                              "name": "address",
+                              "in": "formData",
+                              "type": "string"
+                            },
+{
+                              "name": "en_address",
+                              "in": "formData",
+                              "type": "string"
+                            }
+                          
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/generalSetting"
+                            }
+                          },
+                          "201": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/generalSetting"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "generalSetting"
+                        ]
+                      },
+                      "parameters": [ ]
+                },
+                "/generalSetting/{id}": {
+                    "get": {
+                        "operationId": "generalSetting_get_detail",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/generalSetting"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "generalSetting"
+                        ]
+                      },
+                      "put": {
+                        "operationId": "generalSetting_update",
+                        "description": "",
+                        "parameters": [
+                          
+{
+                              "name": "logo",
+                              "in": "formData",
+                              "type": "file"
+                            },
+{
+                              "name": "catalog",
+                              "in": "formData",
+                              "type": "file"
+                            }
+                          ,
+                          {
+                            "name": "data",
+                            "in": "body",
+                            "required": true,
+                            "schema": {
+                              "$ref": "#/definitions/generalSetting"
+                            }
+                          }
+                        ],
+                        "responses": {
+                          "200": {
+                            "description": "",
+                            "schema": {
+                              "$ref": "#/definitions/generalSetting"
+                            }
+                          }
+                        },
+                        "tags": [
+                          "generalSetting"
+                        ]
+                      },
+                      "delete": {
+                        "operationId": "generalSetting_delete",
+                        "description": "",
+                        "parameters": [ ],
+                        "responses": {
+                          "204": {
+                            "description": ""
+                          }
+                        },
+                        "tags": [
+                          "generalSetting"
+                        ]
+                      },
+                      "parameters": [
+                        {
+                          "name": "id",
+                          "in": "path",
+                          "description": "A unique integer value identifying this generalSetting",
+                          "required": true,
+                          "type": "string"
+                        }
+                    ]
+                }
+                
+      },
+      "definitions": {
+        "loginresponse": {
+          "required": [],
+          "type": "object",
+          "properties": {
+            "token": {
+              "title": "JWT TOKEN",
+              "type": "string",
+              "readonly": true
+            }
+          }
+        },
+        "login": {
+          "required": [],
+          "type": "object",
+          "properties": {
+            "username": {
+              "title": "username",
+              "type": "string"
+            },
+            "password": {
+              "title": "password",
+              "type": "string"
+            }
+          }
+        },
+        "register": {
+          "required": [],
+          "type": "object",
+          "properties": {
+            "username": {
+              "title": "username",
+              "type": "string"
+            },
+            "password": {
+              "title": "password",
+              "type": "string"
+            },
+            "email": {
+              "title": "email",
+              "type": "string"
+            },
+            "firstName": {
+              "title": "first name",
+              "type": "string"
+            },
+            "lastName":{
+              "title": "last name",
+              "type": "string"
+            }
+          }
+        },
+        
+                "contactUsFormCategory":{
+                    "required": [],
+                    "type": "object",
+                    "properties": {
+                        "_id": {
+                            "title": "ID",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        
+                                "title": {
+                                    "title": "title",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "ordering": {
+                                    "title": "ordering",
+                                    "type": "integer",
+                                    
+                                    "minLength": 1
+                                }
+                                
+                        ,
+                        
+                                "isActive": {
+                                    "title": "isActive",
+                                    "type": "boolean",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "created_date": {
+                                    "title": "created_date",
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "minLength": 1
+                                }
+                                
+                    }
+                }
+                ,
+                "category":{
+                    "required": [],
+                    "type": "object",
+                    "properties": {
+                        "_id": {
+                            "title": "ID",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        
+                                "banner": {
+                                    "title": "banner",
+                                    "type": "file",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "icon": {
+                                    "title": "icon",
+                                    "type": "file",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "name": {
+                                    "title": "name",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "en_name": {
+                                    "title": "en_name",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "showOnHomePage": {
+                                    "title": "showOnHomePage",
+                                    "type": "boolean",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "slug": {
+                                    "title": "slug",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "showProductPrices": {
+                                    "title": "showProductPrices",
+                                    "type": "boolean",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "catalog": {
+                                    "title": "catalog",
+                                    "type": "file",
+                                    
+                                    "minLength": 1
+                                }
+                                
+                        ,
+                        
+                                "isActive": {
+                                    "title": "isActive",
+                                    "type": "boolean",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "created_date": {
+                                    "title": "created_date",
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "minLength": 1
+                                }
+                                
+                    }
+                }
+                ,
+                "contactUsForm":{
+                    "required": [],
+                    "type": "object",
+                    "properties": {
+                        "_id": {
+                            "title": "ID",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        
+                                "relatedContactUsFormCategory": {
+                                    "title": "relatedContactUsFormCategory",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "fullName": {
+                                    "title": "fullName",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "phoneNumber": {
+                                    "title": "phoneNumber",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "companyName": {
+                                    "title": "companyName",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "relatedProductCategory": {
+                                    "title": "relatedProductCategory",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "message": {
+                                    "title": "message",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                
+                        ,
+                        
+                                "isActive": {
+                                    "title": "isActive",
+                                    "type": "boolean",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "created_date": {
+                                    "title": "created_date",
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "minLength": 1
+                                }
+                                
+                    }
+                }
+                ,
+                "province":{
+                    "required": [],
+                    "type": "object",
+                    "properties": {
+                        "_id": {
+                            "title": "ID",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        
+                                "name": {
+                                    "title": "name",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "en_name": {
+                                    "title": "en_name",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "ordering": {
+                                    "title": "ordering",
+                                    "type": "integer",
+                                    
+                                    "minLength": 1
+                                }
+                                
+                        ,
+                        
+                                "isActive": {
+                                    "title": "isActive",
+                                    "type": "boolean",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "created_date": {
+                                    "title": "created_date",
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "minLength": 1
+                                }
+                                
+                    }
+                }
+                ,
+                "city":{
+                    "required": [],
+                    "type": "object",
+                    "properties": {
+                        "_id": {
+                            "title": "ID",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        
+                                "name": {
+                                    "title": "name",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "en_name": {
+                                    "title": "en_name",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "ordering": {
+                                    "title": "ordering",
+                                    "type": "integer",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "relatedProvince": {
+                                    "title": "relatedProvince",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                
+                        ,
+                        
+                                "isActive": {
+                                    "title": "isActive",
+                                    "type": "boolean",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "created_date": {
+                                    "title": "created_date",
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "minLength": 1
+                                }
+                                
+                    }
+                }
+                ,
+                "staticAttribute":{
+                    "required": [],
+                    "type": "object",
+                    "properties": {
+                        "_id": {
+                            "title": "ID",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        
+                                "title": {
+                                    "title": "title",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "en_title": {
+                                    "title": "en_title",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "icon": {
+                                    "title": "icon",
+                                    "type": "file",
+                                    
+                                    "minLength": 1
+                                }
+                                
+                        ,
+                        
+                                "isActive": {
+                                    "title": "isActive",
+                                    "type": "boolean",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "created_date": {
+                                    "title": "created_date",
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "minLength": 1
+                                }
+                                
+                    }
+                }
+                ,
+                "product":{
+                    "required": [],
+                    "type": "object",
+                    "properties": {
+                        "_id": {
+                            "title": "ID",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        
+                                "name": {
+                                    "title": "name",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "en_name": {
+                                    "title": "en_name",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "description": {
+                                    "title": "description",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "en_description": {
+                                    "title": "en_description",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "price": {
+                                    "title": "price",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "showPrice": {
+                                    "title": "showPrice",
+                                    "type": "boolean",
+                                    
+                                    "minLength": 1
+                                }
+                                
+                        ,
+                        
+                                "isActive": {
+                                    "title": "isActive",
+                                    "type": "boolean",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "created_date": {
+                                    "title": "created_date",
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "minLength": 1
+                                }
+                                
+                    }
+                }
+                ,
+                "productAttribute":{
+                    "required": [],
+                    "type": "object",
+                    "properties": {
+                        "_id": {
+                            "title": "ID",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        
+                                "relatedProduct": {
+                                    "title": "relatedProduct",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "title": {
+                                    "title": "title",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "value": {
+                                    "title": "value",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "en_title": {
+                                    "title": "en_title",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "en_value": {
+                                    "title": "en_value",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                
+                        ,
+                        
+                                "isActive": {
+                                    "title": "isActive",
+                                    "type": "boolean",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "created_date": {
+                                    "title": "created_date",
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "minLength": 1
+                                }
+                                
+                    }
+                }
+                ,
+                "productStaticAttributes":{
+                    "required": [],
+                    "type": "object",
+                    "properties": {
+                        "_id": {
+                            "title": "ID",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        
+                                "relatedProduct": {
+                                    "title": "relatedProduct",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "relatedStaticAttribute": {
+                                    "title": "relatedStaticAttribute",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                
+                        ,
+                        
+                                "isActive": {
+                                    "title": "isActive",
+                                    "type": "boolean",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "created_date": {
+                                    "title": "created_date",
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "minLength": 1
+                                }
+                                
+                    }
+                }
+                ,
+                "productImage":{
+                    "required": [],
+                    "type": "object",
+                    "properties": {
+                        "_id": {
+                            "title": "ID",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        
+                                "relatedProduct": {
+                                    "title": "relatedProduct",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "image": {
+                                    "title": "image",
+                                    "type": "file",
+                                    
+                                    "minLength": 1
+                                }
+                                
+                        ,
+                        
+                                "isActive": {
+                                    "title": "isActive",
+                                    "type": "boolean",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "created_date": {
+                                    "title": "created_date",
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "minLength": 1
+                                }
+                                
+                    }
+                }
+                ,
+                "seller":{
+                    "required": [],
+                    "type": "object",
+                    "properties": {
+                        "_id": {
+                            "title": "ID",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        
+                                "name": {
+                                    "title": "name",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "relatedCity": {
+                                    "title": "relatedCity",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "description": {
+                                    "title": "description",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "en_name": {
+                                    "title": "en_name",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "en_description": {
+                                    "title": "en_description",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "phoneNumber": {
+                                    "title": "phoneNumber",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "code": {
+                                    "title": "code",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "address": {
+                                    "title": "address",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "agentName": {
+                                    "title": "agentName",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                
+                        ,
+                        
+                                "isActive": {
+                                    "title": "isActive",
+                                    "type": "boolean",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "created_date": {
+                                    "title": "created_date",
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "minLength": 1
+                                }
+                                
+                    }
+                }
+                ,
+                "productSeller":{
+                    "required": [],
+                    "type": "object",
+                    "properties": {
+                        "_id": {
+                            "title": "ID",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        
+                                "relatedProduct": {
+                                    "title": "relatedProduct",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "relatedSeller": {
+                                    "title": "relatedSeller",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                
+                        ,
+                        
+                                "isActive": {
+                                    "title": "isActive",
+                                    "type": "boolean",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "created_date": {
+                                    "title": "created_date",
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "minLength": 1
+                                }
+                                
+                    }
+                }
+                ,
+                "blogCategory":{
+                    "required": [],
+                    "type": "object",
+                    "properties": {
+                        "_id": {
+                            "title": "ID",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        
+                                "title": {
+                                    "title": "title",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "en_title": {
+                                    "title": "en_title",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "image": {
+                                    "title": "image",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                
+                        ,
+                        
+                                "isActive": {
+                                    "title": "isActive",
+                                    "type": "boolean",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "created_date": {
+                                    "title": "created_date",
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "minLength": 1
+                                }
+                                
+                    }
+                }
+                ,
+                "blogPost":{
+                    "required": [],
+                    "type": "object",
+                    "properties": {
+                        "_id": {
+                            "title": "ID",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        
+                                "title": {
+                                    "title": "title",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "en_title": {
+                                    "title": "en_title",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "content": {
+                                    "title": "content",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "en_content": {
+                                    "title": "en_content",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "image": {
+                                    "title": "image",
+                                    "type": "file",
+                                    
+                                    "minLength": 1
+                                }
+                                
+                        ,
+                        
+                                "isActive": {
+                                    "title": "isActive",
+                                    "type": "boolean",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "created_date": {
+                                    "title": "created_date",
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "minLength": 1
+                                }
+                                
+                    }
+                }
+                ,
+                "generalSetting":{
+                    "required": [],
+                    "type": "object",
+                    "properties": {
+                        "_id": {
+                            "title": "ID",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        
+                                "title": {
+                                    "title": "title",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "en_title": {
+                                    "title": "en_title",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "phoneNumber": {
+                                    "title": "phoneNumber",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "logo": {
+                                    "title": "logo",
+                                    "type": "file",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "secondaryColor": {
+                                    "title": "secondaryColor",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "catalog": {
+                                    "title": "catalog",
+                                    "type": "file",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "aboutUs": {
+                                    "title": "aboutUs",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "en_aboutUs": {
+                                    "title": "en_aboutUs",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "contactUs": {
+                                    "title": "contactUs",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "en_contactUs": {
+                                    "title": "en_contactUs",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "email": {
+                                    "title": "email",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "address": {
+                                    "title": "address",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "en_address": {
+                                    "title": "en_address",
+                                    "type": "string",
+                                    
+                                    "minLength": 1
+                                }
+                                
+                        ,
+                        
+                                "isActive": {
+                                    "title": "isActive",
+                                    "type": "boolean",
+                                    
+                                    "minLength": 1
+                                }
+                                ,
+                                "created_date": {
+                                    "title": "created_date",
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "minLength": 1
+                                }
+                                
+                    }
+                }
+                
+      }
+}
