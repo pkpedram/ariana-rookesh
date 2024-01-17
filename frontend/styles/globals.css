@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: YekanWeb;
+  font-display: swap;
+  src: 
+  url(../public/assets/font/iran-yekan/Pink.eot?#iefix) format('embedded-opentype'),
+  url(../public/assets/font/iran-yekan/Pink.ttf) format('truetype'),
+  url(../public/assets/font/iran-yekan/Pink.woff) format('woff'),
+  /* url(../public/assets/font/iran-yekan/Pink.woff) format('woff2'); */
+}
+@font-face {
+  font-family: Estedad;
+  font-display: swap;
+  src: 
+  /* url(../public/font/eot/PinkYekan.eot?#iefix) format('embedded-opentype'), */
+  url(../public/assets/font/Estedad-v5.0-Fontjo.com/Estedad.ttf) format('truetype'),
+  /* url(../public/font/YekanBakhFamily/Webfonts/fonts/woff/YekanBakh-ExtraBold.woff) format('woff'), */
+  url(../public/assets/font/Estedad-v5.0-Fontjo.com/Estedad.woff2) format('woff2');
+}
+
+
+html,
+body {
+  background: #E5E5E5;
+  margin: 0;
+  /* direction: rtl; */
+  /* text-align: right; */
+  font-family: Estedad !important;
+  font-style: normal;
+  scroll-behavior: smooth;
+}
+
+a, span, li, p, button, h1, h2, h3, h4, h5, h6, input::placeholder, input, textarea, label, time, address, select, option {
+  font-family: Estedad !important;
+  font-style: normal;
+  margin: 0;
+  padding: 0;
+  /* color: #212121; */
+}
+*{
+  direction: rtl;
+  transition: all 0.2s;
+}
