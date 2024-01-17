@@ -75,3 +75,10 @@
 .rmdp-container {
   width: 100%;
 }
+
+
+/* quill overwrites */
+
+.ql-toolbar.ql-snow, .ql-toolbar.ql-snow .ql-picker-label {
+  direction: ltr;
+}

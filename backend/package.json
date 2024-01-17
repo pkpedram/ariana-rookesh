@@ -4,26 +4,25 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-      "start": "node src/app.js",
-      "dev": "nodemon src/app.js",
-      "createsuperuser": "node src/core/generators/createsuperuse.js"
+        "start": "node src/app.js",
+        "dev": "nodemon src/app.js",
+        "createsuperuser": "node src/core/generators/createsuperuse.js"
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
-      "body-parser": "^1.20.2",
-      "cors": "^2.8.5",
-      "crypto": "^1.0.1",
-      "dotenv": "^16.0.3",
-      "express": "^4.18.2",
-      "express-formidable": "^1.2.0",
-      "jsonwebtoken": "^9.0.0",
-      "mongoose": "^7.2.0",
-      "multer": "^1.4.5-lts.1",
-      "nodemon": "^2.0.22",
-      "path": "^0.12.7",
-      "prompt-sync": "^4.2.0",
-      "swagger-ui-express": "^5.0.0"
+        "body-parser": "^1.20.2",
+        "cors": "^2.8.5",
+        "crypto": "^1.0.1",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "express-formidable": "^1.2.0",
+        "jsonwebtoken": "^9.0.0",
+        "mongoose": "^7.2.0",
+        "multer": "^1.4.5-lts.1",
+        "nodemon": "^2.0.22",
+        "path": "^0.12.7",
+        "prompt-sync": "^4.2.0",
+        "swagger-ui-express": "^5.0.0"
     }
-  }
-  
+}

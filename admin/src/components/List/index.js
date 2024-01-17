@@ -10,12 +10,11 @@ import { filterActions } from "../../redux/actions";
 import { connect } from "react-redux";
 import CheckBox from "../CheckBox";
 
-
 //DATE FILTER
 
-import DatePicker, { DateObject } from "react-multi-date-picker"
-import persian from "react-date-object/calendars/persian"
-import persian_fa from "react-date-object/locales/persian_fa"
+import DatePicker, { DateObject } from "react-multi-date-picker";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
 
 const List = ({
   items,
@@ -43,7 +42,7 @@ const List = ({
   subTableCols,
   hasListChange = true,
   searches = [],
-  fromDateToDate = false
+  fromDateToDate = false,
 }) => {
   const [listItems, setListItems] = useState([]);
   const [subListItems, setSubListItems] = useState([]);
@@ -51,9 +50,7 @@ const List = ({
 
   const [activePage, setActivePage] = useState(1);
 
-  const [subTableOpen, setSubTableOpen] = useState(false)
-
-
+  const [subTableOpen, setSubTableOpen] = useState(false);
 
   console.log("listItems", listItems);
 
@@ -66,7 +63,6 @@ const List = ({
     value,
     handleValueChange,
     title,
-    
   }) => {
     return (
       <input
@@ -78,8 +74,9 @@ const List = ({
       />
     );
   };
-  console.log(items
-    .filter((item, idx) => (idx >= 0) && (typeof item == 'object')))
+  console.log(
+    items?.filter((item, idx) => idx >= 0 && typeof item == "object")
+  );
   return (
     <div className="w-full bg-gray-900 mt-8 shadow-xl p-6 rounded-xl">
       <div className="w-full flex items-center justify-between mb-10">
@@ -97,45 +94,48 @@ const List = ({
             </Link>
           )}
         </div>
-        {
-          hasListChange && <div className="flex items-center">
-          <Select
-            keyOfOption={"title"}
-            items={changeList}
-            // className='!w-2/5'
-            width={"w-72"}
-            title={"انتخاب تغییر دسته جمعی..."}
-            onChange={(e) => {
-              setChangeSelectValue(e);
-            }}
-          />
-          <button
-            className={`px-4 py-2  text-white ${
-              listItems.length == 0 && subListItems.length == 0
-                ? "bg-navyLight"
-                : "bg-gold3F"
-            } rounded-md`}
-            onClick={() => {
-              changeList.map((itm) => {
-                if (itm.id === changeSelectValue) {
-                  itm.submitFunction(listItems, subListItems);
-                }
-              });
-            }}
-          >
-            انجام عملیات
-          </button>
-        </div>
-        }
+        {hasListChange && (
+          <div className="flex items-center">
+            <Select
+              keyOfOption={"title"}
+              items={changeList}
+              // className='!w-2/5'
+              width={"w-72"}
+              title={"انتخاب تغییر دسته جمعی..."}
+              onChange={(e) => {
+                setChangeSelectValue(e);
+              }}
+            />
+            <button
+              className={`px-4 py-2  text-white ${
+                listItems.length == 0 && subListItems.length == 0
+                  ? "bg-navyLight"
+                  : "bg-gold3F"
+              } rounded-md`}
+              onClick={() => {
+                changeList.map((itm) => {
+                  if (itm.id === changeSelectValue) {
+                    itm.submitFunction(listItems, subListItems);
+                  }
+                });
+              }}
+            >
+              انجام عملیات
+            </button>
+          </div>
+        )}
       </div>
 
       {filters?.length !== 0 && (
         <div className="w-full flex flex-wrap mb-4 gap-2">
           {filters?.map((item) => (
             <Select
-              items={[{ _id: "", [item.keyOfOption]: " همه " + ' ' + item.title }, ...item?.list]}
+              items={[
+                { _id: "", [item.keyOfOption]: " همه " + " " + item.title },
+                ...item?.list,
+              ]}
               className="w-max !rounded !mx-0"
-              title={'انتخاب ' + item.title}
+              title={"انتخاب " + item.title}
               keyOfOption={item.keyOfOption}
               keyOfOptionList={item.keyOfOptionList}
               onChange={(e) =>
@@ -145,87 +145,82 @@ const List = ({
               }
             />
           ))}
-          {
-            searches?.map((item) => (
-              <input
+          {searches?.map((item) => (
+            <input
               placeholder={item?.placeholder}
-              className={` border border-primary-500 bg-transparent p-2 text-white rounded outline-none`} type="search"
+              className={` border border-primary-500 bg-transparent p-2 text-white rounded outline-none`}
+              type="search"
               onChange={(e) => {
-                if(e.target.value.length == 0){
-                  generateParams({[item.paramName]: ''})
+                if (e.target.value.length == 0) {
+                  generateParams({ [item.paramName]: "" });
                 }
-                if(e.target.value.length >= 3){
-                  generateParams({[item.paramName]: e.target.value})
+                if (e.target.value.length >= 3) {
+                  generateParams({ [item.paramName]: e.target.value });
                 }
               }}
-              />
-            ))
-          }
-          {
-            fromDateToDate && 
+            />
+          ))}
+          {fromDateToDate && (
             <>
-             <div className="">
-             <DatePicker
-                    
-                    // value={new Date(valuetimers.fromDate)}
-                    calendar={persian}
-                    format="YYYY/MM/DD"
-                    locale={persian_fa}
-                    render={
+              <div className="">
+                <DatePicker
+                  // value={new Date(valuetimers.fromDate)}
+                  calendar={persian}
+                  format="YYYY/MM/DD"
+                  locale={persian_fa}
+                  render={
                     <CostumeDatePickerInput
-                        title="از تاریخ"
-                        handleValueChange={(e) => console.log("Date Input", e)}
+                      title="از تاریخ"
+                      handleValueChange={(e) => console.log("Date Input", e)}
                     />
-                    }
-                    className={`border-1 rmdp-mobile rmdp-filter`}
-                    onChange={(e) =>
-                        generateParams({  fromDate: new Date(e).toJSON() })
-                    }
+                  }
+                  className={`border-1 rmdp-mobile rmdp-filter`}
+                  onChange={(e) =>
+                    generateParams({ fromDate: new Date(e).toJSON() })
+                  }
                 />
-             </div>
-             <div className="">
-             <DatePicker
-                    
-                    // value={new Date(valuetimers.fromDate)}
-                    calendar={persian}
-                    format="YYYY/MM/DD"
-                    locale={persian_fa}
-                    render={
+              </div>
+              <div className="">
+                <DatePicker
+                  // value={new Date(valuetimers.fromDate)}
+                  calendar={persian}
+                  format="YYYY/MM/DD"
+                  locale={persian_fa}
+                  render={
                     <CostumeDatePickerInput
-                        title="تا تاریخ"
-                        handleValueChange={(e) => console.log("Date Input", e)}
+                      title="تا تاریخ"
+                      handleValueChange={(e) => console.log("Date Input", e)}
                     />
-                    }
-                    className={`border-1 rmdp-mobile rmdp-filter`}
-                    onChange={(e) =>
-                        generateParams({  toDate: new Date(e).toJSON() })
-                    }
+                  }
+                  className={`border-1 rmdp-mobile rmdp-filter`}
+                  onChange={(e) =>
+                    generateParams({ toDate: new Date(e).toJSON() })
+                  }
                 />
-             </div>
+              </div>
             </>
-
-          }
+          )}
         </div>
       )}
 
       <div className="p-3 w-full flex  items-start justify-between bg-gray-800 shadow-lg rounded border border-[#ACACAC] my-2">
-      {
-          hasListChange ? <div className="w-10">
-          {/* <Input type='checkBox' className='w-4' onChange={(e)=>{handleCheckBox(e,item.id)}}/> */}
-          <CheckBox
-            value={listItems?.length == items?.length}
-            onChange={(e) => {
-              if(e == true){
-               
-                setListItems(items.map(item => item))
-              }else{
-                setListItems([])
-              }
-              
-            }}
-          />
-        </div> : <div className="h-10 w-16 py-3"></div>
-        }
+        {hasListChange ? (
+          <div className="w-10">
+            {/* <Input type='checkBox' className='w-4' onChange={(e)=>{handleCheckBox(e,item.id)}}/> */}
+            <CheckBox
+              value={listItems?.length == items?.length}
+              onChange={(e) => {
+                if (e == true) {
+                  setListItems(items.map((item) => item));
+                } else {
+                  setListItems([]);
+                }
+              }}
+            />
+          </div>
+        ) : (
+          <div className="h-10 w-16 py-3"></div>
+        )}
         {/* <div className='w-2/3 flex items-center text-center text-white justify-between'>
         {
            cols.map(col => (
@@ -239,10 +234,18 @@ const List = ({
         }
           </div> */}
 
-        <div className={`w-full grid ${cols?.filter(itm => itm).length ? 'grid-cols-' + cols?.filter(itm => itm).length : 'grid-cols-6'} gap-2 grid-rows-1 `}>
-          {cols?.filter(itm => itm).map((col) => (
-            <p className="text-center text-gold3F ">{col.title}</p>
-          ))}
+        <div
+          className={`w-full grid ${
+            cols?.filter((itm) => itm).length
+              ? "grid-cols-" + cols?.filter((itm) => itm).length
+              : "grid-cols-6"
+          } gap-2 grid-rows-1 `}
+        >
+          {cols
+            ?.filter((itm) => itm)
+            .map((col) => (
+              <p className="text-center text-gold3F ">{col.title}</p>
+            ))}
         </div>
 
         <div
@@ -251,12 +254,12 @@ const List = ({
       </div>
 
       {items
-        .filter((item, idx) => (idx >= 0) && (typeof item == 'object'))
+        .filter((item, idx) => idx >= 0 && typeof item == "object")
         ?.map((item, index) => (
           <>
             <ListItem
-            hasListChange={hasListChange}
-            rowLink={rowLink}
+              hasListChange={hasListChange}
+              rowLink={rowLink}
               subListItems={subListItems}
               setSubListItems={setSubListItems}
               subCols={subCols}

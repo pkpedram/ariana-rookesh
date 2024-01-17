@@ -1,54 +1,38 @@
 const initialState = {
-    isLogin: false,
-    userData: {},
-    client: false,
-    usersList: [],
-    totalUsers: 0
-  };
-  
-  
-  export default function userState(state = initialState, action) {
-    let { type, payload, params } = action;
-    switch (type) {
-      case "SET_LOGIN":
-        return {
-          ...state,
-          isLogin: payload.isLogin,
-          userData: payload.userData,
-          client: payload.client,
+  isLogin: false,
+  userData: {},
+  usersList: [],
+  totalUsers: 0,
+};
 
-        };
-    
-        case "login":
-            localStorage.setItem('access', payload.token)
-            localStorage.setItem('userData', JSON.stringify(payload.user))
-            localStorage.setItem('client', payload.client)
+export default function userState(state = initialState, action) {
+  let { type, payload, params } = action;
+  switch (type) {
+    case "SET_LOGIN":
+      return {
+        ...state,
+        isLogin: payload.isLogin,
+        userData: payload.userData,
+      };
 
-            return {
-                ...state,
-                isLogin: true,
-                client: payload.client,
-                userData: payload.user
-            }
+    case "login/admin":
+      localStorage.setItem("access", payload.token);
+      localStorage.setItem("userData", JSON.stringify(payload.userData));
 
-      case `client/${params?.id}`:
-        if(params?.client){
-          localStorage.setItem('userData', JSON.stringify(payload.result))
-          return {
-            ...state,
-            userData: payload.result
-          }
-        }      
+      return {
+        ...state,
+        isLogin: true,
+        userData: payload.userData,
+      };
 
-      case `admin/users`:
-        return {
-          ...state,
-          usersList: payload.result,
-          totalUsers: payload.count
-        }  
-      
-      default:
-        return state;
-    }
+    case `admin/users`:
+      return {
+        ...state,
+        usersList: payload.result,
+        totalUsers: payload.count,
+      };
+
+    default:
+      return state;
   }
-  
+}

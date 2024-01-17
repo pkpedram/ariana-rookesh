@@ -8,6 +8,8 @@ import Icon from "../../icon";
 import { BsChevronDown } from "react-icons/bs";
 import { MdAddCircleOutline } from "react-icons/md";
 import CheckBox from "../../CheckBox";
+import { FaCheckCircle } from "react-icons/fa";
+import { IoCloseCircle } from "react-icons/io5";
 
 const ListItem = ({
   item,
@@ -32,26 +34,29 @@ const ListItem = ({
   subTableList,
   subTableOpen,
   setSubTableOpen,
-  hasListChange
+  hasListChange,
 }) => {
   const [newCols, setNewCols] = useState(cols);
 
   const [showSubs, setShowSubs] = useState(false);
 
-  const [timer, setTimer] = useState('00:00')
+  const [timer, setTimer] = useState("00:00");
 
-  let timerCol = item[cols.find(itm => itm?.type == 'timer')?.properties[0][0]]
+  let timerCol =
+    item[cols.find((itm) => itm?.type == "timer")?.properties[0][0]];
 
   useEffect(() => {
-    console.log()
+    console.log();
     setTimeout(() => {
-        let min = Math.floor(((new Date().getTime() - new Date(timerCol)) / 60000))
-        let sec = (((new Date().getTime() - new Date(timerCol)) % 60000) / 1000).toFixed(0)
+      let min = Math.floor((new Date().getTime() - new Date(timerCol)) / 60000);
+      let sec = (
+        ((new Date().getTime() - new Date(timerCol)) % 60000) /
+        1000
+      ).toFixed(0);
 
-        setTimer(`${sec} : ${min}`)
-   
-      }, 1000)
-  }, [timer])
+      setTimer(`${sec} : ${min}`);
+    }, 1000);
+  }, [timer]);
 
   const handleCheckBox = (e, item) => {
     if (e === true) {
@@ -72,45 +77,49 @@ const ListItem = ({
   console.log(subListItems);
 
   useEffect(() => {
-    setNewCols(cols?.filter(itm => itm));
+    setNewCols(cols?.filter((itm) => itm));
   }, [cols]);
 
   const shoppingCartSteps = [
     {
-      title: 'تعیین مقدار',
+      title: "تعیین مقدار",
       id: 0,
     },
     {
-      title: 'تماس کارشناس',
+      title: "تماس کارشناس",
       id: 1,
     },
     {
-      title: 'انتخاب آدرس',
+      title: "انتخاب آدرس",
       id: 2,
     },
     {
-      title: 'تعیین وزن',
+      title: "تعیین وزن",
       id: 3,
     },
     {
-      title: 'مرور سفارش',
+      title: "مرور سفارش",
       id: 4,
     },
-  ]
+  ];
 
   const SubItem = ({ item, indx }) => {
     return (
       <div className={` w-full px-4 flex items-center justify-between my-2 `}>
-        {
-          hasListChange && <div className="w-40 py-3">
-          {/* <Input type='checkBox' className='w-4' onChange={(e)=>{handleSubCheckBox(e,item.id)}}/> */}
-          <CheckBox
-            value={subListItems?.find((itm) => itm.id == item.id)}
-            onChange={(e) => handleSubCheckBox(e, item)}
-          />
-        </div>
-        }
-        <div className={`w-full grid ${subCols?.length ? 'grid-cols-' + subCols?.length : 'grid-cols-6'} grid-rows-1 gap-2`}>
+        {hasListChange && (
+          <div className="w-40 py-3">
+            {/* <Input type='checkBox' className='w-4' onChange={(e)=>{handleSubCheckBox(e,item.id)}}/> */}
+            <CheckBox
+              value={subListItems?.find((itm) => itm.id == item.id)}
+              onChange={(e) => handleSubCheckBox(e, item)}
+            />
+          </div>
+        )}
+        <div
+          className={`w-full grid ${
+            subCols?.length ? "grid-cols-" + subCols?.length : "grid-cols-6"
+          } grid-rows-1 gap-2`}
+        >
           {subConfig.hasOwnProperty("link") ? (
             <Link
               to={`/${subConfig.linkParent}/${item.id}`}
@@ -135,7 +144,6 @@ const ListItem = ({
                   ),
                 };
                 return (
-               
                   <p
                     className="ml-3 flex items-center justify-center gap-4"
                     style={{
@@ -166,8 +174,12 @@ const ListItem = ({
                     " ریال " +
                     " "
                 ),
-                default: col.properties.map(
-                  (property) => findObjectValue(item, property) + " "
+                default: col.properties.map((property) =>
+                  typeof findObjectValue(item, property) === "boolean" ? (
+                    <FaCheckCircle />
+                  ) : (
+                    findObjectValue(item, property) + " "
+                  )
                 ),
               };
 
@@ -258,33 +270,43 @@ const ListItem = ({
           idx % 2 !== 0 ? "bg-navyLight" : ""
         } ${hasSubs && "bg-navyLight"} my-2 `}
       >
-        {
-          hasListChange ? <div className="w-10 py-3">
-          {/* <Input type='checkBox' className='w-4' onChange={(e)=>{handleCheckBox(e,item.id)}}/> */}
-          <CheckBox
-            value={listItems?.find((itm) => itm == item.id)}
-            onChange={(e) => handleCheckBox(e, item)}
-          />
-        </div> : <div className="h-10 w-16 py-3"></div>
-        }
-        <div className={`w-full grid  ${newCols?.length ? 'grid-cols-' + newCols?.length : 'grid-cols-6'}  grid-rows-1 gap-2`}>
-          {config.hasOwnProperty("link") ? 
-          
-              newCols.map((col, i) => {
+        {hasListChange ? (
+          <div className="w-10 py-3">
+            {/* <Input type='checkBox' className='w-4' onChange={(e)=>{handleCheckBox(e,item.id)}}/> */}
+            <CheckBox
+              value={listItems?.find((itm) => itm == item.id)}
+              onChange={(e) => handleCheckBox(e, item)}
+            />
+          </div>
+        ) : (
+          <div className="h-10 w-16 py-3"></div>
+        )}
+        <div
+          className={`w-full grid  ${
+            newCols?.length ? "grid-cols-" + newCols?.length : "grid-cols-6"
+          }  grid-rows-1 gap-2`}
+        >
+          {config.hasOwnProperty("link")
+            ? newCols.map((col, i) => {
                 let model = {
-                  time: col.properties.map((property) => new Date(findObjectValue(item, property))?.toLocaleTimeString('fa-ir')),
-                  date:  col.properties.map(
-                    (property) =>
-                    findObjectValue(item, property) == "0001-01-01T00:00:00"  ?
-                     '-' :
-                      new Date(
-                        findObjectValue(item, property)
-                      )?.toLocaleDateString("fa-IR") + " "
+                  time: col.properties.map((property) =>
+                    new Date(
+                      findObjectValue(item, property)
+                    )?.toLocaleTimeString("fa-ir")
                   ),
-                  dateTime: col.properties.map((property) => 
-                  new Date(
-                    findObjectValue(item, property)
-                  )?.toLocaleString("fa-IR") + " "),
+                  date: col.properties.map((property) =>
+                    findObjectValue(item, property) == "0001-01-01T00:00:00"
+                      ? "-"
+                      : new Date(
+                          findObjectValue(item, property)
+                        )?.toLocaleDateString("fa-IR") + " "
+                  ),
+                  dateTime: col.properties.map(
+                    (property) =>
+                      new Date(findObjectValue(item, property))?.toLocaleString(
+                        "fa-IR"
+                      ) + " "
+                  ),
                   price: col.properties.map(
                     (property) =>
                       findObjectValue(item, property)?.toLocaleString("fa-IR") +
@@ -297,60 +319,73 @@ const ListItem = ({
                 };
                 return (
                   <Link
-                  to={`/${config.linkParent}/${item.id}`}
-                  className="w-full flex gap-2 items-center text-center text-white justify-between"
-                >
-                  <p
-                    className="ml-3 w-full flex items-center justify-center gap-4"
-                   
+                    to={`/${config.linkParent}/${item.id}`}
+                    className="w-full flex gap-2 items-center text-center text-white justify-between"
                   >
-                    {col.type ? model[col.type] : model.default}{" "}
-                    {col?.customText}
-                    {/* {col.properties.map(property => findObjectValue(item, property) + ' ')} */}
-                  </p>
+                    <p className="ml-3 w-full flex items-center justify-center gap-4">
+                      {col.type ? model[col.type] : model.default}{" "}
+                      {col?.customText}
+                      {/* {col.properties.map(property => findObjectValue(item, property) + ' ')} */}
+                    </p>
                   </Link>
                 );
-              }
-         
-          ) : (
-            newCols.map((col, i) => {
-              let model = {
-                time: col.properties?.map((property) => new Date(findObjectValue(item, property))?.toLocaleTimeString('fa-ir')),
-                date:  col.properties?.map(
-                  (property) =>
-                  findObjectValue(item, property) == "0001-01-01T00:00:00"  ?
-                     '-' :
+              })
+            : newCols.map((col, i) => {
+                let model = {
+                  time: col.properties?.map((property) =>
                     new Date(
                       findObjectValue(item, property)
-                    )?.toLocaleDateString("fa-IR") + " "
-                ),
-                dateTime: col.properties?.map((property) => 
-                new Date(
-                  findObjectValue(item, property)
-                )?.toLocaleString("fa-IR") + " "),
-                price: col.properties?.map(
-                  (property) =>
-                    findObjectValue(item, property)?.toLocaleString("fa-IR") +
-                    " ریال " +
-                    " "
-                ),
-                default: col.properties?.map(
-                  (property) => findObjectValue(item, property) + " "
-                ),
-                shoppingCartStep: col.properties?.map((property) => shoppingCartSteps?.find((itm, idx) => itm.id == findObjectValue(item, property))?.title),
-                timer: timer
-              };
+                    )?.toLocaleTimeString("fa-ir")
+                  ),
+                  date: col.properties?.map((property) =>
+                    findObjectValue(item, property) == "0001-01-01T00:00:00"
+                      ? "-"
+                      : new Date(
+                          findObjectValue(item, property)
+                        )?.toLocaleDateString("fa-IR") + " "
+                  ),
+                  dateTime: col.properties?.map(
+                    (property) =>
+                      new Date(findObjectValue(item, property))?.toLocaleString(
+                        "fa-IR"
+                      ) + " "
+                  ),
+                  price: col.properties?.map(
+                    (property) =>
+                      findObjectValue(item, property)?.toLocaleString("fa-IR") +
+                      " ریال " +
+                      " "
+                  ),
+                  default: col.properties?.map((property) =>
+                    typeof findObjectValue(item, property) === "boolean" ? (
+                      findObjectValue(item, property) ? (
+                        <FaCheckCircle className="text-primary-600 text-xl" />
+                      ) : (
+                        <IoCloseCircle className="text-red-500 text-2xl" />
+                      )
+                    ) : (
+                      findObjectValue(item, property) + " "
+                    )
+                  ),
+                  shoppingCartStep: col.properties?.map(
+                    (property) =>
+                      shoppingCartSteps?.find(
+                        (itm, idx) => itm.id == findObjectValue(item, property)
+                      )?.title
+                  ),
+                  timer: timer,
+                };
 
-              //        col.properties.map((itm) => console.log(findObjectValue(item, [...itm]), itm))
+                //        col.properties.map((itm) => console.log(findObjectValue(item, [...itm]), itm))
 
-              return (
-                <p className="flex w-full text-sm items-center justify-center text-white">
-                  {col.type ? model[col.type] : model.default} {col?.customText}
-                  {/* {col.properties.map(itm => findObjectValue(item, itm) + ' ')} */}
-                </p>
-              );
-            })
-          )}
+                return (
+                  <p className="flex w-full text-sm items-center justify-center text-white">
+                    {col.type ? model[col.type] : model.default}{" "}
+                    {col?.customText}
+                    {/* {col.properties.map(itm => findObjectValue(item, itm) + ' ')} */}
+                  </p>
+                );
+              })}
         </div>
         <div
           className={`flex items-center ${
@@ -454,6 +489,5 @@ const ListItem = ({
     </>
   );
 };
-
 
 export default ListItem;
