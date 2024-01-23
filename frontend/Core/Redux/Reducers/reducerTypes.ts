@@ -149,3 +149,28 @@ export interface ProductState {
   productAtts: Array<object>;
   productSellers: Array<object>;
 }
+
+export type BlogList = {
+  _id:string | number,
+  title:string,
+  en_title:string,
+  image:string,
+  isActive:boolean,
+  created_date:string,
+  __v:number
+}
+
+export type BlogInfo = {
+  _id: string | number,
+  title: string,
+  en_title: string,
+  image: string,
+  isActive: boolean,
+  created_date: string,
+  __v: number 
+}
+
+export interface BlogState {
+  blogList:Array<BlogList>,
+  blogInfo:BlogInfo | object,
+}
