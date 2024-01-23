@@ -8,7 +8,13 @@ import { connect } from "react-redux";
 import blogActions from "../../../redux/actions/Blog";
 import { useParams } from "react-router-dom";
 
-const BlogDetail = ({ addPost, getDetail, postDetail, editPost }) => {
+const BlogDetail = ({
+  addPost,
+  getDetail,
+  postDetail,
+  editPost,
+  getBlogCategories,
+}) => {
   const [value, setValue] = useState({
     title: "",
     en_title: "",
@@ -31,6 +37,7 @@ const BlogDetail = ({ addPost, getDetail, postDetail, editPost }) => {
     if (id) {
       getDetail(id);
     }
+    getBlogCategories();
   }, [id]);
 
   useMemo(() => {
@@ -134,6 +141,7 @@ const mapDispatchToProps = {
   addPost: blogActions.addPost,
   getDetail: blogActions.getPostDetail,
   editPost: blogActions.editPost,
+  getBlogCategories: blogActions.getCategories,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BlogDetail);

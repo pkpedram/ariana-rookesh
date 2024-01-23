@@ -434,6 +434,12 @@ let routes = [
     controller: productSellerController["delete"]["controller"],
   },
   {
+    route: "/blog/home",
+    type: "get",
+    middlewares: blogPostController["getHome"]["middlewares"],
+    controller: blogPostController["getHome"]["controller"],
+  },
+  {
     route: "/blogCategory",
     type: "post",
     middlewares: blogCategoryController["post"]["middlewares"],
