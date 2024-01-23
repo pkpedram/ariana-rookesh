@@ -25,6 +25,7 @@ let initialState: PublicState = {
     created_date: "",
     __v: 0,
   },
+  contactUsCategories: [],
 };
 
 const publicState = (state: PublicState = initialState, action: AnyAction) => {
@@ -56,6 +57,13 @@ const publicState = (state: PublicState = initialState, action: AnyAction) => {
       return {
         ...state,
         layoutType: payload,
+      };
+
+    case "contactUsCategories":
+      let data = JSON.parse(payload);
+      return {
+        ...state,
+        contactUsCategories: data,
       };
 
     case "generalSetting":

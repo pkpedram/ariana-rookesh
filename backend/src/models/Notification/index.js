@@ -13,3 +13,5 @@ const notificationSchema = new mongoose.Schema(model);
 const Notification = mongoose.model("Notification", notificationSchema);
 
 module.exports = Notification;
+
+// TYPES are success, info and error

@@ -9,6 +9,7 @@ import {
   FaCubes,
   FaTextHeight,
   FaBoxOpen,
+  FaWpforms,
 } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { BiWindows, BiSolidCategory } from "react-icons/bi";
@@ -46,7 +47,11 @@ const SideBar = ({ sidebarOpen, setSidebarOpen, logout, client, userData }) => {
       icon: <BsShop />,
       text: "فروشنده ها",
     },
-
+    {
+      link: "/forms",
+      icon: <FaWpforms />,
+      text: "فرم ها",
+    },
     {
       link: "/users",
       icon: <FaUsers />,

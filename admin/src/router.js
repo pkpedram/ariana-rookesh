@@ -16,6 +16,7 @@ import Content from "./views/Content";
 import Seller from "./views/Seller";
 import Products from "./views/Products";
 import ProductDetail from "./views/Products/Detail";
+import Forms from "./views/Forms";
 
 const CostumeRouter = ({ setUserStatus, isLogin, client }) => {
   useEffect(() => {
@@ -66,6 +67,10 @@ const CostumeRouter = ({ setUserStatus, isLogin, client }) => {
     {
       path: "/product/add",
       element: <ProductDetail />,
+    },
+    {
+      path: "/forms",
+      element: <Forms />,
     },
     {
       path: "*",

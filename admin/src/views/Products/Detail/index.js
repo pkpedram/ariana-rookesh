@@ -18,6 +18,8 @@ const ProductDetail = ({
   sellers,
   getSellers,
   getProductInfo,
+  getProductCategory,
+  categories,
 }) => {
   const { id } = useParams();
   const [productVal, setProductVal] = useState({
@@ -28,6 +30,7 @@ const ProductDetail = ({
     price: "",
     showPrice: true,
     isActive: true,
+    relatedCategory: null,
   });
   const [images, setImages] = useState([]);
   const [selectedStaticAtts, setSelectedStaticAtts] = useState([]);
@@ -51,8 +54,9 @@ const ProductDetail = ({
   useEffect(() => {
     getStaticAttributes();
     getSellers();
+    getProductCategory();
   }, []);
-
+  console.log(productVal);
   return (
     <>
       <div className="w-full">
@@ -61,7 +65,19 @@ const ProductDetail = ({
         </h1>
         <div className="w-full p-6 rounded-lg bg-gray-800 mt-8">
           <h2 className="text-white text-xl mb-4">مشخصات محصول</h2>
-          <div className="w-full grid grid-cols-4 gap-4">
+          <div className="w-full grid grid-cols-5 gap-4">
+            <div className="w-full flex flex-col justify-between">
+              <p className="mb-1 text-gray-200">دسته بندی</p>
+
+              <Select
+                onChange={(e) =>
+                  setProductVal({ ...productVal, relatedCategory: e })
+                }
+                items={categories}
+                keyOfOption={"name"}
+                title={"انتخاب دسته بندی"}
+              />
+            </div>
             <Input
               name={"name"}
               label={"نام محصول"}
@@ -343,12 +359,14 @@ const mapStateToProps = (state) => ({
   staticAttributes: state.publicState.staticAttributes,
   sellers: state.publicState.sellers,
   productDetail: state.productState.productDetail,
+  categories: state.productState.categories,
 });
 const mapDispatchToProps = {
   getStaticAttributes: publicActions.getStaticAttributes,
   getSellers: publicActions.getSellers,
   addProduct: productActions.addProduct,
   getProductInfo: productActions.getProductInfo,
+  getProductCategory: productActions.getProductCategory,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);

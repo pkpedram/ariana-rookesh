@@ -52,7 +52,7 @@ const productActions = {
                   },
                 }
               );
-              if (staticAttsRes?.data && staticIdx === staticAtts?.length - 1) {
+              if (staticIdx === staticAtts?.length - 1) {
                 sellers?.map(async (seller, sellerIdx) => {
                   try {
                     let sellerRes = await axios.post(
@@ -71,7 +71,7 @@ const productActions = {
                       }
                     );
 
-                    if (sellerRes?.data && sellerIdx == sellers?.length - 1) {
+                    if (sellerIdx == sellers?.length - 1) {
                       atts?.map(async (attItem, attIndex) => {
                         try {
                           let attRes = await axios.post(
@@ -89,7 +89,7 @@ const productActions = {
                             }
                           );
 
-                          if (attRes.data && attIndex == atts?.length - 1) {
+                          if (attIndex == atts?.length - 1) {
                             images?.map(async (imageItem, imgIndex) => {
                               try {
                                 const formData = new FormData();

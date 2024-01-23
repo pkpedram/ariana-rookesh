@@ -13,14 +13,22 @@ export interface LayoutType {
   checkLayoutVersion: Function;
   layoutType: number;
   bg?: string;
+  postSeen: Function;
 }
 
-const Layout = ({ children, checkLayoutVersion, layoutType }: LayoutType) => {
+const Layout = ({
+  children,
+  checkLayoutVersion,
+  layoutType,
+  postSeen,
+}: LayoutType) => {
   const isConnected = useConnect();
 
   useEffect(() => {
     if (!isConnected) {
       toast.error("لطفا اتصال خود به اینترنت را چک کنید");
+    } else {
+      postSeen();
     }
   }, [isConnected]);
 
@@ -29,7 +37,9 @@ const Layout = ({ children, checkLayoutVersion, layoutType }: LayoutType) => {
   }, []);
   return (
     <div
-      className={`w-full  flex ${
+      className={`w-full  ${
+        layoutType === 1 ? "bg-white" : layoutType === 2 ? "bg-black" : ""
+      } flex ${
         // layoutType === 3 ? "h-screen" :
         "min-h-screen"
       } flex-col`}
@@ -40,7 +50,11 @@ const Layout = ({ children, checkLayoutVersion, layoutType }: LayoutType) => {
     >
       <Header />
 
-      <div className={`flex-1 mt-40 max-w-7xl mx-auto w-full  `}>
+      <div
+        className={`flex-1 ${
+          layoutType === 2 ? "" : "mt-40"
+        } max-w-[95rem] mx-auto w-full  `}
+      >
         {children}
       </div>
 
@@ -54,6 +68,7 @@ const mapStateToProps = (state: RootState) => ({
 });
 const mapDispatchToProps = {
   checkLayoutVersion: publicActions.checkLayoutVersion,
+  postSeen: publicActions.postSeen,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Layout);

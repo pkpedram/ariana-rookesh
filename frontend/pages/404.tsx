@@ -1,23 +1,49 @@
-import React from 'react'
-import logo from '../public/assets/image/logo.png'
-import Image from 'next/image'
-import {useRouter} from 'next/router'
+import React from "react";
+import errorGif from "../public/assets/image/error.gif";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { GetServerSideProps, GetStaticProps } from "next";
+import { wrapper } from "../Core/Redux/store";
+import { apiConfig } from "../Core/Redux/constants";
 
 const Error404Page = () => {
-    const router = useRouter()
+  const router = useRouter();
   return (
     <div className="w-full flex flex-col items-center py-40">
-    <Image src={'https://taaghche.com/images/book.png'} width={200} height={200} alt="لوگو" />
-    <h2 className="text-2xl text-main-blue font-bold mb-3">صفحه مورد نظر پیدا نشد</h2>
-    <button
-    className="w-40 h-10 rounded-md bg-main-blue text-white"
-      type="button"
-      onClick={() => router.replace('/')}
-    >
-       بازگشت به صفحه اصلی
-    </button>
-  </div>
-  )
-}
+      <Image src={errorGif} width={700} height={400} alt="404 Gif" />
+      <h2 className="text-2xl text-black font-bold mb-3 mt-10">
+        صفحه مورد نظر پیدا نشد
+      </h2>
+      <button
+        className="w-56 h-10  rounded-md bg-black text-white"
+        type="button"
+        onClick={() => router.replace("/")}
+      >
+        بازگشت به صفحه اصلی
+      </button>
+    </div>
+  );
+};
+export const getStaticProps: GetStaticProps<{}> = wrapper.getStaticProps(
+  (store) =>
+    async ({}) => {
+      // Fetching BookList for the first Time
 
-export default Error404Page
+      const res = await fetch(apiConfig.baseUrl + "generalSetting", {
+        cache: "force-cache",
+      });
+      const data = await res.json();
+
+      store.dispatch({ type: "SET_LAYOUT_TYPE", payload: 1 });
+      store.dispatch({
+        type: "generalSetting",
+        payload: JSON.stringify(data.result[0]),
+      });
+
+      return {
+        props: {},
+      };
+    }
+);
+
+export default Error404Page;

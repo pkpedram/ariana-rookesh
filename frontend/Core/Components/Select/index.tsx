@@ -13,7 +13,7 @@ const Select = ({
   title,
   list,
   keyOfOption,
-  valueOfOption = "id",
+  valueOfOption = "_id",
   onChange,
   value,
 }: selectProps) => {
@@ -21,7 +21,7 @@ const Select = ({
     <select
       value={value}
       onChange={onChange}
-      className="w-full bg-white p-2 rounded-lg outline-none cursor-pointer"
+      className="w-full bg-[#F3F3F3] p-2 rounded-lg outline-none cursor-pointer"
     >
       <option value={""}>انتخاب {title}</option>
       {list.map((item: any, idx) => (

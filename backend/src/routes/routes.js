@@ -25,6 +25,12 @@ let routes = [
   //     controller: ,
   // }
   {
+    route: "/notification",
+    type: "get",
+    middlewares: publicController["getNotification"]["middlewares"],
+    controller: publicController["getNotification"]["controller"],
+  },
+  {
     route: "/register/admin",
     type: "post",
     middlewares: usersController["postAdmin"]["middlewares"],
@@ -529,6 +535,12 @@ let routes = [
     type: "get",
     middlewares: publicController["getSeenList"]["middlewares"],
     controller: publicController["getSeenList"]["controller"],
+  },
+  {
+    route: "/public/seen",
+    type: "post",
+    middlewares: publicController["postSeen"]["middlewares"],
+    controller: publicController["postSeen"]["controller"],
   },
 ];
 

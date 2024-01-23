@@ -13,6 +13,14 @@ export interface FilterState {
     products: Array<customFilter>;
   };
 }
+export interface ContactUsCategory {
+  title: string;
+  ordering: number;
+  isActive: boolean;
+  created_date: string;
+  __v: number;
+  _id: string;
+}
 
 export interface PublicState {
   isMobile: boolean;
@@ -37,6 +45,7 @@ export interface PublicState {
     created_date: string;
     __v: number;
   };
+  contactUsCategories: Array<ContactUsCategory>;
 }
 
 type authors = {
@@ -74,47 +83,17 @@ export type bookTypes = {
 };
 
 export type ProductListItem = {
-  id: number;
-  title: string;
-  sourceBookId: number;
-  hasPhysicalEdition: boolean;
-  canonicalId: number;
-  subtitle: string;
+  _id: string;
+  _v: number;
+  image: string | null;
+  name: string;
+  en_name: string;
   description: string;
-  htmlDescription: string;
-  PublisherID: number;
-  publisherSlug: string;
-  price: number;
-  numberOfPages: number;
-  rating: number;
-  rates: Array<rates>;
-  rateDetails: Array<object>;
-  types: Array<bookTypes>;
-  sticker: string;
-  beforeOffPrice: number;
-  offText: string;
-  priceColor: string;
-  isRtl: boolean;
-  showOverlay: boolean;
-  PhysicalPrice: number;
-  physicalBeforeOffPrice: number;
-  ISBN: string;
-  publishDate: string;
-  destination: number;
-  type: string;
-  coverUri: string;
-  shareUri: string;
-  shareText: string;
-  publisher: string;
-  authors: Array<authors>;
-  files: Array<files>;
-  labels: Array<object>;
-  categories: Array<categories>;
-  subscriptionAvailable: boolean;
-  state: number;
-  encrypted: boolean;
-  currencyPrice: number;
-  currencyBeforeOffPrice: number;
+  price: string;
+  showPrice: boolean;
+  relatedCategory: Category;
+  isActive: boolean;
+  created_date: string;
 };
 
 export type ProductInfo = {
@@ -156,12 +135,17 @@ export type Category = {
   __v: 0;
 };
 export interface ProductState {
-  productList: Array<ProductListItem>;
-  productInfo: ProductListItem;
+  productList: Array<ProductListItem | object>;
+  productInfo: any;
   relatedProductsList: Array<ProductListItem>;
   ordering: string;
   firstTimeFetching: boolean;
   filteredProducts: Array<ProductListItem>;
   publisherList: Array<Publisher>;
   categories: Array<Category>;
+  categoryInfo: Category;
+  productImages: Array<Object>;
+  productStaticAtts: Array<Object>;
+  productAtts: Array<object>;
+  productSellers: Array<object>;
 }

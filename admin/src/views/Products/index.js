@@ -26,17 +26,22 @@ const ProductListPage = ({
         items={productList}
         totals={productListCount}
         cols={[
-          {
-            title: "شناسه",
-            properties: [["_id"]],
-          },
+          // {
+          //   title: "شناسه",
+          //   properties: [["_id"]],
+          // },
           {
             title: "نام",
             properties: [["name"]],
           },
+
           {
             title: "نام انگلیسی",
             properties: [["en_name"]],
+          },
+          {
+            title: "دسته بندی",
+            properties: [["relatedCategory", "name"]],
           },
           {
             title: "قیمت",

@@ -36,12 +36,12 @@ const Header = ({ isMobile, layoutType, generalSetting }: HeaderPorps) => {
   return (
     <div
       className={`w-full  z-30 px-12 flex justify-center  py-10  ${
-        layoutType === 3 || layoutType === 0
+        layoutType === 3 || layoutType === 0 || layoutType === 2
           ? "bg-gradient-to-b from-black via-black/65 to-transparent pb-32"
-          : "fixed"
+          : "fixed bg-black"
       }`}
     >
-      <div className="flex w-full items-center justify-between max-w-7xl">
+      <div className="flex w-full items-center justify-between max-w-[95rem]">
         <div className="flex items-center gap-6">
           <Link href={"/"} className="ml-6">
             <img src={apiConfig.domain + generalSetting?.logo} />

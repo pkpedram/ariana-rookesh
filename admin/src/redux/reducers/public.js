@@ -18,6 +18,8 @@ const initialState = {
   staticAttributesCount: 0,
   sellers: [],
   sellersCount: 0,
+  contactUsForms: [],
+  contactUsFormsCount: 0,
 };
 
 export default function publicState(state = initialState, action) {
@@ -87,6 +89,13 @@ export default function publicState(state = initialState, action) {
         ...state,
         contactCategories: payload.result,
         contactCategoriesCount: payload.count,
+      };
+
+    case "contactUsForm":
+      return {
+        ...state,
+        contactUsForms: payload.result,
+        contactUsFormsCount: payload.count,
       };
 
     case "province":

@@ -6,8 +6,8 @@ let { baseUrl } = apiConfig;
 baseUrl = baseUrl + "/";
 
 export interface Options {
-  dispatch: Dispatch,
-  params?: object
+  dispatch: Dispatch;
+  params?: object;
 }
 
 export interface NotifTexts {
@@ -38,7 +38,7 @@ class DataManager {
         }),
       data || params,
       reload,
-     {
+      {
         success: null,
         error: "خطایی رخ داده است",
       }
@@ -70,7 +70,7 @@ class DataManager {
     opt: Options,
     data: object,
     reload: string | boolean,
-    notifTexts: NotifTexts | undefined
+    notifTexts?: NotifTexts | undefined
   ) =>
     await this.check(
       url,
@@ -150,7 +150,7 @@ class DataManager {
         if (notifTexts?.success) {
           toast.success(notifTexts.success);
         }
-        if(process.env.NODE_ENV == 'development'){
+        if (process.env.NODE_ENV == "development") {
           console.log("STATUS 200 RES:", response);
         }
         if (typeof reload == "string") {
@@ -162,6 +162,7 @@ class DataManager {
       }
     } catch (error: any) {
       dispatch({ type: "LOADING_END" });
+      console.log(error);
 
       if (error?.response?.status == 401) {
         localStorage.removeItem("access");
@@ -169,15 +170,15 @@ class DataManager {
         window.location.reload();
       }
 
-      if (error?.response?.data?.message) {
+      if (typeof error?.response?.data?.message === "string") {
         toast.error(error?.response.data?.message);
         return null;
-      }else{
-        toast.error(notifTexts.error)
+      } else {
+        toast.error(notifTexts.error);
       }
-      if(typeof window !== 'undefined'){
-        if(!window.navigator.onLine){
-          toast.error('لطفا اتصال خود را به اینترنت چک کنید')
+      if (typeof window !== "undefined") {
+        if (!window.navigator.onLine) {
+          toast.error("لطفا اتصال خود را به اینترنت چک کنید");
         }
       }
 

@@ -4,17 +4,17 @@ import { RootState, wrapper } from "../Core/Redux/store";
 import { apiConfig } from "../Core/Redux/constants";
 import axios from "axios";
 import { connect } from "react-redux";
-import { Category, categories } from "../Core/Redux/Reducers/reducerTypes";
+import { Category } from "../Core/Redux/Reducers/reducerTypes";
 import Link from "next/link";
 
 const Home: any = ({ categories }: { categories: Array<Category> }) => {
   return (
     <Fragment>
       <div className="w-full  bg-gradient-to-b from-transparent via-black/90 to-black p-4 absolute h-[80vh] flex items-center justify-center right-0 bottom-0">
-        <div className="w-full h-full max-w-7xl grid grid-cols-4  place-content-end pb-10 gap-4">
+        <div className="w-full h-full max-w-[95rem] grid grid-cols-4  place-content-end pb-10 gap-4">
           {categories.map((category) => (
             <Link
-              href={"/category/" + category.slug}
+              href={"/products/" + category.slug}
               key={category._id}
               className="w-full aspect-square border-2 text-white bg-black/50 hover:bg-black hover:scale-100 scale-90 border-white rounded-xl flex flex-col gap-4 items-center justify-center"
             >

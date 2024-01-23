@@ -54,6 +54,18 @@ const publicActions = {
 
   // contact us
 
+  getContactUsForms: (params) => async (dispatch) => {
+    await _dataManager.get("contactUsForm", {}, { dispatch, params });
+  },
+  deleteContactUsForm:
+    (id = "") =>
+    async (dispatch) => {
+      await _dataManager.delete("contactUsForm/" + id, {}, {}, {}, true, {
+        success: "فرم پر شده با موفقیت حذف شد",
+        error: "مشکلی در حذف فرم پیش آمده است",
+      });
+    },
+
   getContactUsCategories: (params) => async (dispatch) => {
     await _dataManager.get("contactUsFormCategory", {}, { dispatch, params });
   },
