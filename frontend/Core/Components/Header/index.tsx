@@ -1,4 +1,4 @@
-import React, { useMemo,useEffect } from "react";
+import React, { useMemo, useEffect } from "react";
 import { MapStateToProps } from "react-redux";
 import { RootState } from "../../Redux/store";
 import { connect } from "react-redux";
@@ -13,10 +13,15 @@ export interface HeaderPorps {
   isMobile: boolean;
   layoutType?: number;
   generalSetting: PublicState["generalSetting"];
-  handleLanguege:any
+  handleLanguege: any;
 }
 
-const Header = ({ isMobile, layoutType, generalSetting , handleLanguege }: HeaderPorps) => {
+const Header = ({
+  isMobile,
+  layoutType,
+  generalSetting,
+  handleLanguege,
+}: HeaderPorps) => {
   const items = useMemo(() => {
     return [
       {
@@ -37,25 +42,25 @@ const Header = ({ isMobile, layoutType, generalSetting , handleLanguege }: Heade
     ];
   }, []);
 
-  useEffect(()=>{
-    let data = localStorage.getItem('lan')
-    if(data != "true" || data == undefined){
-      localStorage.setItem('lan',true)
-    }else{
-      localStorage.setItem('lan',false)
+  useEffect(() => {
+    let data = localStorage.getItem("lan");
+    if (data != "true" || data == undefined) {
+      localStorage.setItem("lan", "true");
+    } else {
+      localStorage.setItem("lan", "false");
     }
-    handleLanguege()
-  },[])
+    handleLanguege();
+  }, []);
 
-  const handleEN = ()=>{
-    let data = localStorage.getItem('lan')
-    if(data != "true" || data == undefined){
-      localStorage.setItem('lan',true)
-    }else{
-      localStorage.setItem('lan',false)
+  const handleEN = () => {
+    let data = localStorage.getItem("lan");
+    if (data != "true" || data == undefined) {
+      localStorage.setItem("lan", "true");
+    } else {
+      localStorage.setItem("lan", "false");
     }
-    handleLanguege()
-  }
+    handleLanguege();
+  };
 
   return (
     <div
@@ -81,7 +86,13 @@ const Header = ({ isMobile, layoutType, generalSetting , handleLanguege }: Heade
             {generalSetting?.phoneNumber}
             <FaPhoneAlt />
           </p>
-          <button onClick={()=>{handleEN()}}>En</button>
+          <button
+            onClick={() => {
+              handleEN();
+            }}
+          >
+            En
+          </button>
           <a
             href={apiConfig.domain + generalSetting?.catalog}
             target="_blank"
@@ -101,7 +112,7 @@ const mapStateToProps = (state: RootState) => ({
   layoutType: state.publicState.layoutType,
 });
 const mapDispatchToProps = {
-  handleLanguege:publicActions.handleLanguege
+  handleLanguege: publicActions.handleLanguege,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
