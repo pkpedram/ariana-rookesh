@@ -22,7 +22,7 @@ const Home: any = ({
 }) => {
   return (
     <Fragment>
-      <div className=" w-full flex justify-between items-center mb-16">
+      <div className=" w-full flex justify-between items-center mb-16 flex-wrap gap-6">
         <div className="">
           <p className="font-semibold">{generalSetting.contactUs}</p>
           <h3 className="text-2xl mt-8 font-bold">
@@ -30,7 +30,7 @@ const Home: any = ({
           </h3>
         </div>
 
-        <div className="flex flex-col gap-4 items-end">
+        <div className="flex flex-col gap-4 items-end md:justify-end md:w-full">
           <h4 className="text-xl font-bold">راه های تماس با ما</h4>
           <div className="flex items-center gap-2 [&>p]:font-bold ">
             <p>{generalSetting.phoneNumber}</p>
