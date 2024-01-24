@@ -10,6 +10,7 @@ import {
   PublicState,
 } from "../../../Core/Redux/Reducers/reducerTypes";
 import Link from "next/link";
+import imagePlaceHolder from "../../../public/assets/image/jk-placeholder-image.jpg";
 
 const ProductsCategory = ({
   categoryInfo,
@@ -28,46 +29,37 @@ const ProductsCategory = ({
           backgroundImage: `url('${apiConfig?.domain + categoryInfo.banner}')`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
-          backgroundPosition: "absolute",
+          backgroundPosition: "center",
+
           backgroundAttachment: "fixed",
         }}
       >
         <div className="absolute bg-gradient-to-t from-black to-transparent w-full h-full"></div>
       </div>
       {productList?.length !== 0 ? (
-        <div className="w-full  relative  mt-40 mb-32 grid grid-cols-4 gap-4">
-          {[
-            ...productList,
-            // ...productList,
-            // ...productList,
-            // ...productList,
-            // ...productList,
-            // ...productList,
-            // ...productList,
-            // ...productList,
-            // ...productList,
-            // ...productList,
-            // ...productList,
-            // ...productList,
-            // ...productList,
-            // ...productList,
-            // ...productList,
-            // ...productList,
-            // ...productList,
-            // ...productList,
-            // ...productList,
-          ].map((item) => (
+        <div className="w-full  relative  mt-40 mb-32 grid grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-1 gap-4">
+          {productList.map((item) => (
             <Link
               href={`/product/${item._id}/${item.name.split(" ").join("-")}`}
               className="w-full p-3 border-2 text-white bg-black/50 hover:bg-black hover:scale-100 scale-90 border-white rounded-xl flex flex-col gap-4 items-center justify-center"
             >
               <img
-                src={apiConfig.domain + item.image ?? ""}
+                src={
+                  item.image
+                    ? apiConfig.domain + item.image
+                    : imagePlaceHolder.src
+                }
                 className="w-full rounded-lg bg-gray-500 object-cover aspect-square"
               />
               <h4 className="font-bold mb-2 text-right w-full">{item.name}</h4>
-              <p className="w-full text-right color-[#F2F4F8]">
-                {item.description}
+              <p className="w-full text-right color-[#F2F4F8] flex-1">
+                {item.description?.slice(0, 200)}...
+              </p>
+
+              <p className="text-left w-full">
+                {categoryInfo?.showProductPrices && item.showPrice
+                  ? `${Number(item.price).toLocaleString("fa-ir")} تومان`
+                  : "تماس بگیرید"}
               </p>
               <button
                 className="w-full p-5 rounded-lg"

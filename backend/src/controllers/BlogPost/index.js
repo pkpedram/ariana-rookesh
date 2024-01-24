@@ -29,7 +29,7 @@ const blogPostController = {
           image: req?.files?.image
             ? generateFileName(req.files.image[0], "blogPost")
             : null,
-          relatedBlogCategory: req.body.relatedBlogCategory,
+          relatedBlogCategory: req.body.relatedCategory,
           isActive: req.body.isActive,
           seenCount: 0,
           readingTime:
@@ -119,7 +119,9 @@ const blogPostController = {
     controller: async (req, res, next) => {
       try {
         let id = req.params.id;
-        const blogPost = await BlogPost.findById(id);
+        const blogPost = await BlogPost.findById(id).populate(
+          "relatedBlogCategory"
+        );
 
         if (blogPost) {
           blogPost.seenCount += 1;

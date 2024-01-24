@@ -1,25 +1,34 @@
 import type { GetServerSideProps, NextPage } from "next";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { RootState, wrapper } from "../Core/Redux/store";
 import { apiConfig } from "../Core/Redux/constants";
 import axios from "axios";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { Category } from "../Core/Redux/Reducers/reducerTypes";
 import Link from "next/link";
 
 const Home: any = ({ categories }: { categories: Array<Category> }) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: "SET_LAYOUT_TYPE", payload: 3 });
+  }, []);
   return (
     <Fragment>
       <div className="w-full  bg-gradient-to-b from-transparent via-black/90 to-black p-4 absolute h-[80vh] flex items-center justify-center right-0 bottom-0">
-        <div className="w-full h-full max-w-[95rem] grid grid-cols-4  place-content-end pb-10 gap-4">
+        <div className="w-full h-full max-w-[95rem] grid grid-cols-4 md:grid-cols-2  place-content-end pb-10 gap-4">
           {categories.map((category) => (
             <Link
               href={"/products/" + category.slug}
               key={category._id}
-              className="w-full aspect-square border-2 text-white bg-black/50 hover:bg-black hover:scale-100 scale-90 border-white rounded-xl flex flex-col gap-4 items-center justify-center"
+              className="w-full aspect-square border-2 md:p-6 text-white bg-black/50 hover:bg-black hover:scale-100 scale-90 border-white rounded-xl flex flex-col gap-4 items-center justify-center"
             >
-              <p className="text-2xl font-bold">{category.name}</p>
-              <p className="text-lg text-gray-400">{category.en_name}</p>
+              <p className="text-2xl md:text-sm text-center font-bold">
+                {category.name}
+              </p>
+              <p className="text-lg md:text-xs text-gray-400">
+                {category.en_name}
+              </p>
               <img src={apiConfig.domain + category.icon} className="h-1/2" />
             </Link>
           ))}

@@ -48,7 +48,7 @@ const productController = {
 
         for (let i = 0; i < products.length; i++) {
           let image = await ProductImage.findOne({
-            relatedProduct: products[0]?._id,
+            relatedProduct: products[i]?._id,
           });
           let product = products[i]?.toJSON();
           output.push({

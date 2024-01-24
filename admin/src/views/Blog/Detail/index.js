@@ -24,7 +24,7 @@ const BlogDetail = ({
     en_content: "",
     image: null,
     isActive: true,
-    relatedCategory: "",
+    relatedBlogCategory: "",
   });
 
   const { id } = useParams();
@@ -55,9 +55,9 @@ const BlogDetail = ({
         className={"mb-4"}
         items={categories}
         keyOfOption={"title"}
-        title={postDetail?.title ?? "انتخاب دسته بندی"}
+        title={postDetail?.relatedBlogCategory?.title ?? "انتخاب دسته بندی"}
         valueOfOption={"_id"}
-        onChange={(e) => setValue({ ...value, relatedCategory: e })}
+        onChange={(e) => setValue({ ...value, relatedBlogCategory: e })}
       />
       <ImageInput
         id={"image"}

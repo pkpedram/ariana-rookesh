@@ -37,7 +37,7 @@ const Layout = ({
   }, []);
   return (
     <div
-      className={`w-full  ${
+      className={`w-full bg-position-center bg-cover ${
         layoutType === 1 ? "bg-white" : layoutType === 2 ? "bg-black" : ""
       } flex ${
         // layoutType === 3 ? "h-screen" :
@@ -46,6 +46,7 @@ const Layout = ({
       style={{
         background: layoutType === 3 ? `url(${bg.src})` : "",
         backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
       <Header />

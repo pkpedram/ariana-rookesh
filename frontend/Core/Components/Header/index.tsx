@@ -106,7 +106,7 @@ const Header = ({
         }`}
       >
         <div className="flex w-full items-center justify-between max-w-[90rem]">
-          <div className="flex md:hidden items-center gap-6">
+          <div className="flex md:hidden items-center lg:text-xs gap-6">
             <Link href={"/"} className="ml-6">
               <img src={apiConfig.domain + generalSetting?.logo} />
             </Link>
