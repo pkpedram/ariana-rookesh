@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import blogActions from "../../../redux/actions/Blog";
 import { useParams } from "react-router-dom";
 import Select from "../../../components/Select";
+import TextBox from "../../../components/TextBox";
 
 const BlogDetail = ({
   addPost,
@@ -22,6 +23,8 @@ const BlogDetail = ({
     en_title: "",
     content: "",
     en_content: "",
+    description: "",
+    en_description: "",
     image: null,
     isActive: true,
     relatedBlogCategory: "",
@@ -68,7 +71,7 @@ const BlogDetail = ({
       />
 
       <div className="w-full grid grid-cols-2 gap-8 mt-6">
-        <div className="bg-gray-800 w-full rounded-lg  p-6">
+        <div className="bg-gray-800 w-full rounded-lg flex flex-col gap-3 p-6">
           <h1 className="text-2xl text-white mb-4">فارسی</h1>
           <Input
             placeholder={"عنوان"}
@@ -77,8 +80,13 @@ const BlogDetail = ({
             name={"title"}
             onChange={handleChange}
           />
-
-          <p className="mb-1 mt-6 text-gray-200">محتوا</p>
+          <TextBox
+            label={"توضیحات"}
+            name={"description"}
+            onChange={handleChange}
+            value={value.description}
+          />
+          <p className=" text-gray-200">محتوا</p>
           <ReactQuill
             className="bg-white h-72 rounded-lg overflow-hidden"
             theme="snow"
@@ -86,7 +94,7 @@ const BlogDetail = ({
             onChange={(e) => setValue({ ...value, content: e })}
           />
         </div>
-        <div className="bg-gray-800 w-full rounded-lg  p-6">
+        <div className="bg-gray-800 w-full rounded-lg flex flex-col gap-3 p-6">
           <h1 className="text-2xl text-white mb-4">انگلیسی</h1>
           <Input
             placeholder={"title"}
@@ -95,7 +103,12 @@ const BlogDetail = ({
             name={"en_title"}
             onChange={handleChange}
           />
-
+          <TextBox
+            label={"description"}
+            name={"en_description"}
+            onChange={handleChange}
+            value={value.en_description}
+          />
           <p className="mb-1 mt-6 text-gray-200">Content</p>
           <ReactQuill
             className="bg-white h-72 rounded-lg overflow-hidden"

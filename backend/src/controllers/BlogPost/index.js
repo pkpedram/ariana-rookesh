@@ -26,6 +26,8 @@ const blogPostController = {
           en_title: req.body.en_title,
           content: req.body.content,
           en_content: req.body.en_content,
+          description: req.body.description,
+          en_description: req.body.en_description,
           image: req?.files?.image
             ? generateFileName(req.files.image[0], "blogPost")
             : null,

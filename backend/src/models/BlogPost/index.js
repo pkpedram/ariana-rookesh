@@ -5,6 +5,8 @@ const model = {
   en_title: String,
   content: String,
   en_content: String,
+  description: String,
+  en_description: String,
   image: String,
   isActive: { type: Boolean, default: true },
   relatedBlogCategory: {
