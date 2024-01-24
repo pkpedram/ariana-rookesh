@@ -174,4 +174,5 @@ export type BlogInfo = {
 export interface BlogState {
   blogList:Array<BlogList>,
   blogInfo:BlogInfo | object,
+  blogHome:any
 }

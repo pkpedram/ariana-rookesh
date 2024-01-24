@@ -19,6 +19,9 @@ const ProductDetailPage = ({
 }: any) => {
   const [selectedImage, setSelectedImage] = useState(productImages[0]);
   const [openAtts, setOpenAtts] = useState(false);
+
+  // console.log(productImages)
+
   return (
     <div className={`w-full flex flex-col gap-12 mb-20 `}>
       <div className={`w-full gap-6 flex  lg:flex-col ${lan ? "!flex-row-reverse lg:!flex-col" : ""}`}>
