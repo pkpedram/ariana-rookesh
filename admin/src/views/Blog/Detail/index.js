@@ -7,6 +7,7 @@ import Button from "../../../components/Button";
 import { connect } from "react-redux";
 import blogActions from "../../../redux/actions/Blog";
 import { useParams } from "react-router-dom";
+import Select from "../../../components/Select";
 
 const BlogDetail = ({
   addPost,
@@ -14,6 +15,7 @@ const BlogDetail = ({
   postDetail,
   editPost,
   getBlogCategories,
+  categories,
 }) => {
   const [value, setValue] = useState({
     title: "",
@@ -22,6 +24,7 @@ const BlogDetail = ({
     en_content: "",
     image: null,
     isActive: true,
+    relatedCategory: "",
   });
 
   const { id } = useParams();
@@ -48,6 +51,14 @@ const BlogDetail = ({
 
   return (
     <div className="w-full">
+      <Select
+        className={"mb-4"}
+        items={categories}
+        keyOfOption={"title"}
+        title={postDetail?.title ?? "انتخاب دسته بندی"}
+        valueOfOption={"_id"}
+        onChange={(e) => setValue({ ...value, relatedCategory: e })}
+      />
       <ImageInput
         id={"image"}
         title={"تصویر شاخص"}
@@ -136,6 +147,7 @@ const BlogDetail = ({
 
 const mapStateToProps = (state) => ({
   postDetail: state.blogState.postDetail,
+  categories: state.blogState.categories,
 });
 const mapDispatchToProps = {
   addPost: blogActions.addPost,
