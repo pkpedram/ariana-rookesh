@@ -16,7 +16,7 @@ const BlogsPage = ({blogHome}:any) => {
           <BlogFlex items={blogHome?.mostSeen} title="محبوب ترین ها" color="white" isMore/>
         </div>
         {
-          blogHome.categories.map((item:any)=>(
+          blogHome?.categories?.map((item:any)=>(
             <>
                {item?.newest?.length > 0 && <BlogGrid items={item?.newest} color="black" title={`جدیدترین‌ها ${item?.title}`} isMore/>}
               {
