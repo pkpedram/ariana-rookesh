@@ -5,7 +5,8 @@ import { HYDRATE } from "next-redux-wrapper";
 let initialState : BlogState = {
     blogList:[],
     blogInfo:{},
-    blogHome:{}
+    blogHome:{},
+    blogCategoryInfo:{}
 }
 
 const blogState  = (
@@ -30,6 +31,18 @@ const blogState  = (
               return {
                   ...state,
                   blogHome: dataHome?.result
+              }
+            case 'blogInfo':
+              let dataInfo = typeof payload === "string" ? JSON.parse(payload) : payload
+              return{
+                ...state,
+                blogInfo:dataInfo?.result
+              }
+            case 'blogCategoryInfo':
+              let dataCatInfo = typeof payload === "string" ? JSON.parse(payload) : payload
+              return{
+                ...state,
+                blogCategoryInfo:dataCatInfo?.result
               }
             default:
               return state;

@@ -8,9 +8,9 @@ import { connect } from 'react-redux';
 import BlogFlex from '../../Core/Components/BlogFlex';
 
 const BlogsPage = ({blogHome}:any) => {
-  console.log(blogHome)
+  // console.log(blogHome)
   return (
-    <div>
+    <div className='flex flex-col gap-14'>
         <BlogGrid items={blogHome?.newest} title="جدیدترین‌ها" color="black"/>
         <div className='bg-black py-5'>
           <BlogFlex items={blogHome?.mostSeen} title="محبوب ترین ها" color="white" isMore/>
