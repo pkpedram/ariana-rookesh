@@ -4,6 +4,6 @@ export type ApiConfig = {
 };
 
 export const apiConfig: ApiConfig = {
-  domain: "http://localhost:5000/",
-  baseUrl: "http://localhost:5000/api/",
+  domain: "http://arianaback.noavdev.ir/",
+  baseUrl: "http://arianaback.noavdev.ir/api/",
 };
