@@ -18,10 +18,14 @@ const BlogsPage = ({blogHome}:any) => {
         {
           blogHome.categories.map((item:any)=>(
             <>
-              <BlogGrid items={item?.newest} color="black" title={`جدیدترین‌ها ${item?.title}`} isMore/>
-              <div  className='bg-black py-5'>
-                <BlogFlex items={item?.mostSeen} title={`محبوب ترین ها ${item?.title}`}  color="white" isMore/>
-              </div>
+               {item?.newest?.length > 0 && <BlogGrid items={item?.newest} color="black" title={`جدیدترین‌ها ${item?.title}`} isMore/>}
+              {
+                item?.mostSeen?.length > 0 &&               
+                <div  className='bg-black py-5'>
+                  <BlogFlex items={item?.mostSeen} title={`محبوب ترین ها ${item?.title}`}  color="white" isMore/>
+                </div>
+              }
+
             </>
           ))
         }
