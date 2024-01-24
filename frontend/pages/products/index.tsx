@@ -10,7 +10,7 @@ import Link from "next/link";
 const Products = ({ categories }: { categories: Array<Category> }) => {
   return (
     // <div className="w-full z-[1] top-0 right-0 absolute h-full bg-black">
-    <div className="w-full h-full max-w-[95rem] grid grid-cols-4 relative  place-content-end pb-10 gap-4">
+    <div className="w-full h-full max-w-[95rem] grid grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-1 relative  place-content-end pb-10 gap-4">
       {categories.map((category) => (
         <Link
           href={"/products/" + category.slug}
