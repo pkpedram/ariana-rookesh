@@ -7,6 +7,7 @@ import Modal from "../../components/Modal";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import ImageInput from "../../components/ImageInput";
+import TextBox from "../../components/TextBox";
 
 const BlogList = ({
   getBlogPosts,
@@ -33,6 +34,8 @@ const BlogList = ({
     en_title: "",
     image: null,
     isActive: true,
+    description: "",
+    en_description: "",
   });
 
   const handleChange = useCallback((e) => {
@@ -66,6 +69,20 @@ const BlogList = ({
               placeholder={"عنوان انگلیسی"}
               onChange={handleChange}
               value={value.en_title}
+            />
+            <TextBox
+              label={"توضیحات"}
+              placeholder={"توضیحات"}
+              name={"description"}
+              onChange={handleChange}
+              value={value.description}
+            />
+            <TextBox
+              label={"توضیحات انگلیسی"}
+              placeholder={"توضیحات انگلیسی"}
+              name={"en_description"}
+              onChange={handleChange}
+              value={value.en_description}
             />
             <div className="h-72">
               <ImageInput

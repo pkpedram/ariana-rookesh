@@ -5,6 +5,7 @@ const model = {
   en_title: String,
   image: String,
   description: String,
+  en_description: String,
   isActive: { type: Boolean, default: true },
   created_date: { type: Date, default: new Date() },
 };
