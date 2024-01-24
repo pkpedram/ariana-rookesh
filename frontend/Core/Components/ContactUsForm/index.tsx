@@ -57,7 +57,7 @@ const ContactUsForm = ({
           </button>
         ))}
       </div>
-      <div className="w-full grid grid-cols-2 gap-6 mt-4 mb-6">
+      <div className="w-full grid grid-cols-2 md:grid-cols-1 gap-6 mt-4 mb-6">
         <Input
           value={value.fullName}
           placeholder="نام و نام خانوادگی"
