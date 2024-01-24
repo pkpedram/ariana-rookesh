@@ -4,7 +4,7 @@ import { apiConfig } from '../../Redux/constants'
 
 const BlogFlex = ({items , title , isMore,color}:any) => {
   return (
-    <div className="flex flex-col items-center gap-4 w-4/5 mx-auto">
+    <div className="flex flex-col items-center gap-4 w-4/5 mx-auto lg:w-full 2md:!w-4/5">
         <div className="flex items-center justify-between w-full">
             <p className={`font-bold text-2xl ${color == 'white' ? "text-white" :""}`}>{title}</p>
             {isMore &&
@@ -19,11 +19,11 @@ const BlogFlex = ({items , title , isMore,color}:any) => {
             </div>
             }
         </div>
-        <div className='flex gap-6 justify-between w-full 2lg:flex-col 2lg:items-center'>
+        <div className='flex gap-6 justify-between w-full  2lg:flex-wrap 2lg:justify-center 2lg:items-center '>
                     {
                         items?.map((item:any)=>(
-                            <div className={`p-4 border border-[#000] rounded-xl flex flex-col gap-2 justify-between w-1/3  2lg:w-full ${color == 'white' ? "text-white border-[#FFF]" :""}`} key={item?.id}>
-                            <div className='rounded-xl h-2/6'><img className='object-cover !h-full !w-full rounded-xl' src={apiConfig.domain + item.image} alt="" /></div>
+                            <div className={`p-4 border border-[#000] rounded-xl flex flex-col gap-2 justify-between w-1/3 2lg:w-2/5 2md:w-full  ${color == 'white' ? "text-white border-[#FFF]" :""}`} key={item?.id}>
+                            <div className='rounded-xl h-[15rem]'><img className='object-cover !h-full !w-full rounded-xl' src={apiConfig.domain + item.image} alt="" /></div>
                             <h3 className='font-bold text-xl'>{item?.title}</h3>
                             <p className='text-justify text-md'>{item.content.length > 200 ? item.content.substring(0,200) + "..." : item?.content}</p>
                             <div className="flex items-center gap-1 text-sm text-[#979797]">
