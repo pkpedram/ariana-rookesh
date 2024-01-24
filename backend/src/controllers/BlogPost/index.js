@@ -131,7 +131,7 @@ const blogPostController = {
           blogPost.seenCount += 1;
           await blogPost.save();
           return res.send({
-            info: await baseResults(BlogPost, "id", req.params, false, []),
+            info: blogPost,
             relatedPosts: relatedPosts,
           });
         } else {
