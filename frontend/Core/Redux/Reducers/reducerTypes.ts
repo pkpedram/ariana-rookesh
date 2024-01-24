@@ -46,6 +46,7 @@ export interface PublicState {
     __v: number;
   };
   contactUsCategories: Array<ContactUsCategory>;
+  lan:boolean
 }
 
 type authors = {

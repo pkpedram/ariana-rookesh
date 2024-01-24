@@ -15,12 +15,13 @@ const ProductDetailPage = ({
   productInfo,
   productList,
   generalSetting,
+  lan
 }: any) => {
   const [selectedImage, setSelectedImage] = useState(productImages[0]);
   const [openAtts, setOpenAtts] = useState(false);
   return (
-    <div className="w-full flex flex-col gap-12 mb-20">
-      <div className="w-full gap-6 flex lg:flex-col">
+    <div className={`w-full flex flex-col gap-12 mb-20 `}>
+      <div className={`w-full gap-6 flex  lg:flex-col ${lan ? "!flex-row-reverse lg:!flex-col" : ""}`}>
         <div className="w-[30rem] lg:w-full flex lg:flex-col-reverse lg:gap-6  h-full">
           <div className="flex h-max min-w-[8rem] flex-col lg:flex-row lg:justify-center gap-4">
             {productImages
@@ -42,38 +43,44 @@ const ProductDetailPage = ({
             />
           </div>
         </div>
-        <div className="flex flex-1 2lg:!flex-col justify-between lg:!flex-row sm:!flex-col gap-6">
+        <div className={`flex flex-1 2lg:!flex-col justify-between  gap-6 ${lan ? "!flex-row-reverse sm:flex-col text-left" : "lg:!flex-row sm:!flex-col"}`}>
           <div className="flex-1">
-            <h1 className="text-2xl text-white font-bold">{productInfo?.name}</h1>
-            <p className="text-gray-300 mt-6">{productInfo?.description}</p>
+            <h1 className="text-2xl text-white font-bold">{lan ? productInfo?.en_name :productInfo?.name}</h1>
+            <p className="text-gray-300 mt-6">{lan ? productInfo?.en_description :productInfo?.description}</p>
           </div>
           <div className="w-max min-w-[20rem] sm:!w-full p-4 flex flex-col justify-between bg-white rounded-lg">
             <div className="flex flex-col min-w-max gap-2">
               {productStaticAtts?.map((staticAtt: any) => (
-                <div className="flex gap-3 items-center">
+                <div className={`flex gap-3 items-center ${lan ? "!flex-row-reverse text-left" : ""}`}>
                   <img
                     src={
                       apiConfig.domain + staticAtt?.relatedStaticAttribute?.icon
                     }
                     className="w-6"
                   />
-                  <p>{staticAtt?.relatedStaticAttribute?.title}</p>
+                  <p>{lan ? staticAtt?.relatedStaticAttribute?.en_title :staticAtt?.relatedStaticAttribute?.title}</p>
                 </div>
               ))}
             </div>
             <button
-              className="w-full p-5 py-4 rounded-lg text-white"
+              className={`w-full p-5 py-4 rounded-lg text-white`}
               onClick={() => window.open("tel:" + generalSetting?.phoneNumber)}
               style={{ background: generalSetting.secondaryColor }}
             >
-              استعلام قیمت
+              {
+                lan
+                ?
+                "Price"
+                :
+                "استعلام قیمت"
+              }
             </button>
           </div>
         </div>
       </div>
       <div className="flex flex-col p-6 border-2 border-white rounded-xl">
-        <div className="w-full flex items-center justify-between text-white">
-          <p className="text-xl">مشخصات محصول</p>
+        <div className={`w-full flex items-center justify-between text-white ${lan ? "!flex-row-reverse text-left" : ""}`}>
+          <p className="text-xl"> {lan ? "Information" : "مشخصات محصول" }</p>
           <p
             onClick={() => setOpenAtts((prev) => !prev)}
             className={`text-2xl cursor-pointer ${
@@ -91,7 +98,7 @@ const ProductDetailPage = ({
         >
           {productAtts?.map((att: any) => (
             <div
-              className={`w-full flex xs:flex-col gap-2 ${
+              className={`w-full flex xs:flex-col gap-2 ${lan ? "flex-row-reverse text-left items-end" : ""} ${
                 openAtts ? " opacity-95 z-0" : " opacity-25 z-[-1]"
               }`}
             >
@@ -99,37 +106,36 @@ const ProductDetailPage = ({
                 className="p-2 text-white rounded w-40 text-center"
                 style={{ background: generalSetting.secondaryColor }}
               >
-                {att.title}:
+                {lan ? `:${att.en_title}` : `${att.title}:`}
               </p>
-              <p className="p-2 bg-white text-black w-full rounded">
-                {att.value}
+              <p className={`p-2 bg-white text-black w-full rounded ${lan ? "text-left" : ""}`}>
+                {lan ? att.en_value : att.value}
               </p>
             </div>
           ))}
         </div>
       </div>
-
       <div className="flex flex-col p-6 border-2 border-white rounded-xl">
-        <h1 className="text-xl font-bold text-white">فروشنده ها</h1>
+        <h1 className={`text-xl font-bold text-white ${lan ? "text-left":""}`}> {lan ? "Seller" : "فروشنده ها"}</h1>
         {productSellers?.map((seller: any) => (
-          <div className="w-full flex sm:!grid sm:!grid-cols-2 gap-4 sm:gap-y-6 smmd:!grid-cols-1 p-6 border-2 border-white rounded-xl mt-6">
-            <div className="w-40 smmd:w-full sm:flex sm:flex-col sm:items-center">
+          <div className={`w-full flex sm:!grid sm:!grid-cols-2 gap-4 sm:gap-y-6 smmd:!grid-cols-1 p-6 border-2 border-white rounded-xl mt-6 ${lan ? "flex-row-reverse text-left" : ""}`}>
+            <div className={`w-40 smmd:w-full sm:flex sm:flex-col sm:w-full sm:items-center`}>
               <p className="text-xl font-bold mb-4 text-white">
-                {seller?.relatedSeller?.name}
+                {lan ? seller?.relatedSeller?.en_name : seller?.relatedSeller?.name}
               </p>
               <p className="text-gray-300">
-                {seller?.relatedSeller?.relatedCity?.name}
+                {lan ? seller?.relatedSeller?.relatedCity?.en_name : seller?.relatedSeller?.relatedCity?.name}
               </p>
             </div>
             <div className="flex-1 sm:flex sm:flex-col sm:items-center">
               <p className="text-lg font-bold text-white mb-4">
-                {productInfo?.name}
+                {lan ? productInfo?.en_name : productInfo?.name}
               </p>
               <p className="text-gray-300">
-                {seller?.relatedSeller?.description}
+                {lan ? seller?.relatedSeller?.en_description : seller?.relatedSeller?.description}
               </p>
             </div>
-            <div className="flex sm:col-span-full items-center justify-center">
+            <div className="flex sm:col-span-full items-center justify-center order-3">
               <button
                 onClick={() =>
                   window.open("tel:" + seller?.relatedSeller?.phoneNumber)
@@ -137,14 +143,14 @@ const ProductDetailPage = ({
                 className="p-2 text-white rounded w-32 text-center"
                 style={{ background: generalSetting.secondaryColor }}
               >
-                سفارش
+                {lan ? "Order" : "سفارش"}
               </button>
             </div>
           </div>
         ))}
       </div>
 
-      <h3 className="text-white text-xl font-bold">محصولات مشابه</h3>
+      <h3 className={`text-white text-xl font-bold ${lan ? "text-left" : ""}`}>{lan ? "Simillar Products" :"محصولات مشابه" } </h3>
       <div className="w-full  relative  grid grid-cols-4 2lg:grid-cols-2 sm:grid-cols-1 gap-4">
         {[
           ...productList,
@@ -177,15 +183,15 @@ const ProductDetailPage = ({
                 src={apiConfig.domain + item.image ?? ""}
                 className="w-full rounded-lg bg-gray-500 object-cover aspect-square"
               />
-              <h4 className="font-bold mb-2 text-right w-full">{item.name}</h4>
-              <p className="w-full text-right color-[#F2F4F8]">
-                {item.description}
+              <h4 className={`font-bold mb-2 w-full ${lan ? "text-left" : "text-right"} `}>{lan? item.en_name: item.name}</h4>
+              <p className={`w-full color-[#F2F4F8] ${lan ? "text-left" : "text-right"}`}>
+                {lan ? item.en_description : item.description}
               </p>
               <button
                 className="w-full p-5 rounded-lg"
                 style={{ background: generalSetting.secondaryColor }}
               >
-                مشاهده محصول
+                {lan? "View Product" :"مشاهده محصول"}
               </button>
             </Link>
           ))}
@@ -278,6 +284,7 @@ const mapStateToProps = (state: RootState) => ({
   productInfo: state.productState.productInfo,
   productList: state.productState.productList,
   generalSetting: state.publicState.generalSetting,
+  lan:state.publicState.lan
 });
 
 export default connect(mapStateToProps)(ProductDetailPage);

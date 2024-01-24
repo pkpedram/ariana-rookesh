@@ -26,6 +26,7 @@ let initialState: PublicState = {
     __v: 0,
   },
   contactUsCategories: [],
+  lan:false
 };
 
 const publicState = (state: PublicState = initialState, action: AnyAction) => {
@@ -72,6 +73,11 @@ const publicState = (state: PublicState = initialState, action: AnyAction) => {
         ...state,
         generalSetting: setting,
       };
+    case 'LAN':
+      return {
+        ...state,
+        lan:payload
+      }  
 
     default:
       return state;

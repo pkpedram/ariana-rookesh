@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo,useEffect } from "react";
 import { MapStateToProps } from "react-redux";
 import { RootState } from "../../Redux/store";
 import { connect } from "react-redux";
@@ -6,14 +6,17 @@ import { apiConfig } from "../../Redux/constants";
 import { PublicState } from "../../Redux/Reducers/reducerTypes";
 import Link from "next/link";
 import { FaPhoneAlt } from "react-icons/fa";
+import { publicActions } from "../../Redux/Actions";
+import { type } from "os";
 
 export interface HeaderPorps {
   isMobile: boolean;
   layoutType?: number;
   generalSetting: PublicState["generalSetting"];
+  handleLanguege:any
 }
 
-const Header = ({ isMobile, layoutType, generalSetting }: HeaderPorps) => {
+const Header = ({ isMobile, layoutType, generalSetting , handleLanguege }: HeaderPorps) => {
   const items = useMemo(() => {
     return [
       {
@@ -33,6 +36,27 @@ const Header = ({ isMobile, layoutType, generalSetting }: HeaderPorps) => {
       },
     ];
   }, []);
+
+  useEffect(()=>{
+    let data = localStorage.getItem('lan')
+    if(data != "true" || data == undefined){
+      localStorage.setItem('lan',true)
+    }else{
+      localStorage.setItem('lan',false)
+    }
+    handleLanguege()
+  },[])
+
+  const handleEN = ()=>{
+    let data = localStorage.getItem('lan')
+    if(data != "true" || data == undefined){
+      localStorage.setItem('lan',true)
+    }else{
+      localStorage.setItem('lan',false)
+    }
+    handleLanguege()
+  }
+
   return (
     <div
       className={`w-full  z-30 px-12 flex justify-center  py-10  ${
@@ -57,7 +81,7 @@ const Header = ({ isMobile, layoutType, generalSetting }: HeaderPorps) => {
             {generalSetting?.phoneNumber}
             <FaPhoneAlt />
           </p>
-          <button>En</button>
+          <button onClick={()=>{handleEN()}}>En</button>
           <a
             href={apiConfig.domain + generalSetting?.catalog}
             target="_blank"
@@ -76,6 +100,8 @@ const mapStateToProps = (state: RootState) => ({
   generalSetting: state.publicState.generalSetting,
   layoutType: state.publicState.layoutType,
 });
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  handleLanguege:publicActions.handleLanguege
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -27,6 +27,9 @@ const publicActions = {
       error: null,
     });
   },
+  handleLanguege:()=> async (dispatch: Dispatch) => {
+    dispatch({type:"LAN",payload:JSON.parse(localStorage.getItem("lan"))})
+  },
   postContactUs:
     (data = {}) =>
     async (dispatch: Dispatch) => {
