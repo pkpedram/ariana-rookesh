@@ -17,6 +17,8 @@ const blogCategoryController = {
         let blogCategory = new BlogCategory({
           title: req.body.title,
           en_title: req.body.en_title,
+          description: req.body.description,
+          en_description: req.body.en_description,
           image: req.files.image[0]
             ? generateFileName(req.files.image[0], "_blog_category")
             : null,

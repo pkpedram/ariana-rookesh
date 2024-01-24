@@ -12,7 +12,7 @@
     },
     "version": "v1"
   },
-  "host": "http://arianaback.noavdev.ir/",
+  "host": "arianaback.noavdev.ir",
   "schemes": ["http"],
   "basePath": "/api",
   "consumes": ["application/json", "multipart/form-data"],
@@ -2121,11 +2121,34 @@
         }
       ]
     },
+    "/blog/home": {
+      "get": {
+        "operationId": "blogHome_get_list",
+        "description": "blogHome get list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {},
+            "type": "object",
+            "properties": {}
+          }
+        },
+        "tags": ["blogPost"]
+      }
+    },
     "/blogPost": {
       "get": {
         "operationId": "blogPost_get_list",
         "description": "blogPost get list",
         "parameters": [
+          {
+            "name": "relatedBlogCategory",
+            "in": "query",
+            "description": "کتگوری مربوطه",
+            "required": false,
+            "type": "string"
+          },
           {
             "name": "title",
             "in": "query",
@@ -2188,6 +2211,11 @@
         "operationId": "blogPost_create",
         "description": "",
         "parameters": [
+          {
+            "name": "relatedBlogCategory",
+            "in": "formData",
+            "type": "string"
+          },
           {
             "name": "title",
             "in": "formData",
@@ -3290,7 +3318,11 @@
           "type": "string",
           "readOnly": true
         },
-
+        "relatedBlogCategory": {
+          "title": "cat id",
+          "type": "string",
+          "readOnly": false
+        },
         "title": {
           "title": "title",
           "type": "string",

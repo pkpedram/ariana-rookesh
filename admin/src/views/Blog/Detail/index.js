@@ -7,8 +7,16 @@ import Button from "../../../components/Button";
 import { connect } from "react-redux";
 import blogActions from "../../../redux/actions/Blog";
 import { useParams } from "react-router-dom";
+import Select from "../../../components/Select";
 
-const BlogDetail = ({ addPost, getDetail, postDetail, editPost }) => {
+const BlogDetail = ({
+  addPost,
+  getDetail,
+  postDetail,
+  editPost,
+  getBlogCategories,
+  categories,
+}) => {
   const [value, setValue] = useState({
     title: "",
     en_title: "",
@@ -16,6 +24,7 @@ const BlogDetail = ({ addPost, getDetail, postDetail, editPost }) => {
     en_content: "",
     image: null,
     isActive: true,
+    relatedCategory: "",
   });
 
   const { id } = useParams();
@@ -31,6 +40,7 @@ const BlogDetail = ({ addPost, getDetail, postDetail, editPost }) => {
     if (id) {
       getDetail(id);
     }
+    getBlogCategories();
   }, [id]);
 
   useMemo(() => {
@@ -41,6 +51,14 @@ const BlogDetail = ({ addPost, getDetail, postDetail, editPost }) => {
 
   return (
     <div className="w-full">
+      <Select
+        className={"mb-4"}
+        items={categories}
+        keyOfOption={"title"}
+        title={postDetail?.title ?? "انتخاب دسته بندی"}
+        valueOfOption={"_id"}
+        onChange={(e) => setValue({ ...value, relatedCategory: e })}
+      />
       <ImageInput
         id={"image"}
         title={"تصویر شاخص"}
@@ -129,11 +147,13 @@ const BlogDetail = ({ addPost, getDetail, postDetail, editPost }) => {
 
 const mapStateToProps = (state) => ({
   postDetail: state.blogState.postDetail,
+  categories: state.blogState.categories,
 });
 const mapDispatchToProps = {
   addPost: blogActions.addPost,
   getDetail: blogActions.getPostDetail,
   editPost: blogActions.editPost,
+  getBlogCategories: blogActions.getCategories,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BlogDetail);
