@@ -24,7 +24,7 @@ const BlogGrid = ({items , title , isMore,color}:any) => {
             }
         </div>
             <div className='flex gap-7 2lg:flex-col'> 
-                {items.slice(0,1).map((item:any)=>(
+                {items?.slice(0,1)?.map((item:any)=>(
                     <>
                         <div key={item?._id} className={`p-4 border border-[#000] rounded-xl gap-2 justify-between hidden 2lg:flex md:flex-col md:items-center ${color == 'white' ? "text-white border-[#FFF]" :""}`}>
                             <div className='rounded-xl w-2/4 md:w-full'><img className='object-cover w-full h-full rounded-xl' src={apiConfig.domain + item.image} alt="" /></div>
@@ -63,7 +63,7 @@ const BlogGrid = ({items , title , isMore,color}:any) => {
                 ))}
                 <div className='flex flex-col justify-between w-3/4 2lg:w-full gap-6'>
                     {
-                        items.slice(1,3).map((item:any)=>(
+                        items?.slice(1,3)?.map((item:any)=>(
                             <div key={item?._id} className={`p-4 border border-[#000] rounded-xl flex gap-2 justify-between md:flex-col md:items-center ${color == 'white' ? "text-white !border-[#FFF]" :""}`}>
                             <div className='rounded-xl w-2/4 md:w-full'><img className='object-cover w-full h-full rounded-xl' src={apiConfig.domain + item.image} alt="" /></div>
                             <div className="flex flex-col justify-between w-full">

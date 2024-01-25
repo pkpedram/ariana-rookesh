@@ -13,7 +13,7 @@ const BlogsPage = ({blogHome}:any) => {
     <div className='flex flex-col gap-14'>
         <BlogGrid items={blogHome?.newest} title="جدیدترین‌ها" color="black"/>
         <div className='bg-black py-5'>
-          <BlogFlex items={blogHome?.mostSeen} title="محبوب ترین ها" color="white" isMore/>
+          <BlogFlex items={blogHome?.mostSeen} title="محبوب ترین ها" color="white"/>
         </div>
         {
           blogHome?.categories?.map((item:any)=>(

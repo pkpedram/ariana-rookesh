@@ -17,7 +17,7 @@ const BlogItem = ({item , color , isMain}:any) => {
       </div>
       <div className='w-full flex justify-start'>
           <Link href={`/blogs/blog/${item?.id}`}>
-              <button className={`text-white bg-black rounded-xl px-4 py-2  ${color == 'white' ? "!text-black bg-white" :""}`}>{item?.category}</button>
+              <button className={`text-white bg-black rounded-xl px-4 py-2  ${color == 'white' ? "!text-black bg-white" :""}`}>ادامه مطلب</button>
           </Link>
       </div>
   </div>

@@ -18,7 +18,7 @@ const BlogCategoryId = ({ blogList , blogCategoryInfo }: any) => {
             <h3 className='text-2xl font-bold'>دسته بندی موضوعی {blogCategoryInfo?.title}:</h3>
             <div className='grid grid-cols-3 gap-10 lg:grid-cols-2 sm:grid-cols-1'>
                 {
-                    blogList.map((item:any)=>(
+                    blogList?.map((item:any)=>(
                         <BlogItem item={item} isMain color="black"/>
                     ))
                 }
