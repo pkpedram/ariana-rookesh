@@ -17,10 +17,12 @@ const Footer = ({
   layoutType,
   generalSetting,
   categories,
+  lan,
 }: {
   layoutType: number;
   generalSetting: PublicState["generalSetting"];
   categories: ProductState["categories"];
+  lan: boolean;
 }) => {
   return layoutType === 3 ? null : layoutType === 1 ? (
     <>
@@ -29,12 +31,14 @@ const Footer = ({
           <div className="w-full">
             <img src={logo.src} className="h-8" />
             <p className="w-full text-justify mt-4 min-h-[15rem] md:min-h-0 text-sm font-bold">
-              {generalSetting.aboutUs}
+              {lan ? generalSetting.en_aboutUs : generalSetting.aboutUs}
             </p>
           </div>
           <div className="w-full">
             <div className="h-8 mb-4"></div>
-            <h3 className="text-xl font-bold">محصولات</h3>
+            <h3 className="text-xl font-bold">
+              {lan ? "Products" : "محصولات"}
+            </h3>
             <div className="flex flex-col gap-2 mt-4">
               {categories.map((cat) => (
                 <Link
@@ -42,14 +46,16 @@ const Footer = ({
                   className=" text-gray-500 font-bold"
                   href={`/products/${cat.slug}`}
                 >
-                  <p>{cat.name}</p>
+                  <p>{lan ? cat.en_name : cat.name}</p>
                 </Link>
               ))}
             </div>
           </div>
           <div className="w-full">
             <div className="h-8 mb-4"></div>
-            <h3 className="text-xl font-bold">ارتباط با ما</h3>
+            <h3 className="text-xl font-bold">
+              {lan ? "Contact Us" : "ارتباط با ما"}
+            </h3>
             <div className="flex flex-col gap-2 mt-4">
               <div className="flex items-center gap-2 [&>p]:font-bold">
                 <PiPhone />
@@ -75,7 +81,7 @@ const Footer = ({
               <input
                 className="w-full  outline-none px-2 text-left"
                 type="email"
-                placeholder="ایمیل"
+                placeholder={lan ? "Email" : "ایمیل"}
                 dir="ltr"
               />
             </form>
@@ -92,12 +98,14 @@ const Footer = ({
             <div className="w-full">
               <img src={logoW.src} className="h-8" />
               <p className="w-full text-justify mt-4 text-sm min-h-[15rem] md:min-h-0 font-bold text-white">
-                {generalSetting.aboutUs}
+                {lan ? generalSetting?.en_aboutUs : generalSetting.aboutUs}
               </p>
             </div>
             <div className="w-full">
               <div className="h-8 mb-4"></div>
-              <h3 className="text-xl font-bold text-white">محصولات</h3>
+              <h3 className="text-xl font-bold text-white">
+                {lan ? "Products" : "محصولات"}
+              </h3>
               <div className="flex flex-col gap-2 mt-4">
                 {categories.map((cat) => (
                   <Link
@@ -105,16 +113,21 @@ const Footer = ({
                     className=" text-gray-500 font-bold "
                     href={`/products/${cat.slug}`}
                   >
-                    <p>{cat.name}</p>
+                    <p>{lan ? cat.en_name : cat.name}</p>
                   </Link>
                 ))}
               </div>
             </div>
             <div className="w-full">
               <div className="h-8 mb-4"></div>
-              <h3 className="text-xl font-bold text-white">ارتباط با ما</h3>
+              <h3 className="text-xl font-bold text-white">
+                {lan ? "Contact Us" : "ارتباط با ما"}
+              </h3>
               <div className="flex flex-col gap-2 mt-4">
-                <div className="flex items-center gap-2 [&>p]:font-bold text-white">
+                <div
+                  className="flex items-center gap-2 [&>p]:font-bold text-white"
+                  dir={lan ? "ltr" : "rtl"}
+                >
                   <PiPhone />
                   <p>{generalSetting.phoneNumber}</p>
                 </div>
@@ -128,7 +141,9 @@ const Footer = ({
           <div className="w-1/4  md:w-full md:h-96 lg:w-1/3 relative">
             <img
               src={vectorWhite.src}
-              className="h-full w-full object-cover z-[1] absolute object-right top-0 right-0"
+              className={`h-full w-full object-cover z-[1] absolute object-right top-0 right-0 ${
+                lan ? "" : ""
+              }`}
             />
             <div className="relative z-[2] w-full py-8 pr-24 pl-4">
               <form className="w-full flex bg-black p-4 rounded-xl">
@@ -138,7 +153,7 @@ const Footer = ({
                 <input
                   className="w-full bg-black text-white outline-none px-2 text-left"
                   type="email"
-                  placeholder="ایمیل"
+                  placeholder={lan ? "Email" : "ایمیل"}
                   dir="ltr"
                 />
               </form>
@@ -155,6 +170,7 @@ const mapStateToProps = (state: RootState) => ({
   layoutType: state.publicState.layoutType,
   generalSetting: state.publicState.generalSetting,
   categories: state.productState.categories,
+  lan: state.publicState.lan,
 });
 
 export default connect(mapStateToProps)(Footer);
