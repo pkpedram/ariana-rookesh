@@ -46,7 +46,7 @@ export interface PublicState {
     __v: number;
   };
   contactUsCategories: Array<ContactUsCategory>;
-  lan:boolean
+  lan: boolean;
 }
 
 type authors = {
@@ -90,6 +90,7 @@ export type ProductListItem = {
   name: string;
   en_name: string;
   description: string;
+  en_description: string;
   price: string;
   showPrice: boolean;
   relatedCategory: Category;
@@ -152,28 +153,35 @@ export interface ProductState {
 }
 
 export type BlogList = {
-  _id:string | number,
-  title:string,
-  en_title:string,
-  image:string,
-  isActive:boolean,
-  created_date:string,
-  __v:number
-}
+  _id: string | number;
+  title: string;
+  en_title: string;
+  image: string;
+  isActive: boolean;
+  created_date: string;
+  __v: number;
+};
 
 export type BlogInfo = {
-  _id: string | number,
-  title: string,
-  en_title: string,
-  image: string,
-  isActive: boolean,
-  created_date: string,
-  __v: number 
-}
+  _id: string | number;
+  title: string;
+  en_title: string;
+  image: string;
+  isActive: boolean;
+  created_date: string;
+  __v: number;
+};
 
 export interface BlogState {
+<<<<<<< HEAD
   blogList:Array<BlogList>,
   blogInfo:BlogInfo | object,
   blogHome:any,
   blogCategoryInfo:any
 }
+=======
+  blogList: Array<BlogList>;
+  blogInfo: BlogInfo | object;
+  blogHome: any;
+}
+>>>>>>> main

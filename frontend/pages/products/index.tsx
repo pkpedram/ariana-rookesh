@@ -7,7 +7,13 @@ import { Category } from "../../Core/Redux/Reducers/reducerTypes";
 import { connect } from "react-redux";
 import Link from "next/link";
 
-const Products = ({ categories }: { categories: Array<Category> }) => {
+const Products = ({
+  categories,
+  lan,
+}: {
+  categories: Array<Category>;
+  lan: boolean;
+}) => {
   return (
     // <div className="w-full z-[1] top-0 right-0 absolute h-full bg-black">
     <div className="w-full h-full max-w-[95rem] grid grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-1 relative  place-content-end pb-10 gap-4">
@@ -17,8 +23,12 @@ const Products = ({ categories }: { categories: Array<Category> }) => {
           key={category._id}
           className="w-full aspect-square border-2 text-white bg-black/50 hover:bg-black hover:scale-100 scale-90 border-white rounded-xl flex flex-col gap-4 items-center justify-center"
         >
-          <p className="text-2xl font-bold">{category.name}</p>
-          <p className="text-lg text-gray-400">{category.en_name}</p>
+          <p className="text-2xl font-bold">
+            {lan ? category.en_name : category.name}
+          </p>
+          <p className="text-lg text-gray-400">
+            {lan ? category.name : category.en_name}
+          </p>
           <div className="h-1/2 p-4">
             <img
               src={apiConfig.domain + category.icon}
@@ -61,5 +71,6 @@ export const getServerSideProps: GetServerSideProps<{}> =
 
 const mapStateToProps = (state: RootState) => ({
   categories: state.productState.categories,
+  lan: state.publicState.lan,
 });
 export default connect(mapStateToProps)(Products);

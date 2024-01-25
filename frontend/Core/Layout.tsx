@@ -14,6 +14,7 @@ export interface LayoutType {
   layoutType: number;
   bg?: string;
   postSeen: Function;
+  handleLanguege: Function;
 }
 
 const Layout = ({
@@ -21,6 +22,7 @@ const Layout = ({
   checkLayoutVersion,
   layoutType,
   postSeen,
+  handleLanguege,
 }: LayoutType) => {
   const isConnected = useConnect();
 
@@ -34,6 +36,7 @@ const Layout = ({
 
   useEffect(() => {
     checkLayoutVersion();
+    handleLanguege();
   }, []);
   return (
     <div
@@ -59,7 +62,7 @@ const Layout = ({
         {children}
       </div>
 
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };
@@ -70,6 +73,7 @@ const mapStateToProps = (state: RootState) => ({
 const mapDispatchToProps = {
   checkLayoutVersion: publicActions.checkLayoutVersion,
   postSeen: publicActions.postSeen,
+  handleLanguege: publicActions.handleLanguege,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Layout);

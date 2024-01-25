@@ -26,10 +26,12 @@ const blogPostController = {
           en_title: req.body.en_title,
           content: req.body.content,
           en_content: req.body.en_content,
+          description: req.body.description,
+          en_description: req.body.en_description,
           image: req?.files?.image
             ? generateFileName(req.files.image[0], "blogPost")
             : null,
-          relatedBlogCategory: req.body.relatedCategory,
+          relatedBlogCategory: req.body.relatedBlogCategory,
           isActive: req.body.isActive,
           seenCount: 0,
           readingTime:
@@ -122,13 +124,18 @@ const blogPostController = {
         const blogPost = await BlogPost.findById(id).populate(
           "relatedBlogCategory"
         );
-
+        const relatedPosts = await BlogPost.find({
+          relatedBlogCategory: blogPost.relatedBlogCategory,
+        })
+          .sort("-created_date")
+          .limit(3);
         if (blogPost) {
           blogPost.seenCount += 1;
           await blogPost.save();
-          return res.send(
-            await baseResults(BlogPost, "id", req.params, false, [])
-          );
+          return res.send({
+            info: blogPost,
+            relatedPosts: relatedPosts,
+          });
         } else {
           res
             .status(404)

@@ -7,7 +7,13 @@ import { connect, useDispatch } from "react-redux";
 import { Category } from "../Core/Redux/Reducers/reducerTypes";
 import Link from "next/link";
 
-const Home: any = ({ categories }: { categories: Array<Category> }) => {
+const Home: any = ({
+  categories,
+  lan,
+}: {
+  categories: Array<Category>;
+  lan: boolean;
+}) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,10 +30,10 @@ const Home: any = ({ categories }: { categories: Array<Category> }) => {
               className="w-full aspect-square border-2 md:p-6 text-white bg-black/50 hover:bg-black hover:scale-100 scale-90 border-white rounded-xl flex flex-col gap-4 items-center justify-center"
             >
               <p className="text-2xl md:text-sm text-center font-bold">
-                {category.name}
+                {lan ? category.en_name : category.name}
               </p>
               <p className="text-lg md:text-xs text-gray-400">
-                {category.en_name}
+                {lan ? category.name : category.en_name}
               </p>
               <img src={apiConfig.domain + category.icon} className="h-1/2" />
             </Link>
@@ -70,6 +76,7 @@ export const getServerSideProps: GetServerSideProps<{}> =
 
 const mapStateToProps = (state: RootState) => ({
   categories: state.productState.categories,
+  lan: state.publicState.lan,
 });
 
 export default connect(mapStateToProps)(Home);
