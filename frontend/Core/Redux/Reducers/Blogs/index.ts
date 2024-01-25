@@ -36,7 +36,7 @@ const blogState  = (
               let dataInfo = typeof payload === "string" ? JSON.parse(payload) : payload
               return{
                 ...state,
-                blogInfo:dataInfo?.result
+                blogInfo:dataInfo
               }
             case 'blogCategoryInfo':
               let dataCatInfo = typeof payload === "string" ? JSON.parse(payload) : payload

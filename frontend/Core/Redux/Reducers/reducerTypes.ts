@@ -173,15 +173,8 @@ export type BlogInfo = {
 };
 
 export interface BlogState {
-<<<<<<< HEAD
   blogList:Array<BlogList>,
   blogInfo:BlogInfo | object,
   blogHome:any,
   blogCategoryInfo:any
 }
-=======
-  blogList: Array<BlogList>;
-  blogInfo: BlogInfo | object;
-  blogHome: any;
-}
->>>>>>> main
