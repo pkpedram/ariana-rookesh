@@ -24,11 +24,11 @@ const Footer = ({
 }) => {
   return layoutType === 3 ? null : layoutType === 1 ? (
     <>
-      <div className="w-full z-50 flex bg-white gap-8">
-        <div className="w-full grid grid-cols-4 gap-16 p-8">
+      <div className="w-full z-30 flex bg-white gap-8 md:flex-col">
+        <div className="flex-1 grid grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-1 gap-16 p-8">
           <div className="w-full">
             <img src={logo.src} className="h-8" />
-            <p className="w-full text-justify mt-4 text-sm font-bold">
+            <p className="w-full text-justify mt-4 min-h-[15rem] md:min-h-0 text-sm font-bold">
               {generalSetting.aboutUs}
             </p>
           </div>
@@ -62,12 +62,12 @@ const Footer = ({
             </div>
           </div>
         </div>
-        <div className="w-1/3 relative">
+        <div className="w-1/4  md:w-full md:h-96 lg:w-1/3 relative">
           <img
             src={vectorBlack.src}
-            className="h-full w-full z-[1] object-cover absolute top-0 left-0"
+            className="h-full w-full z-[1] object-cover object-right absolute top-0 right-0"
           />
-          <div className="relative z-[2] w-full py-8 pr-16 pl-4">
+          <div className="relative z-[2] w-full py-8 pr-24 pl-4">
             <form className="w-full flex bg-white p-4 rounded-xl">
               <button className="bg-black py-1 px-6 text-white rounded-lg">
                 <FaLongArrowAltRight />
@@ -87,11 +87,11 @@ const Footer = ({
   ) : (
     <>
       <>
-        <div className="w-full flex z-50 bg-black gap-8">
-          <div className="w-full grid grid-cols-4 gap-16 p-8">
+        <div className="w-full flex z-30 bg-black gap-8 md:flex-col">
+          <div className="w-full grid grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-1 gap-16 p-8">
             <div className="w-full">
               <img src={logoW.src} className="h-8" />
-              <p className="w-full text-justify mt-4 text-sm font-bold text-white">
+              <p className="w-full text-justify mt-4 text-sm min-h-[15rem] md:min-h-0 font-bold text-white">
                 {generalSetting.aboutUs}
               </p>
             </div>
@@ -125,12 +125,12 @@ const Footer = ({
               </div>
             </div>
           </div>
-          <div className="w-1/3 relative">
+          <div className="w-1/4  md:w-full md:h-96 lg:w-1/3 relative">
             <img
               src={vectorWhite.src}
-              className="h-full w-full object-cover z-[1] absolute top-0 left-0"
+              className="h-full w-full object-cover z-[1] absolute object-right top-0 right-0"
             />
-            <div className="relative z-[2] w-full py-8 pr-16 pl-4">
+            <div className="relative z-[2] w-full py-8 pr-24 pl-4">
               <form className="w-full flex bg-black p-4 rounded-xl">
                 <button className="bg-white py-1 px-6 text-black rounded-lg">
                   <FaLongArrowAltRight />

@@ -120,7 +120,7 @@ const Header = ({
         </div>
       )}
       <div
-        className={`w-full  z-30 px-12 md:px-6 flex justify-center  md:py-6 py-10  ${
+        className={`w-full  z-40 px-12 md:px-6 flex justify-center  md:py-6 py-10  ${
           lan ? "ltr" : ""
         }  ${
           layoutType === 3 || layoutType === 0 || layoutType === 2

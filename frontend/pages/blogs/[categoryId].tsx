@@ -1,58 +1,67 @@
-import { GetServerSideProps } from 'next';
-import React from 'react'
-import { RootState, wrapper } from '../../Core/Redux/store';
-import { apiConfig } from '../../Core/Redux/constants';
-import axios from 'axios';
-import { connect } from 'react-redux';
-import BlogItem from '../../Core/Components/BlogItem';
-import BreadCrumb from '../../Core/Components/BreadCrumb';
+import { GetServerSideProps } from "next";
+import React from "react";
+import { RootState, wrapper } from "../../Core/Redux/store";
+import { apiConfig } from "../../Core/Redux/constants";
+import axios from "axios";
+import { connect } from "react-redux";
+import BlogItem from "../../Core/Components/BlogItem";
+import BreadCrumb from "../../Core/Components/BreadCrumb";
 
-const BlogCategoryId = ({ blogList , blogCategoryInfo }: any) => {
-    // console.log(blogCategoryInfo)
+const BlogCategoryId = ({ blogList, blogCategoryInfo }: any) => {
+  // console.log(blogCategoryInfo)
   return (
-    <div className='flex flex-col gap-8'>
-        <BreadCrumb info={{name:blogCategoryInfo?.title , link:`/blogs/${blogCategoryInfo?._id}`}}/>
-        <div className='bg-black p-4 text-white flex flex-col gap-4 smmd:!p-0'>
-            <h3 className='text-2xl font-bold'>{blogCategoryInfo?.title}</h3>
-            <p className='text-justify'>{blogCategoryInfo?.description}</p>
+    <div className="flex flex-col gap-8">
+      <BreadCrumb
+        categories={[]}
+        info={{
+          name: blogCategoryInfo?.title,
+          link: `/blogs/${blogCategoryInfo?._id}`,
+        }}
+      />
+      <div className="bg-black p-4 text-white flex flex-col gap-4 smmd:!p-0">
+        <h3 className="text-2xl font-bold">{blogCategoryInfo?.title}</h3>
+        <p className="text-justify">{blogCategoryInfo?.description}</p>
+      </div>
+      <div className="p-4 flex flex-col gap-4 smmd:!p-0">
+        <h3 className="text-2xl font-bold">
+          دسته بندی موضوعی {blogCategoryInfo?.title}:
+        </h3>
+        <div className="grid grid-cols-3 gap-10 lg:grid-cols-2 sm:grid-cols-1">
+          {blogList?.map((item: any) => (
+            <BlogItem item={item} isMain color="black" />
+          ))}
         </div>
-        <div className='p-4 flex flex-col gap-4 smmd:!p-0'>
-            <h3 className='text-2xl font-bold'>دسته بندی موضوعی {blogCategoryInfo?.title}:</h3>
-            <div className='grid grid-cols-3 gap-10 lg:grid-cols-2 sm:grid-cols-1'>
-                {
-                    blogList?.map((item:any)=>(
-                        <BlogItem item={item} isMain color="black"/>
-                    ))
-                }
-            </div>
-        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 export const getServerSideProps: GetServerSideProps<{}> =
   wrapper.getServerSideProps((store) => async ({ query }) => {
-
     const res = await fetch(apiConfig.baseUrl + "generalSetting", {
       cache: "force-cache",
     });
     const data = await res.json();
 
-
     // const blogInfoRes = await axios.get(apiConfig.baseUrl + `blogPost/${query?.blogId}`)
 
     // const blogHomeRes = await axios.get(apiConfig.baseUrl + "blog/home")
 
-    const blogByCategoryRes = await axios.get(apiConfig.baseUrl + `blogPost?relatedBlogCategory=${query?.categoryId}`)
-    const blogCategoryRes = await axios.get(apiConfig.baseUrl + `blogCategory/${query?.categoryId}`)
-    
+    const blogByCategoryRes = await axios.get(
+      apiConfig.baseUrl + `blogPost?relatedBlogCategory=${query?.categoryId}`
+    );
+    const blogCategoryRes = await axios.get(
+      apiConfig.baseUrl + `blogCategory/${query?.categoryId}`
+    );
+
+    store.dispatch({ type: "SET_LAYOUT_TYPE", payload: 1 });
 
     store.dispatch({
-      type:"blogCategoryInfo",
-      payload:JSON.stringify(blogCategoryRes.data),
+      type: "blogCategoryInfo",
+      payload: JSON.stringify(blogCategoryRes.data),
     });
     store.dispatch({
-      type:"blogCategory",
-      payload:JSON.stringify(blogByCategoryRes?.data),
+      type: "blogCategory",
+      payload: JSON.stringify(blogByCategoryRes?.data),
     });
 
     store.dispatch({
@@ -60,14 +69,13 @@ export const getServerSideProps: GetServerSideProps<{}> =
       payload: JSON.stringify(data.result[0]),
     });
     return {
-        props:{}
-    }
+      props: {},
+    };
+  });
+
+const mapStateToProps = (state: RootState) => ({
+  blogList: state.blogState.blogList,
+  blogCategoryInfo: state.blogState.blogCategoryInfo,
 });
 
-const mapStateToProps = (state:RootState) => ({
-    blogList:state.blogState.blogList,
-    blogCategoryInfo:state.blogState.blogCategoryInfo
-})
-
-
-export default connect(mapStateToProps)(BlogCategoryId)
+export default connect(mapStateToProps)(BlogCategoryId);
