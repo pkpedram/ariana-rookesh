@@ -11,10 +11,12 @@ const ContactUsForm = ({
   categories,
   postContactUs,
   productCategories,
+  lan,
 }: {
   categories: Array<ContactUsCategory>;
   postContactUs: Function;
   productCategories: Array<Category>;
+  lan: boolean;
 }) => {
   const [value, setValue] = useState<any>({
     relatedContactUsFormCategory: categories[0]?._id,
@@ -39,7 +41,7 @@ const ContactUsForm = ({
       }}
       className="w-full"
     >
-      <div className="w-full flex flex-wrap gap-4">
+      <div className={`${lan ? "ltr" : ""} w-full flex flex-wrap gap-4`}>
         {categories?.map((cat) => (
           <button
             type="button"
@@ -57,24 +59,40 @@ const ContactUsForm = ({
           </button>
         ))}
       </div>
-      <div className="w-full grid grid-cols-2 md:grid-cols-1 gap-6 mt-4 mb-6">
+      <div
+        className={`${
+          lan ? "ltr" : ""
+        } w-full grid grid-cols-2 md:grid-cols-1 gap-6 mt-4 mb-6`}
+      >
         <Input
           value={value.fullName}
-          placeholder="نام و نام خانوادگی"
+          placeholder={lan ? "Full Name" : "نام و نام خانوادگی"}
           onChange={changeHandler}
           name="fullName"
+          dir={lan ? "ltr" : ""}
+          style={{
+            textAlign: lan ? "left" : "right",
+          }}
         />
         <Input
           value={value.companyName}
-          placeholder="نام شرکت"
+          placeholder={lan ? "Company Name" : "نام شرکت"}
           onChange={changeHandler}
           name="companyName"
+          dir={lan ? "ltr" : ""}
+          style={{
+            textAlign: lan ? "left" : "right",
+          }}
         />
         <Input
           value={value.phoneNumber}
-          placeholder="شماره همراه"
+          placeholder={lan ? "Phone Number" : "شماره همراه"}
           onChange={changeHandler}
           name="phoneNumber"
+          dir={lan ? "ltr" : ""}
+          style={{
+            textAlign: lan ? "left" : "right",
+          }}
         />
         {/* <Input
           value={value.relatedProductCategory}
@@ -83,10 +101,11 @@ const ContactUsForm = ({
           name="relatedProductCategory"
         /> */}
         <Select
-          title="گروه محصول"
+          title={lan ? "Related Product Category" : "گروه محصول"}
           value={value.relatedProductCategory}
-          keyOfOption="name"
+          keyOfOption={lan ? "en_name" : "name"}
           list={productCategories}
+          lan={lan}
           valueOfOption="_id"
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
             setValue({
@@ -98,16 +117,20 @@ const ContactUsForm = ({
       </div>
       <TextBox
         value={value.message}
-        placeholder="پیام شما"
+        placeholder={lan ? "Your Message" : "پیام شما"}
         onChange={(e) => setValue({ ...value, message: e.currentTarget.value })}
         name="relatedProductCategory"
+        dir={lan ? "ltr" : ""}
+        style={{
+          textAlign: lan ? "left" : "right",
+        }}
       />
-      <div className="w-full flex justify-end mt-6">
+      <div className={`w-full flex ${lan ? "" : "justify-end "} mt-6`}>
         <button
           type="submit"
           className="bg-black p-3 text-white px-8 rounded-lg"
         >
-          ثبت پیام
+          {lan ? "Submit Form" : "ثبت پیام"}
         </button>
       </div>
     </form>
@@ -117,6 +140,7 @@ const ContactUsForm = ({
 const mapStateToProps = (state: RootState) => ({
   categories: state.publicState.contactUsCategories,
   productCategories: state.productState.categories,
+  lan: state.publicState.lan,
 });
 const mapDispatchToProps = {
   postContactUs: publicActions.postContactUs,

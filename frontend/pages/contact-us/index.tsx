@@ -16,27 +16,53 @@ import ContactUsForm from "../../Core/Components/ContactUsForm";
 const Home: any = ({
   categories,
   generalSetting,
+  lan,
 }: {
   categories: Array<ContactUsCategory>;
   generalSetting: PublicState["generalSetting"];
+  lan: boolean;
 }) => {
   return (
     <Fragment>
-      <div className=" w-full flex justify-between items-center mb-16 flex-wrap gap-6">
-        <div className="">
-          <p className="font-semibold">{generalSetting.contactUs}</p>
+      <div
+        className={` w-full flex justify-between items-center mb-16 flex-wrap gap-6 ${
+          lan ? "ltr" : ""
+        } `}
+      >
+        <div className={lan ? "ltr text-left" : ""}>
+          <p className="font-semibold">
+            {lan ? generalSetting.en_contactUs : generalSetting.contactUs}
+          </p>
           <h3 className="text-2xl mt-8 font-bold">
-            آدرس: {generalSetting.address}
+            {lan ? (
+              <>Address: {generalSetting.en_address}</>
+            ) : (
+              <> آدرس: {generalSetting.address}</>
+            )}
           </h3>
         </div>
 
-        <div className="flex flex-col gap-4 items-end md:justify-end md:w-full">
-          <h4 className="text-xl font-bold">راه های تماس با ما</h4>
-          <div className="flex items-center gap-2 [&>p]:font-bold ">
+        <div
+          className={`flex flex-col gap-4 ${
+            lan ? "items-start" : "items-end"
+          } md:justify-end md:w-full`}
+        >
+          <h4 className="text-xl font-bold">
+            {lan ? "Ways to Contact us" : "راه های تماس با ما"}
+          </h4>
+          <div
+            className={`flex items-center gap-2 [&>p]:font-bold ${
+              lan ? "ltr" : ""
+            }`}
+          >
             <p>{generalSetting.phoneNumber}</p>
             <PiPhone />
           </div>
-          <div className="flex items-center gap-2 [&>p]:font-bold ">
+          <div
+            className={`flex items-center gap-2 [&>p]:font-bold ${
+              lan ? "ltr" : ""
+            }`}
+          >
             <p>{generalSetting.email}</p>
             <BsMailbox />
           </div>
@@ -98,6 +124,7 @@ export const getServerSideProps: GetServerSideProps<{}> =
 const mapStateToProps = (state: RootState) => ({
   categories: state.publicState.contactUsCategories,
   generalSetting: state.publicState.generalSetting,
+  lan: state.publicState.lan,
 });
 
 export default connect(mapStateToProps)(Home);

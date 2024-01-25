@@ -65,7 +65,7 @@ const Footer = ({
         <div className="w-1/3 relative">
           <img
             src={vectorBlack.src}
-            className="h-full w-full z-[1] absolute top-0 left-0"
+            className="h-full w-full z-[1] object-cover absolute top-0 left-0"
           />
           <div className="relative z-[2] w-full py-8 pr-16 pl-4">
             <form className="w-full flex bg-white p-4 rounded-xl">
@@ -128,7 +128,7 @@ const Footer = ({
           <div className="w-1/3 relative">
             <img
               src={vectorWhite.src}
-              className="h-full w-full z-[1] absolute top-0 left-0"
+              className="h-full w-full object-cover z-[1] absolute top-0 left-0"
             />
             <div className="relative z-[2] w-full py-8 pr-16 pl-4">
               <form className="w-full flex bg-black p-4 rounded-xl">

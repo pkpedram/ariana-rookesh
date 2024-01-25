@@ -30,7 +30,7 @@ const publicActions = {
   handleLanguege: () => async (dispatch: Dispatch) => {
     dispatch({
       type: "LAN",
-      payload: JSON.parse(JSON.stringify(localStorage.getItem("lan"))),
+      payload: localStorage?.getItem("lan") == "true" ? true : false,
     });
   },
   postContactUs:

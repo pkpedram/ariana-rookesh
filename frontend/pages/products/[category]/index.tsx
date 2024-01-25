@@ -16,10 +16,12 @@ const ProductsCategory = ({
   categoryInfo,
   productList,
   generalSetting,
+  lan,
 }: {
   categoryInfo: Category;
   productList: Array<ProductListItem>;
   generalSetting: PublicState["generalSetting"];
+  lan: boolean;
 }) => {
   return (
     <Fragment>
@@ -51,34 +53,56 @@ const ProductsCategory = ({
                 }
                 className="w-full rounded-lg bg-gray-500 object-cover aspect-square"
               />
-              <h4 className="font-bold mb-2 text-right w-full">{item.name}</h4>
-              <p className="w-full text-right color-[#F2F4F8] flex-1">
-                {item.description?.slice(0, 200)}...
+              <h4
+                className={`font-bold mb-2 ${
+                  lan ? "text-left" : "text-right"
+                } w-full`}
+              >
+                {lan ? item.en_name : item.name}
+              </h4>
+              <p
+                className={`${
+                  lan ? "ltr text-left" : "text-right"
+                } w-full  color-[#F2F4F8] flex-1`}
+              >
+                {lan ? (
+                  <> {item.en_description?.slice(0, 200)}...</>
+                ) : (
+                  <> {item.description?.slice(0, 200)}...</>
+                )}
               </p>
 
               <p className="text-left w-full">
                 {categoryInfo?.showProductPrices && item.showPrice
-                  ? `${Number(item.price).toLocaleString("fa-ir")} تومان`
+                  ? lan
+                    ? `${(Number(item.price) * 10).toLocaleString("en-us")} IRR`
+                    : `${Number(item.price).toLocaleString("fa-ir")} تومان`
+                  : lan
+                  ? "Call for price"
                   : "تماس بگیرید"}
               </p>
               <button
                 className="w-full p-5 rounded-lg"
                 style={{ background: generalSetting.secondaryColor }}
               >
-                مشاهده محصول
+                {lan ? "View details" : "مشاهده محصول"}
               </button>
             </Link>
           ))}
         </div>
       ) : (
-        <div className="justify-center bg-black p-4 w-max mx-auto gap-4 text-white flex items-center flex-col rounded-lg  relative  mt-40 mb-32">
-          <h1 className="text-xl">محصولی در این دسته بندی موجود نیست</h1>
+        <div className="justify-center bg-black p-4 md:w-full w-max mx-auto gap-4 text-white flex items-center flex-col rounded-lg  relative  mt-40 mb-32">
+          <h1 className="text-xl md:text-sm">
+            {lan
+              ? "There is no products in this category"
+              : "محصولی در این دسته بندی موجود نیست"}
+          </h1>
           <Link
             href={"/"}
-            className="w p-3 px-6 rounded-lg"
+            className="w p-3 px-6 rounded-lg md:mt-4"
             style={{ background: generalSetting.secondaryColor }}
           >
-            بازگشت به صفحه اصلی
+            {lan ? "Return to homepage" : "بازگشت به صفحه اصلی"}
           </Link>
         </div>
       )}
@@ -131,6 +155,7 @@ const mapStateToProps = (state: RootState) => ({
   categoryInfo: state.productState.categoryInfo,
   productList: state.productState.productList,
   generalSetting: state.publicState.generalSetting,
+  lan: state.publicState.lan,
 });
 
 export default connect(mapStateToProps)(ProductsCategory);

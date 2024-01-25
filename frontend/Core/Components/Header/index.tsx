@@ -15,6 +15,7 @@ export interface HeaderPorps {
   layoutType?: number;
   generalSetting: PublicState["generalSetting"];
   handleLanguege: any;
+  lan: boolean;
 }
 
 const Header = ({
@@ -22,6 +23,7 @@ const Header = ({
   layoutType,
   generalSetting,
   handleLanguege,
+  lan,
 }: HeaderPorps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const items = useMemo(() => {
@@ -56,63 +58,92 @@ const Header = ({
 
   return (
     <>
-      <div
-        className={`w-full h-screen flex fixed ltr bg-black/40 backdrop-blur z-50 top-0 ${
-          mobileMenuOpen ? "left-0" : "left-full"
-        } `}
-      >
+      {isMobile && (
         <div
-          onClick={() => setMobileMenuOpen(false)}
-          className="h-screen w-1/3"
-        ></div>
-        <div
-          className={`relative w-2/3 delay-200 h-screen bg-black overflow-y-auto flex flex-col gap-6 p-4 ${
-            mobileMenuOpen ? " right-0" : " -right-[80%]"
-          }`}
+          className={`w-full ${
+            lan ? "" : "ltr"
+          } h-screen flex fixed  bg-black/40 backdrop-blur z-50 top-0 ${
+            mobileMenuOpen
+              ? lan
+                ? "right-0"
+                : "left-0"
+              : lan
+              ? "right-full"
+              : "left-full"
+          } `}
         >
-          <div className="w-full flex justify-end text-white text-xl mt-4">
-            <IoClose onClick={() => setMobileMenuOpen(false)} />
+          <div
+            onClick={() => setMobileMenuOpen(false)}
+            className="h-screen w-1/3"
+          ></div>
+          <div
+            className={`relative w-2/3 delay-200 h-screen bg-black overflow-y-auto flex flex-col gap-6 p-4 ${
+              mobileMenuOpen
+                ? lan
+                  ? "left-0"
+                  : " right-0"
+                : lan
+                ? "-left-[80%]"
+                : " -right-[80%]"
+            }`}
+          >
+            <div className="w-full flex justify-end text-white text-xl mt-4">
+              <IoClose onClick={() => setMobileMenuOpen(false)} />
+            </div>
+            <div className="w-full flex items-center justify-between text-lg pb-4 border-b-2 mb-6  border-white">
+              <p className="flex items-center gap-2 text-white ">
+                {generalSetting?.phoneNumber}
+                <FaPhoneAlt />
+              </p>
+              <button
+                className="text-white text-2xl"
+                onClick={() => {
+                  handleEN();
+                }}
+              >
+                {lan ? "فا" : "En"}
+              </button>
+            </div>
+            {items.map((item, idx) => (
+              <Link
+                onClick={() => setMobileMenuOpen(false)}
+                href={item.link}
+                passHref
+                className={lan ? "ltr" : ""}
+              >
+                <p className={`${lan ? "text-left" : ""} text-white`}>
+                  {lan ? item.en_title : item.title}
+                </p>
+              </Link>
+            ))}
           </div>
-          <div className="w-full flex items-center justify-between text-lg pb-4 border-b-2 mb-6  border-white">
-            <p className="flex items-center gap-2 text-white ">
-              {generalSetting?.phoneNumber}
-              <FaPhoneAlt />
-            </p>
-            <button
-              className="text-white text-2xl"
-              onClick={() => {
-                handleEN();
-              }}
-            >
-              En
-            </button>
-          </div>
-          {items.map((item, idx) => (
-            <Link
-              onClick={() => setMobileMenuOpen(false)}
-              href={item.link}
-              passHref
-            >
-              <p className="text-white">{item.title}</p>
-            </Link>
-          ))}
         </div>
-      </div>
+      )}
       <div
-        className={`w-full  z-30 px-12 md:px-6 flex justify-center  md:py-6 py-10   ${
+        className={`w-full  z-30 px-12 md:px-6 flex justify-center  md:py-6 py-10  ${
+          lan ? "ltr" : ""
+        }  ${
           layoutType === 3 || layoutType === 0 || layoutType === 2
             ? "bg-gradient-to-b from-black via-black/65 to-transparent pb-32"
             : "fixed bg-black"
         }`}
       >
-        <div className="flex w-full items-center justify-between max-w-[90rem]">
-          <div className="flex md:hidden items-center lg:text-xs gap-6">
+        <div
+          className={`${
+            lan ? "ltr" : "rtl"
+          } flex w-full items-center justify-between max-w-[90rem]`}
+        >
+          <div
+            className={`${
+              lan ? "ltr" : "rtl"
+            } flex md:hidden items-center lg:text-xs  gap-6`}
+          >
             <Link href={"/"} className="ml-6">
               <img src={apiConfig.domain + generalSetting?.logo} />
             </Link>
             {items.map((item, idx) => (
               <Link href={item.link} passHref>
-                <p className="text-white">{item.title}</p>
+                <p className="text-white">{lan ? item.en_title : item.title}</p>
               </Link>
             ))}
           </div>
@@ -120,7 +151,9 @@ const Header = ({
             onClick={() => {
               setMobileMenuOpen(true);
             }}
-            className="hidden flex-1 md:flex  text-white text-3xl"
+            className={`${
+              lan ? "justify-end" : ""
+            } hidden flex-1 md:flex  text-white text-3xl`}
           >
             <IoMenu />
           </div>
@@ -129,7 +162,11 @@ const Header = ({
               <img src={apiConfig.domain + generalSetting?.logo} />
             </Link>
           </div>
-          <div className="flex items-center gap-6 text-white md:flex-1 md:justify-end">
+          <div
+            className={`flex items-center gap-6 text-white md:flex-1 md:justify-end ${
+              lan ? "ltr" : ""
+            }`}
+          >
             <p className="flex items-center md:hidden gap-2">
               {generalSetting?.phoneNumber}
               <FaPhoneAlt />
@@ -140,7 +177,7 @@ const Header = ({
                 handleEN();
               }}
             >
-              En
+              {lan ? "فا" : "En"}
             </button>
 
             <a
@@ -148,7 +185,7 @@ const Header = ({
               target="_blank"
               className="text-black bg-white p-3 rounded-lg font-semibold md:text-xs text-xs"
             >
-              دانلود کاتالوگ
+              {lan ? "Catalogue" : " دانلود کاتالوگ"}
             </a>
           </div>
         </div>
@@ -161,6 +198,7 @@ const mapStateToProps = (state: RootState) => ({
   isMobile: state.publicState.isMobile,
   generalSetting: state.publicState.generalSetting,
   layoutType: state.publicState.layoutType,
+  lan: state.publicState.lan,
 });
 const mapDispatchToProps = {
   handleLanguege: publicActions.handleLanguege,
