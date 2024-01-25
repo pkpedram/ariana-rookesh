@@ -15,26 +15,26 @@ type BreadCrumbProps = {
 
 const BreadCrumb = ({categories, info} : BreadCrumbProps) => {
   return (
-    <div className='w-full flex flex-wrap items-center text-sm text-black'>
-        <Link href="https://taaghche.com">
-            طاقچه
+    <div className='w-full flex flex-wrap items-center text-sm text-[#0A1F44]'>
+        <Link href="/">
+            آریانا روکش
         </Link>
         <p><BsChevronLeft /></p>
         {
-          categories.map((item) => (
+          categories?.map((item) => (
             <>
-            <Link href={`https://taaghche.com/category/${item.slug}`} key={`BREADCRUMB_CATEGORY_${item.id}`}>
-              {item.title}
+            <Link href={`/blogs/${item?._id}`} key={`BREADCRUMB_CATEGORY_${item?._id}`}>
+              {item?.title}
             </Link>
             
-       <p key={`BREADCRUMB_CHEVRON_${item.id}`}><BsChevronLeft /></p>
+       <p key={`BREADCRUMB_CHEVRON_${item?._id}`}><BsChevronLeft /></p>
             
 
             </>
           ))
         }
-        <Link href={info.link}>
-          {info.name}
+        <Link className='underline underline-offset-8' href={info?.link}>
+          {info?.name}
         </Link>
     </div>
   )

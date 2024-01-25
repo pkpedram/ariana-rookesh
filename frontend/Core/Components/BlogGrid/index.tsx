@@ -29,7 +29,7 @@ const BlogGrid = ({items , title , isMore,color}:any) => {
                         <div key={item?._id} className={`p-4 border border-[#000] rounded-xl gap-2 justify-between hidden 2lg:flex md:flex-col md:items-center ${color == 'white' ? "text-white border-[#FFF]" :""}`}>
                             <div className='rounded-xl w-2/4 md:w-full'><img className='object-cover w-full h-full rounded-xl' src={apiConfig.domain + item.image} alt="" /></div>
                             <div className="flex flex-col justify-between w-full">
-                                <h3 className={`font-bold text-xl`}>{item?.title}</h3>
+                                <h3 className={`font-bold text-xl underline underline-offset-4`}>{item?.title}</h3>
                                 <p className='text-justify text-md overflow-hidden' >{item?.description?.length > 200 ? item?.description?.substring(0,200) + "..." : item?.description}</p>
                                 <div className="flex items-center gap-1 text-sm text-[#979797]">
                                     <p>{new Date(item?.created_date).toLocaleDateString("fa-ir",{year:'numeric',month:'long',day:'numeric'})}</p>
@@ -45,7 +45,7 @@ const BlogGrid = ({items , title , isMore,color}:any) => {
                         </div>
                         <div className={`p-4 border border-[#000] rounded-xl flex flex-col gap-2 justify-between w-3/12 2lg:hidden  ${color == 'white' ? "text-white border-[#FFF]" :""}`} key={item?._id}>
                             <div className='rounded-xl'><img className='object-cover w-full rounded-xl' src={apiConfig.domain + item.image} alt="" /></div>
-                            <h3 className='font-bold text-xl'>{item?.title}</h3>
+                            <h3 className='font-bold text-xl underline underline-offset-4'>{item?.title}</h3>
                             <p className='text-justify text-md overflow-hidden'>{item?.description?.length > 200 ? item?.description?.substring(0,200) + "..." : item?.description}</p>
                             <div className="flex items-center gap-1 text-sm text-[#979797]">
                                 <p>{new Date(item?.created_date).toLocaleDateString("fa-ir",{year:'numeric',month:'long',day:'numeric'})}</p>
@@ -67,7 +67,7 @@ const BlogGrid = ({items , title , isMore,color}:any) => {
                             <div key={item?._id} className={`p-4 border border-[#000] rounded-xl flex gap-2 justify-between md:flex-col md:items-center ${color == 'white' ? "text-white !border-[#FFF]" :""}`}>
                             <div className='rounded-xl w-2/4 md:w-full'><img className='object-cover w-full h-full rounded-xl' src={apiConfig.domain + item.image} alt="" /></div>
                             <div className="flex flex-col justify-between w-full">
-                                <h3 className='font-bold text-xl'>{item?.title}</h3>
+                                <h3 className='font-bold text-xl underline underline-offset-4'>{item?.title}</h3>
                                 <p className='text-justify text-md overflow-hidden' >{item?.description?.length > 200 ? item?.description?.substring(0,200) + "..." : item?.description}</p>
                                 <div className="flex items-center gap-1 text-sm text-[#979797]">
                                     <p>{new Date(item?.created_date).toLocaleDateString("fa-ir",{year:'numeric',month:'long',day:'numeric'})}</p>

@@ -5,11 +5,14 @@ import { apiConfig } from '../../../Core/Redux/constants';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import BlogFlex from '../../../Core/Components/BlogFlex';
+import ContactUsForm from '../../../Core/Components/ContactUsForm/index';
+import BreadCrumb from '../../../Core/Components/BreadCrumb';
 
 const BlogId = ({blogInfo}:any) => {
     console.log(blogInfo)
   return (
     <div className='flex flex-col gap-6'>
+        <BreadCrumb info={{name:blogInfo?.info?.title , link:`/blogs/blog/${blogInfo?.info?._id}`}} categories={[blogInfo?.info?.relatedBlogCategory]}/>
         <div className="flex lg:flex-col gap-10 p-8 bg-black">
             <div className="w-2/5 lg:w-full lg:h-[19rem] h-[16rem] rounded-xl">
               <img className=" object-cover rounded-xl !w-full !h-full" src={apiConfig.domain + blogInfo?.info?.image} alt="" />
@@ -29,6 +32,9 @@ const BlogId = ({blogInfo}:any) => {
         </div>
         <div className="bg-black pb-6 pt-2">
           <BlogFlex items={blogInfo?.relatedPosts}  color="white"/>
+        </div>
+        <div>
+          <ContactUsForm/>
         </div>
     </div>
   )
