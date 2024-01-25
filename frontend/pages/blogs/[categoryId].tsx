@@ -11,7 +11,7 @@ const BlogCategoryId = ({ blogList , blogCategoryInfo }: any) => {
     // console.log(blogCategoryInfo)
   return (
     <div className='flex flex-col gap-8'>
-        <BreadCrumb info={{name:blogCategoryInfo?.title , link:blogCategoryInfo._id}}/>
+        <BreadCrumb info={{name:blogCategoryInfo?.title , link:`/blogs/${blogCategoryInfo?._id}`}}/>
         <div className='bg-black p-4 text-white flex flex-col gap-4 smmd:!p-0'>
             <h3 className='text-2xl font-bold'>{blogCategoryInfo?.title}</h3>
             <p className='text-justify'>{blogCategoryInfo?.description}</p>

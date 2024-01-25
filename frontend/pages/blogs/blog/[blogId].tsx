@@ -57,7 +57,7 @@ export const getServerSideProps: GetServerSideProps<{}> =
 
     store.dispatch({
       type:"blogInfo",
-      payload:JSON.stringify(blogInfoRes.data),
+      payload:JSON.stringify(blogInfoRes?.data),
     });
 
     store.dispatch({
