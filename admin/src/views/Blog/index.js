@@ -119,6 +119,7 @@ const BlogList = ({
       <h1 className="text-white text-2xl">پست های بلاگ</h1>
 
       <List
+        hasListChange={false}
         addButtonTitle="افزودن پست جدید"
         addButtonLink="/blog/add"
         items={postsList}
@@ -149,6 +150,7 @@ const BlogList = ({
       <h1 className="text-white text-2xl mt-8">دسته بندی های بلاگ</h1>
 
       <List
+        hasListChange={false}
         addButtonOnClick={() => setCatModal(true)}
         addButtonTitle="افزودن دسته بندی جدید"
         items={categories}

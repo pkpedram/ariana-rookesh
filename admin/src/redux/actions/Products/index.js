@@ -1,6 +1,7 @@
 import { ApiConfig } from "../../constants";
 import _dataManager from "../../dataManager";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const productActions = {
   addProductCategory: (data) => async (dispatch) => {
@@ -38,60 +39,68 @@ const productActions = {
           },
         });
         if (res.data) {
-          staticAtts.map(async (item, staticIdx) => {
+          [...staticAtts, 1].map(async (item, staticIdx) => {
             try {
-              let staticAttsRes = await axios.post(
-                ApiConfig.baseUrl + "/productStaticAttributes",
-                {
-                  relatedProduct: res.data?.result?._id,
-                  relatedStaticAttribute: item,
-                },
-                {
-                  headers: {
-                    Authorization: `Bearer ${localStorage.getItem("access")}`,
+              if (typeof item === "object") {
+                let staticAttsRes = await axios.post(
+                  ApiConfig.baseUrl + "/productStaticAttributes",
+                  {
+                    relatedProduct: res.data?.result?._id,
+                    relatedStaticAttribute: item,
                   },
-                }
-              );
+                  {
+                    headers: {
+                      Authorization: `Bearer ${localStorage.getItem("access")}`,
+                    },
+                  }
+                );
+              }
               if (staticIdx === staticAtts?.length - 1) {
-                sellers?.map(async (seller, sellerIdx) => {
+                [...sellers, 1]?.map(async (seller, sellerIdx) => {
                   try {
-                    let sellerRes = await axios.post(
-                      ApiConfig.baseUrl + "/productSeller",
-                      {
-                        relatedProduct: res.data?.result?._id,
-                        relatedSeller: seller,
-                        isActive: true,
-                      },
-                      {
-                        headers: {
-                          Authorization: `Bearer ${localStorage.getItem(
-                            "access"
-                          )}`,
+                    if (typeof seller === "object") {
+                      let sellerRes = await axios.post(
+                        ApiConfig.baseUrl + "/productSeller",
+                        {
+                          relatedProduct: res.data?.result?._id,
+                          relatedSeller: seller,
+                          isActive: true,
                         },
-                      }
-                    );
+                        {
+                          headers: {
+                            Authorization: `Bearer ${localStorage.getItem(
+                              "access"
+                            )}`,
+                          },
+                        }
+                      );
+                    }
 
                     if (sellerIdx == sellers?.length - 1) {
-                      atts?.map(async (attItem, attIndex) => {
+                      [...atts, 1]?.map(async (attItem, attIndex) => {
                         try {
-                          let attRes = await axios.post(
-                            ApiConfig.baseUrl + "/productAttribute",
-                            {
-                              ...attItem,
-                              relatedProduct: res.data?.result?._id,
-                            },
-                            {
-                              headers: {
-                                Authorization: `Bearer ${localStorage.getItem(
-                                  "access"
-                                )}`,
+                          if (typeof attItem === "object") {
+                            let attRes = await axios.post(
+                              ApiConfig.baseUrl + "/productAttribute",
+                              {
+                                ...attItem,
+                                relatedProduct: res.data?.result?._id,
                               },
-                            }
-                          );
+                              {
+                                headers: {
+                                  Authorization: `Bearer ${localStorage.getItem(
+                                    "access"
+                                  )}`,
+                                },
+                              }
+                            );
+                          }
 
                           if (attIndex == atts?.length - 1) {
-                            images?.map(async (imageItem, imgIndex) => {
+                            [...images, 1]?.map(async (imageItem, imgIndex) => {
                               try {
+                                if (typeof imageItem !== "number") {
+                                }
                                 const formData = new FormData();
                                 formData.append("image", imageItem);
                                 formData.append(
@@ -110,11 +119,12 @@ const productActions = {
                                   }
                                 );
 
-                                if (
-                                  imageRes?.data &&
-                                  imgIndex == images?.length - 1
-                                ) {
+                                if (imgIndex == images?.length - 1) {
                                   dispatch({ type: "LOADING_END" });
+                                  toast.success("محصول با موفقیت افزوده شد");
+                                  setTimeout(() => {
+                                    window.location.href = "/products";
+                                  }, 1000);
                                 }
                               } catch (error) {
                                 console.error(error);

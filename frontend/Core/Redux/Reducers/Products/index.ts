@@ -24,6 +24,8 @@ let initialState: ProductState = {
     showOnHomePage: false,
     showProductPrices: true,
     slug: "",
+    description: "",
+    en_description: "",
   },
   productAtts: [],
   productImages: [],

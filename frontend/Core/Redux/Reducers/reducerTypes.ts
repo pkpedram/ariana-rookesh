@@ -134,6 +134,8 @@ export type Category = {
   catalog: string | null;
   isActive: boolean;
   created_date: string;
+  description: string;
+  en_description: string;
   __v: 0;
 };
 export interface ProductState {
@@ -173,8 +175,8 @@ export type BlogInfo = {
 };
 
 export interface BlogState {
-  blogList:Array<BlogList>,
-  blogInfo:BlogInfo | object,
-  blogHome:any,
-  blogCategoryInfo:any
+  blogList: Array<BlogList>;
+  blogInfo: BlogInfo | object;
+  blogHome: any;
+  blogCategoryInfo: any;
 }

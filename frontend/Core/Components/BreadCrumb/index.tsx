@@ -1,43 +1,44 @@
-import React from 'react'
-import { categories } from '../../Redux/Reducers/reducerTypes'
-import Link from 'next/link'
-import {BsChevronLeft} from 'react-icons/bs'
+import React from "react";
+import { Category } from "../../Redux/Reducers/reducerTypes";
+import Link from "next/link";
+import { BsChevronLeft } from "react-icons/bs";
 
 type bookInfo = {
-    name: string;
-    link: string
-}
+  name: string;
+  link: string;
+};
 
 type BreadCrumbProps = {
-    categories: Array<categories>;
-    info: bookInfo
-}
+  categories?: Array<Category>;
+  info: bookInfo;
+};
 
-const BreadCrumb = ({categories, info} : BreadCrumbProps) => {
+const BreadCrumb = ({ categories, info }: BreadCrumbProps) => {
   return (
-    <div className='w-full flex flex-wrap items-center text-sm text-[#0A1F44]'>
-        <Link href="/">
-            آریانا روکش
-        </Link>
-        <p><BsChevronLeft /></p>
-        {
-          categories?.map((item) => (
-            <>
-            <Link href={`/blogs/${item?._id}`} key={`BREADCRUMB_CATEGORY_${item?._id}`}>
-              {item?.title}
-            </Link>
-            
-       <p key={`BREADCRUMB_CHEVRON_${item?._id}`}><BsChevronLeft /></p>
-            
+    <div className="w-full flex flex-wrap items-center text-sm text-[#0A1F44]">
+      <Link href="/">آریانا روکش</Link>
+      <p>
+        <BsChevronLeft />
+      </p>
+      {categories?.map((item) => (
+        <>
+          <Link
+            href={`/blogs/${item?._id}`}
+            key={`BREADCRUMB_CATEGORY_${item?._id}`}
+          >
+            {item?.name}
+          </Link>
 
-            </>
-          ))
-        }
-        <Link className='underline underline-offset-8' href={info?.link}>
-          {info?.name}
-        </Link>
+          <p key={`BREADCRUMB_CHEVRON_${item?._id}`}>
+            <BsChevronLeft />
+          </p>
+        </>
+      ))}
+      <Link className="underline underline-offset-8" href={info?.link}>
+        {info?.name}
+      </Link>
     </div>
-  )
-}
+  );
+};
 
-export default BreadCrumb
+export default BreadCrumb;
