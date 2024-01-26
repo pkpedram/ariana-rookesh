@@ -9,6 +9,7 @@ import Button from "../../components/Button";
 import PdfInput from "../../components/PdfInput";
 import CheckBox from "../../components/CheckBox";
 import { publicActions } from "../../redux/actions";
+import TextBox from "../../components/TextBox";
 
 const Categories = ({
   getProductCategory,
@@ -34,6 +35,8 @@ const Categories = ({
     slug: "",
     showProductPrices: false,
     catalog: null,
+    description: "",
+    en_description: "",
   });
 
   const [contactCatModal, setContactCatModal] = useState(false);
@@ -92,6 +95,18 @@ const Categories = ({
               label={"لینک یکتا"}
               onChange={handleChange}
               value={productCatValue.slug}
+            />
+            <TextBox
+              name={"description"}
+              label={"توضیحات (نمایش در درباره ما)"}
+              onChange={handleChange}
+              value={productCatValue.description}
+            />
+            <TextBox
+              name={"en_description"}
+              label={"توضیحات (انگلیسی)"}
+              onChange={handleChange}
+              value={productCatValue.en_description}
             />
             <div className="h-72">
               <ImageInput

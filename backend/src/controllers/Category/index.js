@@ -34,6 +34,8 @@ const categoryController = {
             : null,
           isActive: req.body.isActive ?? true,
           created_date: new Date(),
+          description: req.body.description,
+          en_description: req.body.en_description,
         });
         await category.save();
         if (process.env.NODE_ENV !== "production") {
