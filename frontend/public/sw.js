@@ -1,1 +1,101 @@
-if(!self.define){let e,s={};const a=(a,t)=>(a=new URL(a+".js",t).href,s[a]||new Promise((s=>{if("document"in self){const e=document.createElement("script");e.src=a,e.onload=s,document.head.appendChild(e)}else e=a,importScripts(a),s()})).then((()=>{let e=s[a];if(!e)throw new Error(`Module ${a} didn’t register its module`);return e})));self.define=(t,i)=>{const n=e||("document"in self?document.currentScript.src:"")||location.href;if(s[n])return;let c={};const d=e=>a(e,n),o={module:{uri:n},exports:c,require:d};s[n]=Promise.all(t.map((e=>o[e]||d(e)))).then((e=>(i(...e),c)))}}define(["./workbox-7c2a5a06"],(function(e){"use strict";importScripts(),self.skipWaiting(),e.clientsClaim(),e.precacheAndRoute([{url:"/_next/static/AQaKm9NvzOB7m78ZEEfHh/_buildManifest.js",revision:"276e1dceafba655ac532fee8cfa189f5"},{url:"/_next/static/AQaKm9NvzOB7m78ZEEfHh/_ssgManifest.js",revision:"b6652df95db52feb4daf4eca35380933"},{url:"/_next/static/chunks/framework-63157d71ad419e09.js",revision:"63157d71ad419e09"},{url:"/_next/static/chunks/main-02f6c10415bfd9a8.js",revision:"02f6c10415bfd9a8"},{url:"/_next/static/chunks/pages/404-d825a2857cc4eae1.js",revision:"d825a2857cc4eae1"},{url:"/_next/static/chunks/pages/500-692289e9615e7bd6.js",revision:"692289e9615e7bd6"},{url:"/_next/static/chunks/pages/_app-7ef8da08967ca1a3.js",revision:"7ef8da08967ca1a3"},{url:"/_next/static/chunks/pages/_error-54de1933a164a1ff.js",revision:"54de1933a164a1ff"},{url:"/_next/static/chunks/pages/about-us-5dc0381c6269d5b4.js",revision:"5dc0381c6269d5b4"},{url:"/_next/static/chunks/pages/blogs-fb3db8a07ab4a685.js",revision:"fb3db8a07ab4a685"},{url:"/_next/static/chunks/pages/blogs/%5BcategoryId%5D-6de61188a1c5f347.js",revision:"6de61188a1c5f347"},{url:"/_next/static/chunks/pages/blogs/blog/%5BblogId%5D-f63dd388a45b9dda.js",revision:"f63dd388a45b9dda"},{url:"/_next/static/chunks/pages/contact-us-6a3d7ea5a826de6a.js",revision:"6a3d7ea5a826de6a"},{url:"/_next/static/chunks/pages/index-21bd8b7273cb0879.js",revision:"21bd8b7273cb0879"},{url:"/_next/static/chunks/pages/product/%5BproductId%5D/%5Bname%5D-c10a243b9a298c2a.js",revision:"c10a243b9a298c2a"},{url:"/_next/static/chunks/pages/products-f26ddd93bef2084a.js",revision:"f26ddd93bef2084a"},{url:"/_next/static/chunks/pages/products/%5Bcategory%5D-28ac57f3e9a0fd10.js",revision:"28ac57f3e9a0fd10"},{url:"/_next/static/chunks/pages/sellers-b0e95a56483a6b87.js",revision:"b0e95a56483a6b87"},{url:"/_next/static/chunks/polyfills-78c92fac7aa8fdd8.js",revision:"79330112775102f91e1010318bae2bd3"},{url:"/_next/static/chunks/webpack-ee7e63bc15b31913.js",revision:"ee7e63bc15b31913"},{url:"/_next/static/css/0bd51e4bdaad7c57.css",revision:"0bd51e4bdaad7c57"},{url:"/_next/static/media/Estedad.187ecee9.woff2",revision:"187ecee9"},{url:"/_next/static/media/Estedad.a16bf398.ttf",revision:"a16bf398"},{url:"/_next/static/media/Pink.60da0e60.ttf",revision:"60da0e60"},{url:"/_next/static/media/Pink.6302bae3.woff",revision:"6302bae3"},{url:"/_next/static/media/Pink.83132737.eot",revision:"83132737"},{url:"/_next/static/media/about.44ef0dcb.png",revision:"270c1074247f5ef1d88c6eeb1207fdee"},{url:"/_next/static/media/discount_726476-01 1.c9088a21.svg",revision:"15f0a2d9fa3bb17432433da1daeb4169"},{url:"/_next/static/media/error.c31d9dfa.gif",revision:"0ee0c0c8188c5f09ae2b57730793f5cf"},{url:"/_next/static/media/happy.52875709.svg",revision:"9099d801305bc863cff14211294e971c"},{url:"/_next/static/media/jk-placeholder-image.009bf1fe.jpg",revision:"8865f01b09e3902c0a7c342fa11a0234"},{url:"/_next/static/media/logo.2142a623.svg",revision:"9bc4eab679531d6adac70ef662bd04eb"},{url:"/_next/static/media/logoWhite.23bd8618.svg",revision:"d1c0ab69664c986701f154ca3cb9bdc5"},{url:"/_next/static/media/notbad.240be9de.svg",revision:"f311fd1558aaae6a0083e1df258b936b"},{url:"/_next/static/media/sad.03894864.svg",revision:"e7cb2bdb0400bed7a11f13d466999cec"},{url:"/_next/static/media/sellerIcon.1e1cdec7.svg",revision:"3b7c8563104dc33a29a8c54282991548"},{url:"/_next/static/media/vectorBlack.96662967.svg",revision:"6b0d6fa496f79d328b0318019cda3631"},{url:"/_next/static/media/vectorWhite.d3763344.svg",revision:"0471d716159fb76f82ea228477207b34"},{url:"/_next/static/media/veryhappy.5c9e7d0f.svg",revision:"35b164e3d7a5fe0e821e06b657bc3b97"},{url:"/assets/font/Estedad-v5.0-Fontjo.com/Estedad.ttf",revision:"a12902cd16108ad0eb762feebf1693f1"},{url:"/assets/font/Estedad-v5.0-Fontjo.com/Estedad.woff2",revision:"09c7dde2243a99219317a6433c8588f1"},{url:"/assets/font/Estedad-v5.0-Fontjo.com/read me!.txt",revision:"894cd2eb5fe4ce24c5d6fbe4f8f686a0"},{url:"/assets/font/Estedad-v5.0-Fontjo.com/ttf/Estedad-Black.ttf",revision:"d1611be96f626712c3256327ea672eb8"},{url:"/assets/font/Estedad-v5.0-Fontjo.com/ttf/Estedad-Bold.ttf",revision:"65475ae4ef29769e0b699fffe210c497"},{url:"/assets/font/Estedad-v5.0-Fontjo.com/ttf/Estedad-ExtraBold.ttf",revision:"6e683599ec5656777f0152dcf1f3e22b"},{url:"/assets/font/Estedad-v5.0-Fontjo.com/ttf/Estedad-ExtraLight.ttf",revision:"74119914fce2487f757dbbc9bc8abeee"},{url:"/assets/font/Estedad-v5.0-Fontjo.com/ttf/Estedad-Light.ttf",revision:"639bf56ffb86ec6978944f91b4de9163"},{url:"/assets/font/Estedad-v5.0-Fontjo.com/ttf/Estedad-Medium.ttf",revision:"a7b1473e887fb4a9adf676ab5b185093"},{url:"/assets/font/Estedad-v5.0-Fontjo.com/ttf/Estedad-Regular.ttf",revision:"8dcf404349d3f5dd9c309aa21b712f71"},{url:"/assets/font/Estedad-v5.0-Fontjo.com/ttf/Estedad-SemiBold.ttf",revision:"ff48875b22759e7c115386ab3e0c1e3a"},{url:"/assets/font/Estedad-v5.0-Fontjo.com/ttf/Estedad-Thin.ttf",revision:"0240620953703c74166e466f0a1e420c"},{url:"/assets/font/Estedad-v5.0-Fontjo.com/woff2/Estedad-Black.woff2",revision:"abe68be05d188d61f9bd368ef3d4bb6b"},{url:"/assets/font/Estedad-v5.0-Fontjo.com/woff2/Estedad-Bold.woff2",revision:"5d83b54816921af21379951985ffb066"},{url:"/assets/font/Estedad-v5.0-Fontjo.com/woff2/Estedad-ExtraBold.woff2",revision:"5eee214b5cd7a25f0db0ae72433a676a"},{url:"/assets/font/Estedad-v5.0-Fontjo.com/woff2/Estedad-ExtraLight.woff2",revision:"059050236e12d07fdd7f6e3f1dae56dd"},{url:"/assets/font/Estedad-v5.0-Fontjo.com/woff2/Estedad-Light.woff2",revision:"461dce3e25642d3117e737014e35270e"},{url:"/assets/font/Estedad-v5.0-Fontjo.com/woff2/Estedad-Medium.woff2",revision:"a39d89490b90a7e8e69a6d72336db931"},{url:"/assets/font/Estedad-v5.0-Fontjo.com/woff2/Estedad-Regular.woff2",revision:"459bc71dc27ece38f1be644a8f06e25b"},{url:"/assets/font/Estedad-v5.0-Fontjo.com/woff2/Estedad-SemiBold.woff2",revision:"e93494cd09181006a64ee77a5acc5ef4"},{url:"/assets/font/Estedad-v5.0-Fontjo.com/woff2/Estedad-Thin.woff2",revision:"98565c7a79a830f229c551052c4a43da"},{url:"/assets/font/iran-yekan/Pink.eot",revision:"dfdc6e89bcf845dc99748413f70277db"},{url:"/assets/font/iran-yekan/Pink.ttf",revision:"6906da26c109b9eef1c2d5e11b2d7646"},{url:"/assets/font/iran-yekan/Pink.woff",revision:"52efa674f832684a8dddc4a3270f8441"},{url:"/assets/image/about.png",revision:"270c1074247f5ef1d88c6eeb1207fdee"},{url:"/assets/image/discount_726476-01 1.svg",revision:"15f0a2d9fa3bb17432433da1daeb4169"},{url:"/assets/image/error.gif",revision:"0ee0c0c8188c5f09ae2b57730793f5cf"},{url:"/assets/image/happy.svg",revision:"9099d801305bc863cff14211294e971c"},{url:"/assets/image/homeBg.jpeg",revision:"2349ba57d9c8a50c2ae576c0fc27000d"},{url:"/assets/image/jk-placeholder-image.jpg",revision:"8865f01b09e3902c0a7c342fa11a0234"},{url:"/assets/image/logo.svg",revision:"9bc4eab679531d6adac70ef662bd04eb"},{url:"/assets/image/logoWhite.svg",revision:"d1c0ab69664c986701f154ca3cb9bdc5"},{url:"/assets/image/notbad.svg",revision:"f311fd1558aaae6a0083e1df258b936b"},{url:"/assets/image/sad.svg",revision:"e7cb2bdb0400bed7a11f13d466999cec"},{url:"/assets/image/sellerIcon.svg",revision:"3b7c8563104dc33a29a8c54282991548"},{url:"/assets/image/vectorBlack.svg",revision:"6b0d6fa496f79d328b0318019cda3631"},{url:"/assets/image/vectorWhite.svg",revision:"0471d716159fb76f82ea228477207b34"},{url:"/assets/image/veryhappy.svg",revision:"35b164e3d7a5fe0e821e06b657bc3b97"},{url:"/favicon.ico",revision:"c30c7d42707a47a3f4591831641e50dc"},{url:"/icons/android-chrome-192x192.png",revision:"0bbd64d1ee937300fb1505ec5c88b154"},{url:"/icons/leftArrow.svg",revision:"1d59245bff24a4d8aba19600f88be2cb"},{url:"/manifest.json",revision:"3406e18f2db337bf33ca04c08fb1463d"},{url:"/vercel.svg",revision:"4b4f1876502eb6721764637fe5c41702"}],{ignoreURLParametersMatching:[]}),e.cleanupOutdatedCaches(),e.registerRoute("/",new e.NetworkFirst({cacheName:"start-url",plugins:[{cacheWillUpdate:async({request:e,response:s,event:a,state:t})=>s&&"opaqueredirect"===s.type?new Response(s.body,{status:200,statusText:"OK",headers:s.headers}):s}]}),"GET"),e.registerRoute(/^https:\/\/fonts\.(?:gstatic)\.com\/.*/i,new e.CacheFirst({cacheName:"google-fonts-webfonts",plugins:[new e.ExpirationPlugin({maxEntries:4,maxAgeSeconds:31536e3})]}),"GET"),e.registerRoute(/^https:\/\/fonts\.(?:googleapis)\.com\/.*/i,new e.StaleWhileRevalidate({cacheName:"google-fonts-stylesheets",plugins:[new e.ExpirationPlugin({maxEntries:4,maxAgeSeconds:604800})]}),"GET"),e.registerRoute(/\.(?:eot|otf|ttc|ttf|woff|woff2|font.css)$/i,new e.StaleWhileRevalidate({cacheName:"static-font-assets",plugins:[new e.ExpirationPlugin({maxEntries:4,maxAgeSeconds:604800})]}),"GET"),e.registerRoute(/\.(?:jpg|jpeg|gif|png|svg|ico|webp)$/i,new e.StaleWhileRevalidate({cacheName:"static-image-assets",plugins:[new e.ExpirationPlugin({maxEntries:64,maxAgeSeconds:86400})]}),"GET"),e.registerRoute(/\/_next\/image\?url=.+$/i,new e.StaleWhileRevalidate({cacheName:"next-image",plugins:[new e.ExpirationPlugin({maxEntries:64,maxAgeSeconds:86400})]}),"GET"),e.registerRoute(/\.(?:mp3|wav|ogg)$/i,new e.CacheFirst({cacheName:"static-audio-assets",plugins:[new e.RangeRequestsPlugin,new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400})]}),"GET"),e.registerRoute(/\.(?:mp4)$/i,new e.CacheFirst({cacheName:"static-video-assets",plugins:[new e.RangeRequestsPlugin,new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400})]}),"GET"),e.registerRoute(/\.(?:js)$/i,new e.StaleWhileRevalidate({cacheName:"static-js-assets",plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400})]}),"GET"),e.registerRoute(/\.(?:css|less)$/i,new e.StaleWhileRevalidate({cacheName:"static-style-assets",plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400})]}),"GET"),e.registerRoute(/\/_next\/data\/.+\/.+\.json$/i,new e.StaleWhileRevalidate({cacheName:"next-data",plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400})]}),"GET"),e.registerRoute(/\.(?:json|xml|csv)$/i,new e.NetworkFirst({cacheName:"static-data-assets",plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400})]}),"GET"),e.registerRoute((({url:e})=>{if(!(self.origin===e.origin))return!1;const s=e.pathname;return!s.startsWith("/api/auth/")&&!!s.startsWith("/api/")}),new e.NetworkFirst({cacheName:"apis",networkTimeoutSeconds:10,plugins:[new e.ExpirationPlugin({maxEntries:16,maxAgeSeconds:86400})]}),"GET"),e.registerRoute((({url:e})=>{if(!(self.origin===e.origin))return!1;return!e.pathname.startsWith("/api/")}),new e.NetworkFirst({cacheName:"others",networkTimeoutSeconds:10,plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400})]}),"GET"),e.registerRoute((({url:e})=>!(self.origin===e.origin)),new e.NetworkFirst({cacheName:"cross-origin",networkTimeoutSeconds:10,plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:3600})]}),"GET")}));
+/**
+ * Copyright 2018 Google Inc. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// If the loader is already loaded, just stop.
+if (!self.define) {
+  let registry = {};
+
+  // Used for `eval` and `importScripts` where we can't get script URL by other means.
+  // In both cases, it's safe to use a global var because those functions are synchronous.
+  let nextDefineUri;
+
+  const singleRequire = (uri, parentUri) => {
+    uri = new URL(uri + ".js", parentUri).href;
+    return registry[uri] || (
+      
+        new Promise(resolve => {
+          if ("document" in self) {
+            const script = document.createElement("script");
+            script.src = uri;
+            script.onload = resolve;
+            document.head.appendChild(script);
+          } else {
+            nextDefineUri = uri;
+            importScripts(uri);
+            resolve();
+          }
+        })
+      
+      .then(() => {
+        let promise = registry[uri];
+        if (!promise) {
+          throw new Error(`Module ${uri} didn’t register its module`);
+        }
+        return promise;
+      })
+    );
+  };
+
+  self.define = (depsNames, factory) => {
+    const uri = nextDefineUri || ("document" in self ? document.currentScript.src : "") || location.href;
+    if (registry[uri]) {
+      // Module is already loading or loaded.
+      return;
+    }
+    let exports = {};
+    const require = depUri => singleRequire(depUri, uri);
+    const specialDeps = {
+      module: { uri },
+      exports,
+      require
+    };
+    registry[uri] = Promise.all(depsNames.map(
+      depName => specialDeps[depName] || require(depName)
+    )).then(deps => {
+      factory(...deps);
+      return exports;
+    });
+  };
+}
+define(['./workbox-8f0e986c'], (function (workbox) { 'use strict';
+
+  importScripts();
+  self.skipWaiting();
+  workbox.clientsClaim();
+  workbox.registerRoute("/", new workbox.NetworkFirst({
+    "cacheName": "start-url",
+    plugins: [{
+      cacheWillUpdate: async ({
+        request,
+        response,
+        event,
+        state
+      }) => {
+        if (response && response.type === 'opaqueredirect') {
+          return new Response(response.body, {
+            status: 200,
+            statusText: 'OK',
+            headers: response.headers
+          });
+        }
+        return response;
+      }
+    }]
+  }), 'GET');
+  workbox.registerRoute(/.*/i, new workbox.NetworkOnly({
+    "cacheName": "dev",
+    plugins: []
+  }), 'GET');
+
+}));
+//# sourceMappingURL=sw.js.map

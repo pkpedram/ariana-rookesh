@@ -85,7 +85,7 @@ const BlogId = ({ blogInfo }: any) => {
 
           <div className="mt-20 w-full">
             {blogInfo?.faq?.map((faq: any) => (
-              <div className="w-full p-4 rounded-2xl border border-black">
+              <div className="w-full p-4 rounded-2xl border border-black my-2">
                 <div className="w-full flex items-center justify-between">
                   <p className="text-lg font-bold">{faq.title}</p>
                   <p
