@@ -15,6 +15,10 @@ const model = {
   },
   seenCount: Number,
   readingTime: String,
+  isImportant: Boolean,
+  authorName: String,
+  authorDescription: String,
+  authorPic: String,
   created_date: { type: Date, default: new Date() },
 };
 

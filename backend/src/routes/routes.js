@@ -488,6 +488,42 @@ let routes = [
     controller: blogPostController["getList"]["controller"],
   },
   {
+    route: "/blogPostSection",
+    type: "post",
+    middlewares: blogPostController["postSection"]["middlewares"],
+    controller: blogPostController["postSection"]["controller"],
+  },
+  {
+    route: "/blogPostSection/:id",
+    type: "put",
+    middlewares: blogPostController["putSection"]["middlewares"],
+    controller: blogPostController["putSection"]["controller"],
+  },
+  {
+    route: "/blogPostSection/:id",
+    type: "delete",
+    middlewares: blogPostController["deleteSection"]["middlewares"],
+    controller: blogPostController["deleteSection"]["controller"],
+  },
+  {
+    route: "/blogPostFaq",
+    type: "post",
+    middlewares: blogPostController["postFaq"]["middlewares"],
+    controller: blogPostController["postFaq"]["controller"],
+  },
+  {
+    route: "/blogPostFaq/:id",
+    type: "put",
+    middlewares: blogPostController["putFaq"]["middlewares"],
+    controller: blogPostController["putFaq"]["controller"],
+  },
+  {
+    route: "/blogPostFaq/:id",
+    type: "delete",
+    middlewares: blogPostController["delete"]["middlewares"],
+    controller: blogPostController["deleteSection"]["controller"],
+  },
+  {
     route: "/blogPost/:id",
     type: "get",
     middlewares: blogPostController["getDetail"]["middlewares"],

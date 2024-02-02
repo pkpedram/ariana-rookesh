@@ -9,7 +9,7 @@ type bookInfo = {
 };
 
 type BreadCrumbProps = {
-  categories?: Array<Category>;
+  categories?: Array<Object>;
   info: bookInfo;
 };
 
@@ -20,13 +20,13 @@ const BreadCrumb = ({ categories, info }: BreadCrumbProps) => {
       <p>
         <BsChevronLeft />
       </p>
-      {categories?.map((item) => (
+      {categories?.map((item: any) => (
         <>
           <Link
             href={`/blogs/${item?._id}`}
             key={`BREADCRUMB_CATEGORY_${item?._id}`}
           >
-            {item?.name}
+            {item?.title}
           </Link>
 
           <p key={`BREADCRUMB_CHEVRON_${item?._id}`}>

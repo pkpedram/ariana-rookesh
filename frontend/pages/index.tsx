@@ -22,7 +22,7 @@ const Home: any = ({
   }, []);
   return (
     <Fragment>
-      <div className="w-full  bg-gradient-to-b from-transparent via-black/90 to-black p-4 absolute h-[80vh] flex items-center justify-center right-0 bottom-0">
+      <div className="w-full !max-w-full  bg-gradient-to-b from-transparent via-black/90 to-black p-4 absolute h-[80vh] flex items-center justify-center right-0 bottom-0">
         <div className="w-full h-full max-w-[95rem] grid grid-cols-4 md:grid-cols-2  place-content-end pb-10 gap-4">
           {categories.map((category) => (
             <Link

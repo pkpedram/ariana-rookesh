@@ -24,9 +24,9 @@ const ProductsCategory = ({
   lan: boolean;
 }) => {
   return (
-    <Fragment>
+    <div>
       <div
-        className="w-full h-screen  absolute top-0 right-0"
+        className="w-full h-screen  absolute top-0 right-0 px-0 !mx-0 !max-w-full"
         style={{
           backgroundImage: `url('${apiConfig?.domain + categoryInfo.banner}')`,
           backgroundRepeat: "no-repeat",
@@ -135,7 +135,7 @@ const ProductsCategory = ({
           </Link>
         </div>
       )}
-    </Fragment>
+    </div>
   );
 };
 

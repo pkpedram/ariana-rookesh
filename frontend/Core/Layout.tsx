@@ -40,24 +40,33 @@ const Layout = ({
   }, []);
   return (
     <div
-      className={`w-full bg-position-center bg-cover ${
+      className={`w-full bg-position-center bg-cover bg-center bg-no-repeat ${
         layoutType === 1 ? "bg-white" : layoutType === 2 ? "bg-black" : ""
       } flex ${
         // layoutType === 3 ? "h-screen" :
         "min-h-screen"
       } flex-col`}
-      style={{
-        background: layoutType === 3 ? `url(${bg.src})` : "",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      style={
+        layoutType === 3
+          ? {
+              background: layoutType === 3 ? `url(${bg.src})` : "",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }
+          : {
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }
+      }
     >
       <Header />
 
       <div
         className={`flex-1 ${
           layoutType === 2 ? "" : "mt-40 md:mt-28"
-        } [&>*]:max-w-[90rem] sm:w-11/12 [&>*]:px-4 [&>*]:mx-auto w-full  `}
+        } [&>*]:max-w-[90rem]  [&>*]:px-4 [&>*]:mx-auto w-full  `}
       >
         {children}
       </div>
