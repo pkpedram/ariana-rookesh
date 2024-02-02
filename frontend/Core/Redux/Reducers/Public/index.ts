@@ -24,6 +24,8 @@ let initialState: PublicState = {
     isActive: true,
     created_date: "",
     __v: 0,
+    aboutUs_full: "",
+    en_aboutUs_full: "",
   },
   contactUsCategories: [],
   lan: false,

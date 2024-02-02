@@ -12,7 +12,8 @@ const categoryController = {
       upload("category").fields([
         { name: "banner", maxCount: 1 },
         { name: "icon", maxCount: 1 },
-        { name: "catalog", maxCount: 1 },
+        // { name: "catalog", maxCount: 1 },
+        { name: "aboutUsImage", maxCount: 1 },
       ]),
     ],
     controller: async (req, res, next) => {
@@ -29,13 +30,16 @@ const categoryController = {
           icon: req.files.icon
             ? generateFileName(req.files.icon[0], "category")
             : null,
-          catalog: req.files.catalog
-            ? generateFileName(req.files.catalog[0], "category")
-            : null,
+          // catalog: req.files.catalog
+          //   ? generateFileName(req.files.catalog[0], "category")
+          //   : null,
           isActive: req.body.isActive ?? true,
           created_date: new Date(),
           description: req.body.description,
           en_description: req.body.en_description,
+          aboutUsImage: req.files.aboutUsImage
+            ? generateFileName(req.files.aboutUsImage[0], "category")
+            : null,
         });
         await category.save();
         if (process.env.NODE_ENV !== "production") {
@@ -95,7 +99,8 @@ const categoryController = {
       upload("category").fields([
         { name: "banner", maxCount: 1 },
         { name: "icon", maxCount: 1 },
-        { name: "catalog", maxCount: 1 },
+        { name: "aboutUsImage", maxCount: 1 },
+        // { name: "catalog", maxCount: 1 },
       ]),
     ],
     controller: async (req, res, next) => {
@@ -111,9 +116,9 @@ const categoryController = {
           category.icon = req.files.icon
             ? generateFileName(req.files.icon[0], "category")
             : category.icon;
-          category.catalog = req.files.catalog
-            ? generateFileName(req.files.catalog[0], "category")
-            : category.catalog;
+          category.aboutUsImage = req.files.aboutUsImage
+            ? generateFileName(req.files.aboutUsImage[0], "category")
+            : category.aboutUsImage;
 
           let keys = Object.keys(req.body);
           keys.map((item) => (category[item] = req.body[item]));

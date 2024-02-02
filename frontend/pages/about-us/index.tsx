@@ -19,7 +19,7 @@ const AboutUs = ({
   generalSetting: PublicState["generalSetting"];
 }) => {
   return (
-    <div className="w-full mb-20">
+    <div className="w-full mb-20 !px-0 !max-w-full [&>*]:max-w-[90rem] [&>*]:mx-auto">
       <h1 className={`${lan ? "ltr" : ""} text-xl font-bold`}>
         {lan ? "About Ariana Holding" : "درباره هلدینگ آریانا"}
       </h1>
@@ -28,45 +28,52 @@ const AboutUs = ({
         alt="عکس چوب"
         className="w-full my-6 rounded-2xl"
       />
-      <p className={`${lan ? "ltr" : ""} mb-8`}>
-        {lan ? generalSetting.en_aboutUs : generalSetting.aboutUs}
-      </p>
+      <div
+        className={`${lan ? "ltr" : ""} mb-8`}
+        dangerouslySetInnerHTML={{
+          __html: lan
+            ? generalSetting.en_aboutUs_full
+            : generalSetting.aboutUs_full,
+        }}
+      ></div>
 
       {categories.map((item, idx) =>
         idx % 2 === 0 ? (
-          <div
-            className={`bg-black p-8 flex lg:flex-col-reverse w-full items-center gap-16 justify-between px-32 lg:px-16 md:px-4 relative mt-40 mb-16 ${
-              lan ? "ltr" : ""
-            }`}
-          >
-            <div className="w-1/2 lg:w-full min-h-[10rem] ">
-              <h1
-                className={`${
-                  lan ? "text-left" : ""
-                } text-white mb-4 text-xl font-bold`}
-              >
-                {lan
-                  ? `${item.en_name}s of Ariana holding`
-                  : `${item.name} های هلدینگ آریانا`}
-              </h1>
-              <p
-                className={`text-white ${
-                  lan ? "text-left ltr" : ""
-                } text-justify `}
-              >
-                {lan ? item.en_description : item.description}
-              </p>
-            </div>
+          <div className="w-full bg-black !max-w-full px-32 lg:px-16 md:px-4">
             <div
-              className={`w-1/3 lg:w-full h-full lg:relative flex items-center justify-center absolute ${
-                lan ? "right-32 lg:right-0" : "left-32 lg:left-0"
-              } overflow-hidden rounded-2xl -top-[25%] lg:bottom-[10rem] md:bottom-0`}
+              className={` max-w-[90rem] mx-auto p-8 flex lg:flex-col-reverse w-full items-center gap-16 justify-between  relative mt-40 mb-16 ${
+                lan ? "ltr" : ""
+              }`}
             >
-              <img
-                alt={item.name}
-                src={apiConfig.domain + item.banner}
-                className=" w-full aspect-square object-cover rounded-2xl "
-              />
+              <div className="w-1/2 lg:w-full min-h-[10rem] ">
+                <h1
+                  className={`${
+                    lan ? "text-left" : ""
+                  } text-white mb-4 text-xl font-bold`}
+                >
+                  {lan
+                    ? `${item.en_name}s of Ariana holding`
+                    : `${item.name} های هلدینگ آریانا`}
+                </h1>
+                <p
+                  className={`text-white ${
+                    lan ? "text-left ltr" : ""
+                  } text-justify `}
+                >
+                  {lan ? item.en_description : item.description}
+                </p>
+              </div>
+              <div
+                className={`w-1/3 lg:w-full h-full lg:relative flex items-center justify-center absolute ${
+                  lan ? "right-32 lg:right-0" : "left-32 lg:left-0"
+                } overflow-hidden rounded-2xl -top-[25%] lg:bottom-[10rem] md:bottom-0`}
+              >
+                <img
+                  alt={item.name}
+                  src={apiConfig.domain + item.aboutUsImage}
+                  className=" w-full aspect-square object-cover rounded-2xl "
+                />
+              </div>
             </div>
           </div>
         ) : (
@@ -78,7 +85,7 @@ const AboutUs = ({
                 : `${item.name} های هلدینگ آریانا`}
             </h1>
             <img
-              src={apiConfig.domain + item.banner}
+              src={apiConfig.domain + item.aboutUsImage}
               className="w-full h-60 object-cover object-center my-8 rounded-xl"
             />
             <p className={` ${lan ? "text-left ltr" : ""} text-justify `}>

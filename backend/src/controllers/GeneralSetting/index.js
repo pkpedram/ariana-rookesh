@@ -30,6 +30,8 @@ const generalSettingController = {
           contactUs: req.body.contactUs,
           en_contactUs: req.body.en_contactUs,
           email: req.body.email,
+          aboutUs_full: req.body.aboutUs_full,
+          en_aboutUs_full: req.body.en_aboutUs_full,
           address: req.body.address,
           en_address: req.body.en_address,
           logo: req.files.logo

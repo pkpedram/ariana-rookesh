@@ -6,6 +6,8 @@ import ImageInput from "../../components/ImageInput";
 import PdfInput from "../../components/PdfInput";
 import Button from "../../components/Button";
 import { publicActions } from "../../redux/actions";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const GeneralSettings = ({
   generalSettings,
@@ -24,6 +26,8 @@ const GeneralSettings = ({
     email: "",
     address: "",
     en_address: "",
+    aboutUs_full: "",
+    en_aboutUs_full: "",
     logo: null,
     catalog: null,
   });
@@ -118,6 +122,20 @@ const GeneralSettings = ({
                 name={"en_aboutUs"}
                 placeholder={"درباره ما کوتاه انگلیسی"}
                 label={"درباره ما کوتاه انگلیسی"}
+              />
+              <ReactQuill
+                className="bg-white h-72 rounded-lg overflow-hidden"
+                theme="snow"
+                value={value.aboutUs_full}
+                placeholder="درباره ما"
+                onChange={(e) => setValue({ ...value, aboutUs_full: e })}
+              />
+              <ReactQuill
+                className="bg-white h-72 rounded-lg overflow-hidden"
+                theme="snow"
+                value={value.en_aboutUs_full}
+                placeholder="درباره ما انگلیسی"
+                onChange={(e) => setValue({ ...value, en_aboutUs_full: e })}
               />
               <TextBox
                 onChange={handleChange}

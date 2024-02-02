@@ -10,7 +10,7 @@ const model = {
   description: String,
   en_description: String,
   showProductPrices: Boolean,
-  catalog: String,
+  aboutUsImage: String,
   isActive: { type: Boolean, default: true },
   created_date: { type: Date, default: new Date() },
 };

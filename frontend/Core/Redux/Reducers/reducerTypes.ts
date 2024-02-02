@@ -44,6 +44,8 @@ export interface PublicState {
     isActive: true;
     created_date: string;
     __v: number;
+    en_aboutUs_full: string;
+    aboutUs_full: string;
   };
   contactUsCategories: Array<ContactUsCategory>;
   lan: boolean;
@@ -135,11 +137,12 @@ export type Category = {
   showOnHomePage: boolean;
   slug: string;
   showProductPrices: boolean;
-  catalog: string | null;
+  catalog?: string | null;
   isActive: boolean;
   created_date: string;
   description: string;
   en_description: string;
+  aboutUsImage: string;
   __v: 0;
 };
 export interface ProductState {

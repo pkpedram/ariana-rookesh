@@ -34,7 +34,7 @@ const Categories = ({
     showOnHomePage: false,
     slug: "",
     showProductPrices: false,
-    catalog: null,
+    aboutUsImage: null,
     description: "",
     en_description: "",
   });
@@ -72,7 +72,7 @@ const Categories = ({
               showOnHomePage: false,
               slug: "",
               showProductPrices: false,
-              catalog: null,
+              aboutUsImage: null,
             });
           }}
         >
@@ -144,7 +144,25 @@ const Categories = ({
                 className={"!max-h-[13rem]"}
               />
             </div>
-            <div className="h-96">
+            <div className="h-72">
+              <ImageInput
+                name={"aboutUsImage"}
+                title={"تصویر صفحه درباره ما"}
+                value={productCatValue.aboutUsImage}
+                onChange={(e) =>
+                  setProductCatValue({
+                    ...productCatValue,
+                    aboutUsImage: e.target.files[0],
+                  })
+                }
+                deleteFile={(e) =>
+                  setProductCatValue({ ...productCatValue, aboutUsImage: null })
+                }
+                id={"aboutUsImage"}
+                className={"!max-h-[13rem]"}
+              />
+            </div>
+            {/* <div className="h-96">
               <PdfInput
                 name={"catalog"}
                 title={"کاتالوگ"}
@@ -161,7 +179,7 @@ const Categories = ({
                 id={"catalog"}
                 className={"!max-h-[13rem]"}
               />
-            </div>
+            </div> */}
             <div className="w-full grid grid-cols-2 gap-4">
               <div className="w-full flex items-center gap-2">
                 <CheckBox
