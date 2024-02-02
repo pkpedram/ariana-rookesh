@@ -86,7 +86,7 @@ const AboutUs = ({
             </h1>
             <img
               src={apiConfig.domain + item.aboutUsImage}
-              className="w-full h-60 object-cover object-center my-8 rounded-xl"
+              className="w-full h-60 object-cover object-center my-8 "
             />
             <p className={` ${lan ? "text-left ltr" : ""} text-justify `}>
               {lan ? item.en_description : item.description}

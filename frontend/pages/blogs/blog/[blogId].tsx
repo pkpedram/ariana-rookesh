@@ -33,7 +33,7 @@ const BlogId = ({ blogInfo }: any) => {
       </div>
       <div className=" w-full bg-black p-8">
         <div className="flex lg:flex-col gap-10 max-w-[90rem] mx-auto">
-          <div className="w-2/5 lg:w-full lg:h-[19rem] h-[16rem] rounded-xl">
+          <div className="w-2/5 lg:w-full lg:h-[19rem] min-h-[16rem] rounded-xl">
             <img
               className=" object-cover rounded-xl !w-full !h-full"
               src={apiConfig.domain + blogInfo?.info?.image}
