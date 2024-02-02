@@ -4,7 +4,10 @@ const { baseResults } = require("../../core/utils/Results");
 const { generateFileName } = require("../../core/utils/multer");
 
 const Product = require("../../models/Product");
+const ProductAttribute = require("../../models/ProductAttribute");
 const ProductImage = require("../../models/ProductImage");
+const ProductSeller = require("../../models/ProductSeller");
+const ProductStaticAttributes = require("../../models/ProductStaticAttributes");
 
 const productController = {
   post: {
@@ -85,6 +88,44 @@ const productController = {
         } else {
           res.status(404).send({ message: "There is no Product with this id" });
         }
+      } catch (error) {
+        if (process.env.NODE_ENV !== "production") {
+          console.log(error);
+        }
+        res.status(500).send({ message: error });
+        next();
+      }
+    },
+  },
+  getDetailForEdit: {
+    middlewares: [authenticateJwtToken(["admin"])],
+    controller: async (req, res, next) => {
+      try {
+        let id = req.params.id;
+        const product = await Product.findById(id);
+
+        if (!product)
+          return res
+            .status(404)
+            .send({ message: "محصولی با این شناسه پیدا نشد" });
+        const productImages = await ProductImage.find({ relatedProduct: id });
+        const productSellers = await ProductSeller.find({
+          relatedProduct: id,
+        }).populate("relatedSeller");
+        const productStaticAttributes = await ProductStaticAttributes.find({
+          relatedProduct: id,
+        }).populate("relatedStaticAttribute");
+        const productAttributes = await ProductAttribute.find({
+          relatedProduct: id,
+        });
+
+        return res.send({
+          product,
+          productImages,
+          productSellers,
+          productAttributes,
+          productStaticAttributes,
+        });
       } catch (error) {
         if (process.env.NODE_ENV !== "production") {
           console.log(error);

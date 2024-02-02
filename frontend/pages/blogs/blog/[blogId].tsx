@@ -52,9 +52,16 @@ const BlogId = ({ blogInfo }: any) => {
         ></div>
       </div>
       <div className="bg-black pb-6 pt-2">
-        <BlogFlex items={blogInfo?.relatedPosts} color="white" />
+        <BlogFlex
+          title={"آخرین مطالب این دسته بندی"}
+          items={blogInfo?.relatedPosts}
+          color="white"
+        />
       </div>
       <div>
+        <h1 className="my-4 mb-8 text-2xl font-bold">
+          برای استعلام قیمت محصولات با ما در ارتباط باشید
+        </h1>
         <ContactUsForm />
       </div>
     </div>

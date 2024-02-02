@@ -69,6 +69,10 @@ const CostumeRouter = ({ setUserStatus, isLogin, client }) => {
       element: <ProductDetail />,
     },
     {
+      path: "/products/:id",
+      element: <ProductDetail />,
+    },
+    {
       path: "/forms",
       element: <Forms />,
     },

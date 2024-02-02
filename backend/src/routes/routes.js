@@ -260,6 +260,12 @@ let routes = [
     controller: productController["post"]["controller"],
   },
   {
+    route: "/productforedit/:id",
+    type: "get",
+    middlewares: productController["getDetailForEdit"]["middlewares"],
+    controller: productController["getDetailForEdit"]["controller"],
+  },
+  {
     route: "/product",
     type: "get",
     middlewares: productController["getList"]["middlewares"],

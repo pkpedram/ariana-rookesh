@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import aboutImage from "../../public/assets/image/about.png";
 import Image from "next/image";
 import { Category, PublicState } from "../../Core/Redux/Reducers/reducerTypes";
+import ContactUsForm from "../../Core/Components/ContactUsForm";
 
 const AboutUs = ({
   categories,
@@ -86,6 +87,9 @@ const AboutUs = ({
           </div>
         )
       )}
+      <div className="w-full mt-8">
+        <ContactUsForm />
+      </div>
     </div>
   );
 };

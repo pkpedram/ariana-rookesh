@@ -10,6 +10,8 @@ import { IoClose } from "react-icons/io5";
 import Button from "../../../components/Button";
 import ImageInput from "../../../components/ImageInput";
 import productActions from "../../../redux/actions/Products";
+import { ApiConfig } from "../../../redux/constants";
+import Swal from "sweetalert2";
 
 const ProductDetail = ({
   getStaticAttributes,
@@ -17,9 +19,19 @@ const ProductDetail = ({
   addProduct,
   sellers,
   getSellers,
-  getProductInfo,
+  deleteProductAttribute,
+  getProductInfoForEdit,
   getProductCategory,
   categories,
+  productFullDetail,
+  deleteProductImage,
+  deleteProductStaticAttribute,
+  editProduct,
+  addProductStaticAttributs,
+  addProductAttributes,
+  addProductSeller,
+  deleteProductSeller,
+  addProductImage,
 }) => {
   const { id } = useParams();
   const [productVal, setProductVal] = useState({
@@ -56,6 +68,22 @@ const ProductDetail = ({
     getSellers();
     getProductCategory();
   }, []);
+
+  useEffect(() => {
+    if (id) {
+      getProductInfoForEdit({}, id);
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (productFullDetail.hasOwnProperty("product")) {
+      setProductVal(productFullDetail?.product);
+      setSelectedStaticAtts(productFullDetail?.productStaticAttributes);
+      setAtts(productFullDetail?.productAttributes);
+      setSelectedSellers(productFullDetail?.productSellers);
+      setImages(productFullDetail?.productImages);
+    }
+  }, [productFullDetail]);
   console.log(productVal);
   return (
     <>
@@ -75,7 +103,13 @@ const ProductDetail = ({
                 }
                 items={categories}
                 keyOfOption={"name"}
-                title={"انتخاب دسته بندی"}
+                title={
+                  id
+                    ? categories?.find(
+                        (itm) => itm._id === productVal?.relatedCategory
+                      )?.name
+                    : "انتخاب دسته بندی"
+                }
               />
             </div>
             <Input
@@ -118,6 +152,18 @@ const ProductDetail = ({
               value={productVal?.en_description}
             />
           </div>
+          {id && (
+            <div className="w-full flex justify-end mt-4">
+              <Button
+                className={"!w-max px-8 text-xl"}
+                onClick={() => {
+                  editProduct(productVal, id);
+                }}
+              >
+                ثبت تغییرات
+              </Button>
+            </div>
+          )}
         </div>
         <div className="w-full p-6 rounded-lg bg-gray-800 mt-8">
           <h2 className="text-white text-xl mb-8">ویژگی محصول</h2>
@@ -126,11 +172,22 @@ const ProductDetail = ({
               <p className="text-primary-500 mb-1">ویژگی های ثابت</p>
               <Select
                 items={staticAttributes}
-                onChange={(e) =>
-                  selectedStaticAtts?.find((itm) => itm == e)
-                    ? null
-                    : setSelectedStaticAtts([...selectedStaticAtts, e])
-                }
+                onChange={async (e) => {
+                  if (id) {
+                    let res = await addProductStaticAttributs({
+                      relatedProduct: id,
+                      relatedStaticAttribute: e,
+                    });
+                    console.log(res);
+                    if (res) {
+                      getProductInfoForEdit({}, id);
+                    }
+                  } else {
+                    if (!selectedStaticAtts?.find((itm) => itm == e)) {
+                      setSelectedStaticAtts([...selectedStaticAtts, e]);
+                    }
+                  }
+                }}
                 keyOfOption={"title"}
                 valueOfOption={"_id"}
               />
@@ -138,15 +195,40 @@ const ProductDetail = ({
                 {selectedStaticAtts?.map((item) => (
                   <div className="bg-dark flex items-center gap-3 justify-between p-2 rounded-lg">
                     <p className="text-primary-200">
-                      {staticAttributes?.find((itm) => itm._id === item).title}
+                      {item?._id
+                        ? item.relatedStaticAttribute?.title
+                        : staticAttributes?.find((itm) => itm._id === item)
+                            .title}
                     </p>
                     <p
                       className="text-red-500 text-xl cursor-pointer"
-                      onClick={() =>
-                        setSelectedStaticAtts(
-                          selectedStaticAtts?.filter((itm) => itm !== item)
-                        )
-                      }
+                      onClick={() => {
+                        if (item?._id) {
+                          Swal.fire({
+                            title: "آیا مطمئن هستید؟",
+                            text: "در صورت حذف نمیتوانید آن را برگردانید!",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "بله، حذف کن!",
+                            cancelButtonText: "نه، کی گفته",
+                          }).then((result) => {
+                            if (result.isConfirmed) {
+                              deleteProductStaticAttribute(item?._id);
+                              setSelectedStaticAtts(
+                                selectedStaticAtts?.filter(
+                                  (itm) => itm?._id !== item?._id
+                                )
+                              );
+                            }
+                          });
+                        } else {
+                          setSelectedStaticAtts(
+                            selectedStaticAtts?.filter((itm) => itm !== item)
+                          );
+                        }
+                      }}
                     >
                       <IoClose />
                     </p>
@@ -183,15 +265,33 @@ const ProductDetail = ({
                 />
                 <Button
                   className={"mt-auto"}
-                  onClick={() => {
-                    setAtts([...atts, tempAtts]);
-                    setTempAtts({
-                      title: "",
-                      value: "",
-                      en_title: "",
-                      en_value: "",
-                      isActive: true,
-                    });
+                  onClick={async () => {
+                    if (id) {
+                      let res = await addProductAttributes({
+                        ...tempAtts,
+                        relatedProduct: id,
+                      });
+                      console.log(res);
+                      if (res) {
+                        getProductInfoForEdit({}, id);
+                        setTempAtts({
+                          title: "",
+                          value: "",
+                          en_title: "",
+                          en_value: "",
+                          isActive: true,
+                        });
+                      }
+                    } else {
+                      setAtts([...atts, tempAtts]);
+                      setTempAtts({
+                        title: "",
+                        value: "",
+                        en_title: "",
+                        en_value: "",
+                        isActive: true,
+                      });
+                    }
                   }}
                 >
                   ثبت
@@ -206,9 +306,29 @@ const ProductDetail = ({
                     </p>
                     <p
                       className="text-red-500 text-xl cursor-pointer"
-                      onClick={() =>
-                        setAtts(atts?.filter((itm, indx) => indx !== idx))
-                      }
+                      onClick={() => {
+                        if (item?._id) {
+                          Swal.fire({
+                            title: "آیا مطمئن هستید؟",
+                            text: "در صورت حذف نمیتوانید آن را برگردانید!",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "بله، حذف کن!",
+                            cancelButtonText: "نه، کی گفته",
+                          }).then((result) => {
+                            if (result.isConfirmed) {
+                              deleteProductAttribute(item?._id);
+                              setAtts(
+                                atts?.filter((itm) => itm?._id !== item?._id)
+                              );
+                            }
+                          });
+                        } else {
+                          setAtts(atts?.filter((itm, indx) => indx !== idx));
+                        }
+                      }}
                     >
                       <IoClose />
                     </p>
@@ -223,11 +343,21 @@ const ProductDetail = ({
           <h2 className="text-white text-xl mb-8">فروشنده های محصول</h2>
           <Select
             items={sellers}
-            onChange={(e) =>
-              !selectedSellers?.find((itm) => itm == e)
-                ? setSelectedSellers([...selectedSellers, e])
-                : null
-            }
+            onChange={async (e) => {
+              if (id) {
+                let res = await addProductSeller({
+                  relatedProduct: id,
+                  relatedSeller: e,
+                });
+                if (res) {
+                  getProductInfoForEdit({}, id);
+                }
+              } else {
+                if (!selectedSellers?.find((itm) => itm == e)) {
+                  setSelectedSellers([...selectedSellers, e]);
+                }
+              }
+            }}
             keyOfOptionList={[
               {
                 properties: [["name"]],
@@ -248,15 +378,39 @@ const ProductDetail = ({
 
           <div className="w-full grid grid-cols-3 gap-4 mt-4">
             {selectedSellers?.map((item) => {
-              let seller = sellers?.find((itm) => itm._id === item);
+              let seller = item?.relatedProduct
+                ? item?.relatedSeller
+                : sellers?.find((itm) => itm._id === item);
               return (
                 <div className="bg-dark p-6 rounded-md flex flex-col gap-2 relative">
                   <div
-                    onClick={() =>
-                      setSelectedSellers(
-                        selectedSellers?.filter((itm) => itm !== item)
-                      )
-                    }
+                    onClick={() => {
+                      if (item?._id) {
+                        Swal.fire({
+                          title: "آیا مطمئن هستید؟",
+                          text: "در صورت حذف نمیتوانید آن را برگردانید!",
+                          icon: "warning",
+                          showCancelButton: true,
+                          confirmButtonColor: "#3085d6",
+                          cancelButtonColor: "#d33",
+                          confirmButtonText: "بله، حذف کن!",
+                          cancelButtonText: "نه، کی گفته",
+                        }).then((result) => {
+                          if (result.isConfirmed) {
+                            deleteProductSeller(item?._id);
+                            setSelectedSellers(
+                              selectedSellers?.filter(
+                                (itm) => itm?._id !== item?._id
+                              )
+                            );
+                          }
+                        });
+                      } else {
+                        setSelectedSellers(
+                          selectedSellers?.filter((itm) => itm !== item)
+                        );
+                      }
+                    }}
                     className="text-red-500 text-3xl cursor-pointer absolute left-4 top-4"
                   >
                     <IoClose />
@@ -303,9 +457,19 @@ const ProductDetail = ({
           <ImageInput
             title={"افزودن تصویر"}
             id={"asd"}
-            onChange={(e) => {
+            onChange={async (e) => {
               if (e.target.files?.length > 0) {
-                setImages([...images, e.target.files[0]]);
+                if (id) {
+                  const formData = new FormData();
+                  formData.append("image", e.target.files[0]);
+                  formData.append("relatedProduct", id);
+                  let res = await addProductImage(formData);
+                  if (res) {
+                    getProductInfoForEdit({}, id);
+                  }
+                } else {
+                  setImages([...images, e.target.files[0]]);
+                }
               }
             }}
             value={null}
@@ -315,14 +479,38 @@ const ProductDetail = ({
               <div className="w-full flex flex-col">
                 <div className="flex-1 flex items-center">
                   <img
-                    src={URL.createObjectURL(image)}
+                    src={
+                      image?._id
+                        ? ApiConfig.domain + image.image
+                        : URL.createObjectURL(image)
+                    }
                     className="w-full object-contain rounded-xl"
                   />
                 </div>
                 <p
-                  onClick={() =>
-                    setImages(images?.filter((itm, indx) => indx !== idx))
-                  }
+                  onClick={() => {
+                    if (image?._id) {
+                      Swal.fire({
+                        title: "آیا مطمئن هستید؟",
+                        text: "در صورت حذف نمیتوانید آن را برگردانید!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "بله، حذف کن!",
+                        cancelButtonText: "نه، کی گفته",
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          deleteProductImage(image?._id);
+                          setImages(
+                            images?.filter((itm) => itm?._id !== image?._id)
+                          );
+                        }
+                      });
+                    } else {
+                      setImages(images?.filter((itm, indx) => indx !== idx));
+                    }
+                  }}
                   className="w-full p-2 rounded-lg text-white bg-red-500 mt-4 text-lg cursor-pointer text-center"
                 >
                   حذف تصویر
@@ -331,25 +519,27 @@ const ProductDetail = ({
             ))}
           </div>
         </div>
-        <div className="w-full flex justify-end mt-4">
-          <Button
-            className={"!w-max px-8 text-xl"}
-            onClick={() => {
-              if (id) {
-              } else {
-                addProduct(
-                  productVal,
-                  selectedStaticAtts,
-                  atts,
-                  images,
-                  selectedSellers
-                );
-              }
-            }}
-          >
-            تایید ثبت
-          </Button>
-        </div>
+        {!id && (
+          <div className="w-full flex justify-end mt-4">
+            <Button
+              className={"!w-max px-8 text-xl"}
+              onClick={() => {
+                if (id) {
+                } else {
+                  addProduct(
+                    productVal,
+                    selectedStaticAtts,
+                    atts,
+                    images,
+                    selectedSellers
+                  );
+                }
+              }}
+            >
+              تایید ثبت
+            </Button>
+          </div>
+        )}
       </div>
     </>
   );
@@ -360,6 +550,7 @@ const mapStateToProps = (state) => ({
   sellers: state.publicState.sellers,
   productDetail: state.productState.productDetail,
   categories: state.productState.categories,
+  productFullDetail: state.productState.productFullDetail,
 });
 const mapDispatchToProps = {
   getStaticAttributes: publicActions.getStaticAttributes,
@@ -367,6 +558,16 @@ const mapDispatchToProps = {
   addProduct: productActions.addProduct,
   getProductInfo: productActions.getProductInfo,
   getProductCategory: productActions.getProductCategory,
+  getProductInfoForEdit: productActions.getProductInfoForEdit,
+  deleteProductImage: productActions.deleteProductImage,
+  deleteProductAttribute: productActions.deleteProductAttribute,
+  deleteProductStaticAttribute: productActions.deleteProductStaticAttribute,
+  editProduct: productActions.editProduct,
+  addProductStaticAttributs: productActions.addProductStaticAttributs,
+  addProductAttributes: productActions.addProductAttributes,
+  addProductSeller: productActions.addProductSeller,
+  deleteProductSeller: productActions.deleteProductSeller,
+  addProductImage: productActions.addProductImage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);

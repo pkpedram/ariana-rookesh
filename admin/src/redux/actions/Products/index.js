@@ -155,10 +155,20 @@ const productActions = {
         dispatch({ type: "LOADING_END" });
       }
     },
+  getProductInfoForEdit:
+    (data = {}, id = "") =>
+    async (dispatch) => {
+      await _dataManager.get(
+        "productforedit/" + id,
+        data,
+        { dispatch },
+        { id: id }
+      );
+    },
   editProduct:
     (data = {}, id = "") =>
     async (dispatch) => {
-      await _dataManager.put(`product/${id}`, data, {}, {}, true, {
+      await _dataManager.put(`product/${id}`, data, {}, {}, false, {
         success: "محصول با موفقیت تغییر یافت",
       });
     },
@@ -175,6 +185,67 @@ const productActions = {
     async (dispatch) => {
       await _dataManager.delete(`product/${id}`, {}, {}, {}, true, {
         success: " محصول با موفقیت حذف شد",
+      });
+    },
+  deleteProductImage:
+    (id = "") =>
+    async (dispatch) => {
+      await _dataManager.delete(`productImage/${id}`, {}, {}, {}, false);
+    },
+  deleteProductAttribute:
+    (id = "") =>
+    async (dispatch) => {
+      await _dataManager.delete(`productAttribute/${id}`, {}, {}, {}, false);
+    },
+  deleteProductStaticAttribute:
+    (id = "") =>
+    async (dispatch) => {
+      await _dataManager.delete(
+        `productStaticAttributes/${id}`,
+        {},
+        {},
+        {},
+        false
+      );
+    },
+  deleteProductSeller:
+    (id = "") =>
+    async (dispatch) => {
+      await _dataManager.delete(`productSeller/${id}`, {}, {}, {}, false);
+    },
+  addProductStaticAttributs:
+    (data = {}) =>
+    async (dispatch) => {
+      return await _dataManager.post(
+        "productStaticAttributes",
+        data,
+        {},
+        {},
+        false,
+        {
+          success: "ویژگی ثابت با موفقیت افزوده شد",
+        }
+      );
+    },
+  addProductAttributes:
+    (data = {}) =>
+    async (dispatch) => {
+      return await _dataManager.post("productAttribute", data, {}, {}, false, {
+        success: "ویژگی با موفقیت افزوده شد",
+      });
+    },
+  addProductSeller:
+    (data = {}) =>
+    async (dispatch) => {
+      return await _dataManager.post("productSeller", data, {}, {}, false, {
+        success: "فروشنده با موفقیت افزوده شد",
+      });
+    },
+  addProductImage:
+    (data = {}) =>
+    async (dispatch) => {
+      return await _dataManager.post("productImage", data, {}, {}, false, {
+        success: "تصویر با موفقیت افزوده شد",
       });
     },
 };

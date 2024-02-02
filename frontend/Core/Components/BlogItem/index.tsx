@@ -17,9 +17,7 @@ const BlogItem = ({ item, color, isMain }: any) => {
           alt=""
         />
       </div>
-      <h3 className="font-bold text-xl underline underline-offset-4">
-        {item?.title}
-      </h3>
+      <h3 className="font-bold text-xl ">{item?.title}</h3>
       <p className="text-justify text-md overflow-hidden">
         {item?.description?.length > 200
           ? item.description.substring(0, 200) + "..."
@@ -62,9 +60,7 @@ const BlogItem = ({ item, color, isMain }: any) => {
           alt=""
         />
       </div>
-      <h3 className="font-bold text-xl underline underline-offset-4">
-        {item?.title}
-      </h3>
+      <h3 className="font-bold text-xl ">{item?.title}</h3>
       <p className="text-justify text-md overflow-hidden">
         {item?.description?.length > 200
           ? item.description.substring(0, 200) + "..."

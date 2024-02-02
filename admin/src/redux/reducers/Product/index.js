@@ -4,6 +4,7 @@ let initialState = {
   productList: [],
   productListCount: 0,
   productDetail: {},
+  productFullDetail: {},
 };
 
 export default function productState(state = initialState, action) {
@@ -20,6 +21,12 @@ export default function productState(state = initialState, action) {
         ...state,
         productList: payload.result,
         productListCount: payload.count,
+      };
+
+    case "productforedit/" + params?.id:
+      return {
+        ...state,
+        productFullDetail: payload,
       };
 
     case "product/" + params?.id:
