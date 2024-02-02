@@ -10,8 +10,10 @@ import BlogFlex from "../../Core/Components/BlogFlex";
 const BlogsPage = ({ blogHome }: any) => {
   // console.log(blogHome)
   return (
-    <div className="flex flex-col gap-14 mb-24">
-      <BlogGrid items={blogHome?.newest} title="جدیدترین‌ها" color="black" />
+    <div className="flex flex-col gap-14 mb-24 !max-w-full !px-0">
+      <div className="max-w-[90rem] mx-auto w-full px-4">
+        <BlogGrid items={blogHome?.newest} title="جدیدترین‌ها" color="black" />
+      </div>{" "}
       <div className="bg-black py-5">
         <BlogFlex
           items={blogHome?.mostSeen}
@@ -22,15 +24,17 @@ const BlogsPage = ({ blogHome }: any) => {
       {blogHome?.categories?.map((item: any) => (
         <>
           {item?.newest?.length > 0 && (
-            <BlogGrid
-              items={item?.newest}
-              color="black"
-              title={`جدیدترین‌ها ${item?.title}`}
-              isMore
-            />
+            <div className="max-w-[90rem] mx-auto w-full px-4">
+              <BlogGrid
+                items={item?.newest}
+                color="black"
+                title={`جدیدترین‌ها ${item?.title}`}
+                isMore
+              />
+            </div>
           )}
           {item?.mostSeen?.length > 0 && (
-            <div className="bg-black py-5">
+            <div className="bg-black py-5 !max-w-full !px-0 ">
               <BlogFlex
                 items={item?.mostSeen}
                 title={`محبوب ترین ها ${item?.title}`}

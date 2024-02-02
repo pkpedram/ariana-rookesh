@@ -43,6 +43,11 @@ const Header = ({
         en_title: "Contact Us",
         link: "/contact-us",
       },
+      {
+        title: "بلاگ",
+        en_title: "Blog",
+        link: "/blogs",
+      },
     ];
   }, []);
 
@@ -136,7 +141,7 @@ const Header = ({
           <div
             className={`${
               lan ? "ltr" : "rtl"
-            } flex md:hidden items-center lg:text-xs  gap-6`}
+            } flex md:hidden items-center lg:text-xs lg:gap-3 gap-6`}
           >
             <Link href={"/"} className="ml-6">
               <img src={apiConfig.domain + generalSetting?.logo} />

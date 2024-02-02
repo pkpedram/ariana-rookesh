@@ -26,7 +26,9 @@ let initialState: PublicState = {
     __v: 0,
   },
   contactUsCategories: [],
-  lan:false
+  lan: false,
+  cityList: [],
+  sellers: [],
 };
 
 const publicState = (state: PublicState = initialState, action: AnyAction) => {
@@ -73,12 +75,23 @@ const publicState = (state: PublicState = initialState, action: AnyAction) => {
         ...state,
         generalSetting: setting,
       };
-    case 'LAN':
+    case "LAN":
       return {
         ...state,
-        lan:payload
-      }  
+        lan: payload,
+      };
 
+    case "city":
+      return {
+        ...state,
+        cityList: JSON.parse(payload)?.result,
+      };
+
+    case "sellers":
+      return {
+        ...state,
+        sellers: JSON.parse(payload),
+      };
     default:
       return state;
   }

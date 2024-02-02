@@ -23,6 +23,7 @@ const productController = {
           showPrice: req.body.showPrice,
           isActive: req.body.isActive,
           created_date: new Date(),
+          offerPrice: req.body.offerPrice,
           relatedCategory: req.body.relatedCategory,
         });
         await product.save();
@@ -53,10 +54,14 @@ const productController = {
           let image = await ProductImage.findOne({
             relatedProduct: products[i]?._id,
           });
+          let sellers = await ProductSeller.count({
+            relatedProduct: products[i]?._id,
+          });
           let product = products[i]?.toJSON();
           output.push({
             ...product,
             image: image?.image ?? null,
+            sellerCount: sellers,
           });
         }
 

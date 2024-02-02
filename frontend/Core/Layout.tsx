@@ -57,7 +57,7 @@ const Layout = ({
       <div
         className={`flex-1 ${
           layoutType === 2 ? "" : "mt-40 md:mt-28"
-        } max-w-[90rem] sm:w-11/12 px-4 mx-auto w-full  `}
+        } [&>*]:max-w-[90rem] sm:w-11/12 [&>*]:px-4 [&>*]:mx-auto w-full  `}
       >
         {children}
       </div>

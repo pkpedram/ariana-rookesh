@@ -71,16 +71,45 @@ const ProductsCategory = ({
                   <> {item.description?.slice(0, 200)}...</>
                 )}
               </p>
+              <div className="w-full flex items-center justify-between">
+                <p className="p-2 rounded bg-gray-400 text-xs">
+                  {item?.sellerCount} {lan ? "Sellers" : "فروشنده"}
+                </p>
+                <div className="text-left ">
+                  {" "}
+                  <p
+                    className={`${
+                      item?.offerPrice?.length !== 0
+                        ? "text-xs line-through opacity-70"
+                        : ""
+                    }`}
+                  >
+                    {categoryInfo?.showProductPrices && item.showPrice
+                      ? lan
+                        ? `${(Number(item.price) * 10).toLocaleString(
+                            "en-us"
+                          )} IRR`
+                        : `${Number(item.price).toLocaleString("fa-ir")} تومان`
+                      : lan
+                      ? "Call for price"
+                      : "تماس بگیرید"}
+                  </p>
+                  <p>
+                    {categoryInfo?.showProductPrices &&
+                    item.showPrice &&
+                    item.offerPrice?.length !== 0
+                      ? lan
+                        ? `${(Number(item.offerPrice) * 10).toLocaleString(
+                            "en-us"
+                          )} IRR`
+                        : `${Number(item.offerPrice).toLocaleString(
+                            "fa-ir"
+                          )} تومان`
+                      : ""}
+                  </p>
+                </div>
+              </div>
 
-              <p className="text-left w-full">
-                {categoryInfo?.showProductPrices && item.showPrice
-                  ? lan
-                    ? `${(Number(item.price) * 10).toLocaleString("en-us")} IRR`
-                    : `${Number(item.price).toLocaleString("fa-ir")} تومان`
-                  : lan
-                  ? "Call for price"
-                  : "تماس بگیرید"}
-              </p>
               <button
                 className="w-full p-5 rounded-lg"
                 style={{ background: generalSetting.secondaryColor }}

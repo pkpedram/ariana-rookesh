@@ -41,6 +41,7 @@ const ProductDetail = ({
     en_description: "",
     price: "",
     showPrice: true,
+    offerPrice: "",
     isActive: true,
     relatedCategory: null,
   });
@@ -76,7 +77,7 @@ const ProductDetail = ({
   }, [id]);
 
   useEffect(() => {
-    if (productFullDetail.hasOwnProperty("product")) {
+    if (productFullDetail.hasOwnProperty("product") && id) {
       setProductVal(productFullDetail?.product);
       setSelectedStaticAtts(productFullDetail?.productStaticAttributes);
       setAtts(productFullDetail?.productAttributes);
@@ -129,6 +130,12 @@ const ProductDetail = ({
               label={"قیمت (تومان)"}
               onChange={handleChangeValue}
               value={productVal?.price}
+            />
+            <Input
+              name={"offerPrice"}
+              label={"قیمت با تخفیف (تومان)"}
+              onChange={handleChangeValue}
+              value={productVal?.offerPrice}
             />
             <div className="w-full flex items-end gap-2 pb-2 justify-center">
               <CheckBox

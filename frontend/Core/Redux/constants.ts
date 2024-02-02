@@ -4,6 +4,12 @@ export type ApiConfig = {
 };
 
 export const apiConfig: ApiConfig = {
-  domain: "https://arianaback.noavdev.ir/",
-  baseUrl: "https://arianaback.noavdev.ir/api/",
+  domain:
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:5000/"
+      : "https://arianaback.noavdev.ir/",
+  baseUrl:
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:5000/api/"
+      : "https://arianaback.noavdev.ir/api/",
 };

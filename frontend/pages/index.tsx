@@ -6,6 +6,7 @@ import axios from "axios";
 import { connect, useDispatch } from "react-redux";
 import { Category } from "../Core/Redux/Reducers/reducerTypes";
 import Link from "next/link";
+import sellerIcon from "../public/assets/image/sellerIcon.svg";
 
 const Home: any = ({
   categories,
@@ -38,6 +39,18 @@ const Home: any = ({
               <img src={apiConfig.domain + category.icon} className="h-1/2" />
             </Link>
           ))}
+          <Link
+            href={"/sellers"}
+            className="w-full aspect-square border-2 md:p-6 text-white bg-black/50 hover:bg-black hover:scale-100 scale-90 border-white rounded-xl flex flex-col gap-4 items-center justify-center"
+          >
+            <p className="text-2xl md:text-sm text-center font-bold">
+              {lan ? "Sellers" : "فروشنده ها"}
+            </p>
+            <p className="text-lg md:text-xs text-gray-400">
+              {lan ? "فروشنده ها" : "Sellers"}
+            </p>
+            <img src={sellerIcon.src} className="h-1/2" />
+          </Link>
         </div>
       </div>
     </Fragment>

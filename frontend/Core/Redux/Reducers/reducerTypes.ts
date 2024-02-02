@@ -47,6 +47,8 @@ export interface PublicState {
   };
   contactUsCategories: Array<ContactUsCategory>;
   lan: boolean;
+  cityList: Array<Object>;
+  sellers: Array<Object>;
 }
 
 type authors = {
@@ -96,6 +98,8 @@ export type ProductListItem = {
   relatedCategory: Category;
   isActive: boolean;
   created_date: string;
+  offerPrice?: string;
+  sellerCount: number;
 };
 
 export type ProductInfo = {

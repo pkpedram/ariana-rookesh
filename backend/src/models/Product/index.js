@@ -6,6 +6,7 @@ const model = {
   description: String,
   en_description: String,
   price: String,
+  offerPrice: String,
   showPrice: Boolean,
   relatedCategory: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
   isActive: { type: Boolean, default: true },
