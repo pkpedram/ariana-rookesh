@@ -26,6 +26,7 @@ let initialState: ProductState = {
     slug: "",
     description: "",
     en_description: "",
+    aboutUsImage: "",
   },
   productAtts: [],
   productImages: [],
