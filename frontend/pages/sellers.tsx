@@ -24,7 +24,7 @@ const Seller = ({
   return (
     <Fragment>
       <div
-        className="w-full h-screen  absolute top-0 right-0"
+        className="w-full h-screen  absolute top-0 right-0 !px-0 !max-w-full"
         style={{
           backgroundImage: `url('${bg.src}')`,
           backgroundRepeat: "no-repeat",

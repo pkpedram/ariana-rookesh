@@ -41,9 +41,9 @@ const BlogId = ({ blogInfo }: any) => {
             />
           </div>
           <div className="flex flex-col lg:gap-6 justify-between text-white w-full">
-            <h2 className="text-3xl font-bold">{blogInfo?.info?.title}</h2>
+            <h2 className="text-3xl font-bold mb-4">{blogInfo?.info?.title}</h2>
             <p className="text-justify">{blogInfo?.info?.description}</p>
-            <div className="flex items-center gap-3 text-sm text-[#979797]">
+            <div className="flex items-center gap-3 text-sm mt-2 text-[#979797]">
               <p>
                 {new Date(blogInfo?.info?.created_date).toLocaleDateString(
                   "fa-ir",
