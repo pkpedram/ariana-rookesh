@@ -74,7 +74,7 @@ const BlogItem = ({ item, color, isMain }: any) => {
             day: "numeric",
           })}
         </p>
-        |<p>{item?.relatedBlogCategory?.title}</p>
+        |<p>{item?.authorName}</p>
       </div>
       <div className="w-full flex justify-end">
         <Link href={`/blogs/blog/${item?._id}`}>

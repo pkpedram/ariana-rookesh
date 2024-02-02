@@ -6,6 +6,8 @@ import { apiConfig } from "../../Core/Redux/constants";
 import axios from "axios";
 import { connect } from "react-redux";
 import BlogFlex from "../../Core/Components/BlogFlex";
+import { BsChevronLeft } from "react-icons/bs";
+import Link from "next/link";
 
 const BlogsPage = ({ blogHome }: any) => {
   // console.log(blogHome)
@@ -28,7 +30,7 @@ const BlogsPage = ({ blogHome }: any) => {
               <BlogGrid
                 items={item?.newest}
                 color="black"
-                title={`جدیدترین‌ها ${item?.title}`}
+                title={`جدیدترین های ${item?.title}`}
                 isMore
               />
             </div>
@@ -37,7 +39,7 @@ const BlogsPage = ({ blogHome }: any) => {
             <div className="bg-black py-5 !max-w-full !px-0 ">
               <BlogFlex
                 items={item?.mostSeen}
-                title={`محبوب ترین ها ${item?.title}`}
+                title={`محبوب ترین های ${item?.title}`}
                 color="white"
                 isMore
               />
@@ -45,6 +47,38 @@ const BlogsPage = ({ blogHome }: any) => {
           )}
         </>
       ))}
+      <div className="w-full flex md:flex-col max-w-[90rem] mx-auto gap-4 mt-20 lg:px-4">
+        <div className="w-1/4 md:w-full h-full flex-col">
+          <h1 className="text-xl font-bold mb-4">پیوند های مفید</h1>
+          <div className="w-full border-2 border-black rounded-2xl p-4 h-full flex-1">
+            {blogHome?.categories?.map((cat: any) => (
+              <div className="flex gap-4 items-center">
+                <p>
+                  <BsChevronLeft />
+                </p>
+                <Link href={`/blogs/${cat._id}`} className="font-bold">
+                  {cat.title}
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="w-full">
+          <h1 className="text-xl font-bold mb-4">شاید دوست داشته باشید</h1>
+          <div className="w-full border-2 border-black rounded-2xl p-4">
+            {blogHome?.maybeYouLike?.map((cat: any) => (
+              <div className="flex gap-4 items-center">
+                <p>
+                  <BsChevronLeft />
+                </p>
+                <Link href={`/blog/${cat._id}`} className="font-bold">
+                  {cat.title}
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

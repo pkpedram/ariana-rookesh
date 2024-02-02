@@ -150,6 +150,7 @@ const blogPostController = {
         let mostSeen = await BlogPost.find({ isActive: true })
           .sort("-seenCount")
           .limit(3);
+        let maybeYouLike = await BlogPost.aggregate([{ $sample: { size: 6 } }]);
         let categories = await BlogCategory.find({ isActive: true });
         let output = [];
         for (let i = 0; i < categories.length; i++) {
@@ -176,6 +177,7 @@ const blogPostController = {
             newest: newest,
             mostSeen: mostSeen,
             categories: output,
+            maybeYouLike,
           },
         });
       } catch (error) {

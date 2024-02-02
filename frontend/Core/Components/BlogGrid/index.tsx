@@ -5,7 +5,7 @@ import Link from "next/link";
 const BlogGrid = ({ items, title, isMore, color }: any) => {
   // console.log(items)
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 w-full">
       <div className="flex items-center justify-between">
         <p
           className={`font-bold text-2xl ${
@@ -111,7 +111,7 @@ const BlogGrid = ({ items, title, isMore, color }: any) => {
                     day: "numeric",
                   })}
                 </p>
-                |<p>{item?.relatedBlogCategory?.title}</p>
+                |<p>{item?.authorName}</p>
               </div>
               <div className="w-full flex justify-end">
                 <Link href={`/blogs/blog/${item?._id}`}>
@@ -157,7 +157,7 @@ const BlogGrid = ({ items, title, isMore, color }: any) => {
                       day: "numeric",
                     })}
                   </p>
-                  |<p>{item?.relatedBlogCategory?.title}</p>
+                  |<p>{item?.authorName}</p>
                 </div>
                 <div className="w-full flex justify-end">
                   <Link href={`/blogs/blog/${item?._id}`}>
