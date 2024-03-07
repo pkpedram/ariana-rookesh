@@ -592,13 +592,13 @@ let routes = [
     controller: publicController["postSeen"]["controller"],
   },
   {
-    route: "/suggestedProducts",
+    route: "/suggestedProduct",
     type: "post",
     middlewares: suggestedProductController["post"]["middlewares"],
     controller: suggestedProductController["post"]["controller"],
   },
   {
-    route: "/suggestedProducts/:id",
+    route: "/suggestedProduct/:id",
     type: "delete",
     middlewares: suggestedProductController["delete"]["middlewares"],
     controller: suggestedProductController["delete"]["controller"],

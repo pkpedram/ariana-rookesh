@@ -8,12 +8,17 @@ const ProductAttribute = require("../../models/ProductAttribute");
 const ProductImage = require("../../models/ProductImage");
 const ProductSeller = require("../../models/ProductSeller");
 const ProductStaticAttributes = require("../../models/ProductStaticAttributes");
+const SuggestedProduct = require("../../models/SuggestedProducts");
 
 const productController = {
   post: {
     middlewares: [authenticateJwtToken(["admin"])],
     controller: async (req, res, next) => {
       try {
+        if (req.body.name === '') {
+          res.status(400).send({ message: 'نام نباید خالی باشد' })
+          return null
+        }
         let product = new Product({
           name: req.body.name,
           en_name: req.body.en_name,
@@ -123,6 +128,17 @@ const productController = {
         const productAttributes = await ProductAttribute.find({
           relatedProduct: id,
         });
+        const suggestedProducts = await SuggestedProduct.find({
+          relatedProduct: id
+        }).populate({
+          path: 'suggestedProduct',
+          model: 'Product',
+          populate: {
+            path: 'relatedCategory',
+            model: 'Category'
+          }
+        })
+
 
         return res.send({
           product,
@@ -130,6 +146,7 @@ const productController = {
           productSellers,
           productAttributes,
           productStaticAttributes,
+          suggestedProducts
         });
       } catch (error) {
         if (process.env.NODE_ENV !== "production") {

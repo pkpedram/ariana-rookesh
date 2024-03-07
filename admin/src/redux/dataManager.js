@@ -75,7 +75,7 @@ class DataManager {
       notifTexts
     );
   delete = async (url, params, opt, data, reload, notifTexts) => {
-    await this.check(
+    return await this.check(
       url,
       opt,
       async () =>

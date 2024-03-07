@@ -28,7 +28,14 @@ const productActions = {
     },
 
   addProduct:
-    (data = {}, staticAtts = [], atts, images, sellers = []) =>
+    (
+      data = {},
+      staticAtts = [],
+      atts,
+      images,
+      sellers = [],
+      suggestedProducts = []
+    ) =>
     async (dispatch) => {
       try {
         dispatch({ type: "LOADING_START" });
@@ -39,9 +46,9 @@ const productActions = {
           },
         });
         if (res.data) {
-          [...staticAtts, 1].map(async (item, staticIdx) => {
-            try {
-              if (typeof item === "object") {
+          const staticAttributes = Promise.all(
+            staticAtts.map(async (item, idx) => {
+              try {
                 let staticAttsRes = await axios.post(
                   ApiConfig.baseUrl + "/productStaticAttributes",
                   {
@@ -54,104 +61,146 @@ const productActions = {
                     },
                   }
                 );
+                return staticAttsRes;
+              } catch (error) {
+                console.error(error);
+                toast.error(
+                  `ویژگی ثابت شماره ${idx}: ${error?.response?.data?.message}` ??
+                    `مشکلی در درخواست مربوط به ویژگی ثابت ${idx} وجود دارد`
+                );
+                return false;
               }
-              if (staticIdx === staticAtts?.length - 1) {
-                [...sellers, 1]?.map(async (seller, sellerIdx) => {
-                  try {
-                    if (typeof seller === "object") {
-                      let sellerRes = await axios.post(
-                        ApiConfig.baseUrl + "/productSeller",
-                        {
-                          relatedProduct: res.data?.result?._id,
-                          relatedSeller: seller,
-                          isActive: true,
-                        },
-                        {
-                          headers: {
-                            Authorization: `Bearer ${localStorage.getItem(
-                              "access"
-                            )}`,
-                          },
-                        }
-                      );
-                    }
-
-                    if (sellerIdx == sellers?.length - 1) {
-                      [...atts, 1]?.map(async (attItem, attIndex) => {
-                        try {
-                          if (typeof attItem === "object") {
-                            let attRes = await axios.post(
-                              ApiConfig.baseUrl + "/productAttribute",
-                              {
-                                ...attItem,
-                                relatedProduct: res.data?.result?._id,
-                              },
-                              {
-                                headers: {
-                                  Authorization: `Bearer ${localStorage.getItem(
-                                    "access"
-                                  )}`,
-                                },
-                              }
-                            );
-                          }
-
-                          if (attIndex == atts?.length - 1) {
-                            [...images, 1]?.map(async (imageItem, imgIndex) => {
-                              try {
-                                if (typeof imageItem !== "number") {
-                                }
-                                const formData = new FormData();
-                                formData.append("image", imageItem);
-                                formData.append(
-                                  "relatedProduct",
-                                  res.data?.result?._id
-                                );
-                                let imageRes = await axios.post(
-                                  ApiConfig.baseUrl + "/productImage",
-                                  formData,
-                                  {
-                                    headers: {
-                                      Authorization: `Bearer ${localStorage.getItem(
-                                        "access"
-                                      )}`,
-                                    },
-                                  }
-                                );
-
-                                if (imgIndex == images?.length - 1) {
-                                  dispatch({ type: "LOADING_END" });
-                                  toast.success("محصول با موفقیت افزوده شد");
-                                  setTimeout(() => {
-                                    window.location.href = "/products";
-                                  }, 1000);
-                                }
-                              } catch (error) {
-                                console.error(error);
-                                dispatch({ type: "LOADING_END" });
-                              }
-                            });
-                          }
-                        } catch (error) {
-                          console.error(error);
-                          dispatch({ type: "LOADING_END" });
-                        }
-                      });
-                    }
-                  } catch (error) {
-                    console.error(error);
-                    dispatch({ type: "LOADING_END" });
+            })
+          );
+          const sellersRes = Promise.all(
+            sellers.map(async (seller, idx) => {
+              try {
+                let sellerRes = await axios.post(
+                  ApiConfig.baseUrl + "/productSeller",
+                  {
+                    relatedProduct: res.data?.result?._id,
+                    relatedSeller: seller,
+                    isActive: true,
+                  },
+                  {
+                    headers: {
+                      Authorization: `Bearer ${localStorage.getItem("access")}`,
+                    },
                   }
-                });
+                );
+                return sellerRes;
+              } catch (error) {
+                console.error(error);
+                toast.error(
+                  ` فروشنده شماره ${idx}: ${error?.response?.data?.message}` ??
+                    `مشکلی در درخواست مربوط به فروشنده  ${idx} وجود دارد`
+                );
+                return false;
               }
-            } catch (error) {
-              console.error(error);
+            })
+          ).then((re) => re);
+
+          const attsRes = Promise.all(
+            atts.map(async (attItem, idx) => {
+              try {
+                let attRes = await axios.post(
+                  ApiConfig.baseUrl + "/productAttribute",
+                  {
+                    ...attItem,
+                    relatedProduct: res.data?.result?._id,
+                  },
+                  {
+                    headers: {
+                      Authorization: `Bearer ${localStorage.getItem("access")}`,
+                    },
+                  }
+                );
+                return attRes;
+              } catch (error) {
+                console.error(error);
+                toast.error(
+                  ` ویژگی شماره ${idx}: ${error?.response?.data?.message}` ??
+                    `مشکلی در درخواست مربوط به ویژگی  ${idx} وجود دارد`
+                );
+                return false;
+              }
+            })
+          ).then((re) => re);
+
+          const imagesRes = Promise.all(
+            images.map(async (imageItem, idx) => {
+              try {
+                const formData = new FormData();
+                formData.append("image", imageItem);
+                formData.append("relatedProduct", res.data?.result?._id);
+                let imageRes = await axios.post(
+                  ApiConfig.baseUrl + "/productImage",
+                  formData,
+                  {
+                    headers: {
+                      Authorization: `Bearer ${localStorage.getItem("access")}`,
+                    },
+                  }
+                );
+                return imageRes;
+              } catch (error) {
+                console.error(error);
+                toast.error(
+                  ` تصویر شماره ${idx}: ${error?.response?.data?.message}` ??
+                    `مشکلی در درخواست مربوط به تصویر  ${idx} وجود دارد`
+                );
+                return false;
+              }
+            })
+          ).then((re) => re);
+
+          const sugPrsRes = Promise.all(
+            suggestedProducts.map(async (sg, idx) => {
+              try {
+                let sgRes = await axios.post(
+                  ApiConfig.baseUrl + "/suggestedProduct",
+                  {
+                    ...sg,
+                    relatedProduct: res.data?.result?._id,
+                  },
+                  {
+                    headers: {
+                      Authorization: `Bearer ${localStorage.getItem("access")}`,
+                    },
+                  }
+                );
+                return sgRes;
+              } catch (error) {
+                console.error(error);
+                toast.error(
+                  ` محصول مشابه شماره ${idx}: ${error?.response?.data?.message}` ??
+                    `مشکلی در درخواست مربوط به محصول مشابه  ${idx} وجود دارد`
+                );
+                return false;
+              }
+            })
+          ).then((re) => re);
+
+          Promise.all([
+            staticAttributes,
+            sellersRes,
+            attsRes,
+            imagesRes,
+            sugPrsRes,
+          ])
+            .then((i) => {
               dispatch({ type: "LOADING_END" });
-            }
-          });
+              console.log(i);
+              toast.success("محصول با موفقیت افزوده شد");
+              setTimeout(() => {
+                // window.location.href = "/products";
+              }, 1000);
+            })
+            .catch((err) => console.error(err));
         }
       } catch (error) {
-        console.error(error);
+        console.error(error, error?.response?.data);
+        toast.error(error?.response?.data?.message ?? "مشکلی پیش آمده است");
         dispatch({ type: "LOADING_END" });
       }
     },
@@ -247,6 +296,47 @@ const productActions = {
       return await _dataManager.post("productImage", data, {}, {}, false, {
         success: "تصویر با موفقیت افزوده شد",
       });
+    },
+  deleteSuggestedProduct:
+    (id = "", productId) =>
+    async (dispatch) => {
+      let res = await _dataManager.delete(
+        `suggestedProduct/${id}`,
+        {},
+        {},
+        {},
+        false
+      );
+      if (res) {
+        await _dataManager.get(
+          "productforedit/" + productId,
+          {},
+          { dispatch },
+          { id: productId }
+        );
+      }
+      return res;
+    },
+  addSuggestedProduct:
+    (data = {}, productId) =>
+    async (dispatch) => {
+      let res = await _dataManager.post(
+        "suggestedProduct",
+        data,
+        {},
+        {},
+        false
+      );
+      console.log(res);
+      if (res) {
+        await _dataManager.get(
+          "productforedit/" + productId,
+          {},
+          { dispatch },
+          { id: productId }
+        );
+      }
+      return res;
     },
 };
 

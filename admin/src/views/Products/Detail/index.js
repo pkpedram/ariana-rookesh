@@ -12,6 +12,7 @@ import ImageInput from "../../../components/ImageInput";
 import productActions from "../../../redux/actions/Products";
 import { ApiConfig } from "../../../redux/constants";
 import Swal from "sweetalert2";
+import SuggestedProducts from "../../../components/SuggestedProducts";
 
 const ProductDetail = ({
   getStaticAttributes,
@@ -34,6 +35,7 @@ const ProductDetail = ({
   addProductImage,
 }) => {
   const { id } = useParams();
+  const [tempSugs, setTempSugs] = useState([])
   const [productVal, setProductVal] = useState({
     name: "",
     en_name: "",
@@ -107,8 +109,8 @@ const ProductDetail = ({
                 title={
                   id
                     ? categories?.find(
-                        (itm) => itm._id === productVal?.relatedCategory
-                      )?.name
+                      (itm) => itm._id === productVal?.relatedCategory
+                    )?.name
                     : "انتخاب دسته بندی"
                 }
               />
@@ -205,7 +207,7 @@ const ProductDetail = ({
                       {item?._id
                         ? item.relatedStaticAttribute?.title
                         : staticAttributes?.find((itm) => itm._id === item)
-                            .title}
+                          .title}
                     </p>
                     <p
                       className="text-red-500 text-xl cursor-pointer"
@@ -526,21 +528,22 @@ const ProductDetail = ({
             ))}
           </div>
         </div>
+        <SuggestedProducts edit={id} tempSuggestedProducts={tempSugs} setTempSuggestedProducts={(e) => setTempSugs(e)} />
         {!id && (
           <div className="w-full flex justify-end mt-4">
             <Button
               className={"!w-max px-8 text-xl"}
               onClick={() => {
-                if (id) {
-                } else {
-                  addProduct(
-                    productVal,
-                    selectedStaticAtts,
-                    atts,
-                    images,
-                    selectedSellers
-                  );
-                }
+
+                addProduct(
+                  productVal,
+                  selectedStaticAtts,
+                  atts,
+                  images,
+                  selectedSellers,
+                  tempSugs
+                );
+
               }}
             >
               تایید ثبت
