@@ -159,6 +159,7 @@ export interface ProductState {
   productStaticAtts: Array<Object>;
   productAtts: Array<object>;
   productSellers: Array<object>;
+  suggestedProducts: Array<Object>
 }
 
 export type BlogList = {

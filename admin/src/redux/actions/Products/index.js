@@ -193,7 +193,7 @@ const productActions = {
               console.log(i);
               toast.success("محصول با موفقیت افزوده شد");
               setTimeout(() => {
-                // window.location.href = "/products";
+                window.location.href = "/products/" + res.data?.result?._id;
               }, 1000);
             })
             .catch((err) => console.error(err));

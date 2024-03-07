@@ -59,7 +59,10 @@ const categoryController = {
     middlewares: [authenticateJwtToken(["admin"])],
     controller: async (req, res, next) => {
       try {
-        res.send(await baseResults(Category, "list", req.query, true, []));
+        console.log(await baseResults(Category, "list", req.query, true, []));
+        return res.send(
+          await baseResults(Category, "list", req.query, true, [])
+        );
       } catch (error) {
         if (process.env.NODE_ENV !== "production") {
           console.log(error);

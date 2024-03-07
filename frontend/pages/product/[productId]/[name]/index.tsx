@@ -14,14 +14,15 @@ const ProductDetailPage = ({
   productStaticAtts,
   productSellers,
   productInfo,
-  productList,
+  // productList,
   generalSetting,
   lan,
+  suggestedProducts,
 }: any) => {
   const [selectedImage, setSelectedImage] = useState(productImages[0]);
   const [openAtts, setOpenAtts] = useState(false);
 
-  // console.log(productImages)
+  console.log(suggestedProducts);
 
   return (
     <div className={`w-full flex flex-col gap-12 mb-20 `}>
@@ -199,40 +200,37 @@ const ProductDetailPage = ({
         {lan ? "Simillar Products" : "محصولات مشابه"}{" "}
       </h3>
       <div className="w-full  relative  grid grid-cols-4 2lg:grid-cols-2 sm:grid-cols-1 gap-4">
-        {[...productList]
-          ?.filter((itm) => itm._id !== productInfo?._id)
-          .map((item) => (
-            <Link
-              href={`/product/${item._id}/${item.name.split(" ").join("-")}`}
-              className="w-full p-3 border-2 text-white bg-black/50 hover:bg-black hover:scale-100 scale-90 border-white rounded-xl flex flex-col gap-4 items-center justify-center"
-            >
-              <img
-                src={
-                  item.image
-                    ? apiConfig.domain + item.image
-                    : imagePlaceHolder.src
-                }
-                className="w-full rounded-lg bg-gray-500 object-cover aspect-square"
-              />
-              <h4 className="font-bold mb-2 text-right w-full">{item.name}</h4>
-              <p className="w-full text-right color-[#F2F4F8] flex-1">
-                {item.description?.slice(0, 200)}...
-              </p>
+        {[...suggestedProducts].map((item) => (
+          <Link
+            href={`/product/${item._id}/${item.name.split(" ").join("-")}`}
+            className="w-full p-3 border-2 text-white bg-black/50 hover:bg-black hover:scale-100 scale-90 border-white rounded-xl flex flex-col gap-4 items-center justify-center"
+          >
+            <img
+              src={
+                item.image
+                  ? apiConfig.domain + item.image
+                  : imagePlaceHolder.src
+              }
+              className="w-full rounded-lg bg-gray-500 object-cover aspect-square"
+            />
+            <h4 className="font-bold mb-2 text-right w-full">{item.name}</h4>
+            <p className="w-full text-right color-[#F2F4F8] flex-1">
+              {item.description?.slice(0, 200)}...
+            </p>
 
-              <p className="text-left w-full">
-                {productInfo?.relatedCategory?.showProductPrices &&
-                item.showPrice
-                  ? `${Number(item.price).toLocaleString("fa-ir")} تومان`
-                  : "تماس بگیرید"}
-              </p>
-              <button
-                className="w-full p-5 rounded-lg"
-                style={{ background: generalSetting.secondaryColor }}
-              >
-                مشاهده محصول
-              </button>
-            </Link>
-          ))}
+            <p className="text-left w-full">
+              {productInfo?.relatedCategory?.showProductPrices && item.showPrice
+                ? `${Number(item.price).toLocaleString("fa-ir")} تومان`
+                : "تماس بگیرید"}
+            </p>
+            <button
+              className="w-full p-5 rounded-lg"
+              style={{ background: generalSetting.secondaryColor }}
+            >
+              مشاهده محصول
+            </button>
+          </Link>
+        ))}
       </div>
     </div>
   );
@@ -257,11 +255,11 @@ export const getServerSideProps: GetServerSideProps<{}> =
       // categoryRes.data.result[0]?._id
     );
 
-    const similarProductsRes = await axios.get(
-      apiConfig.baseUrl +
-        "product?relatedCategory=" +
-        productRes?.data?.result.relatedCategory?._id
-    );
+    // const similarProductsRes = await axios.get(
+    //   apiConfig.baseUrl +
+    //     "product?relatedCategory=" +
+    //     productRes?.data?.result.relatedCategory?._id
+    // );
 
     const productAttributes = await axios.get(
       apiConfig.baseUrl + "productAttribute?relatedProduct=" + query?.productId
@@ -279,10 +277,10 @@ export const getServerSideProps: GetServerSideProps<{}> =
     const productImages = await axios.get(
       apiConfig.baseUrl + "productImage?relatedProduct=" + query?.productId
     );
-    store.dispatch({
-      type: "productList",
-      payload: JSON.stringify(similarProductsRes.data),
-    });
+    // store.dispatch({
+    //   type: "productList",
+    //   payload: JSON.stringify(similarProductsRes.data),
+    // });
     store.dispatch({
       type: "productSeller",
       payload: JSON.stringify(productSellers.data),
@@ -303,6 +301,14 @@ export const getServerSideProps: GetServerSideProps<{}> =
       type: "productInfo",
       payload: JSON.stringify(productRes.data.result),
     });
+    store.dispatch({
+      type: "suggestedProducts",
+      payload: JSON.stringify(
+        productRes.data.suggestedProducts?.map(
+          (item: any) => item.suggestedProduct
+        )
+      ),
+    });
     store.dispatch({ type: "SET_LAYOUT_TYPE", payload: 2 });
     store.dispatch({
       type: "generalSetting",
@@ -320,9 +326,10 @@ const mapStateToProps = (state: RootState) => ({
   productStaticAtts: state.productState.productStaticAtts,
   productSellers: state.productState.productSellers,
   productInfo: state.productState.productInfo,
-  productList: state.productState.productList,
+  // productList: state.productState.productList,
   generalSetting: state.publicState.generalSetting,
   lan: state.publicState.lan,
+  suggestedProducts: state.productState.suggestedProducts,
 });
 
 export default connect(mapStateToProps)(ProductDetailPage);

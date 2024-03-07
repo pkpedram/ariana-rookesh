@@ -32,6 +32,7 @@ let initialState: ProductState = {
   productImages: [],
   productStaticAtts: [],
   productSellers: [],
+  suggestedProducts: []
 };
 
 const productState = (
@@ -80,6 +81,14 @@ const productState = (
         ...state,
         productInfo: pIdata,
       };
+
+    case "suggestedProducts":
+      let sgPr = typeof payload === 'string' ? JSON.parse(payload) : payload
+      
+      return {
+        ...state,
+        suggestedProducts: sgPr
+      }
 
     case "productImages":
       let pImages = typeof payload === "string" ? JSON.parse(payload) : payload;

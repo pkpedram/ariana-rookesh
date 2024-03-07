@@ -15,9 +15,9 @@ const productController = {
     middlewares: [authenticateJwtToken(["admin"])],
     controller: async (req, res, next) => {
       try {
-        if (req.body.name === '') {
-          res.status(400).send({ message: 'نام نباید خالی باشد' })
-          return null
+        if (req.body.name === "") {
+          res.status(400).send({ message: "نام نباید خالی باشد" });
+          return null;
         }
         let product = new Product({
           name: req.body.name,
@@ -49,6 +49,7 @@ const productController = {
     middlewares: [authenticateJwtToken(["admin"])],
     controller: async (req, res, next) => {
       try {
+        console.log("get list");
         let output = [];
         let products = await Product.find(req.query)
           .sort("-created_date")
@@ -88,13 +89,22 @@ const productController = {
     controller: async (req, res, next) => {
       try {
         let id = req.params.id;
-        const product = await Product.findById(id);
+        const product = await Product.findById(id).populate("relatedCategory");
+        const suggestedProducts = await SuggestedProduct.find({
+          relatedProduct: id,
+        }).populate({
+          path: "suggestedProduct",
+          model: "Product",
+          populate: {
+            path: "relatedCategory",
+            model: "Category",
+          },
+        });
         if (product) {
-          return res.send(
-            await baseResults(Product, "id", req.params, false, [
-              "relatedCategory",
-            ])
-          );
+          return res.send({
+            result: product,
+            suggestedProducts,
+          });
         } else {
           res.status(404).send({ message: "There is no Product with this id" });
         }
@@ -129,16 +139,15 @@ const productController = {
           relatedProduct: id,
         });
         const suggestedProducts = await SuggestedProduct.find({
-          relatedProduct: id
+          relatedProduct: id,
         }).populate({
-          path: 'suggestedProduct',
-          model: 'Product',
+          path: "suggestedProduct",
+          model: "Product",
           populate: {
-            path: 'relatedCategory',
-            model: 'Category'
-          }
-        })
-
+            path: "relatedCategory",
+            model: "Category",
+          },
+        });
 
         return res.send({
           product,
@@ -146,7 +155,7 @@ const productController = {
           productSellers,
           productAttributes,
           productStaticAttributes,
-          suggestedProducts
+          suggestedProducts,
         });
       } catch (error) {
         if (process.env.NODE_ENV !== "production") {
