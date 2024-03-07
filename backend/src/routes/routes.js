@@ -16,6 +16,7 @@ const blogCategoryController = require("../controllers/BlogCategory");
 const blogPostController = require("../controllers/BlogPost");
 const generalSettingController = require("../controllers/GeneralSetting");
 const publicController = require("../controllers/Public");
+const suggestedProductController = require("../controllers/SuggestedProducts");
 
 let routes = [
   // {
@@ -589,6 +590,18 @@ let routes = [
     type: "post",
     middlewares: publicController["postSeen"]["middlewares"],
     controller: publicController["postSeen"]["controller"],
+  },
+  {
+    route: "/suggestedProducts",
+    type: "post",
+    middlewares: suggestedProductController["post"]["middlewares"],
+    controller: suggestedProductController["post"]["controller"],
+  },
+  {
+    route: "/suggestedProducts/:id",
+    type: "delete",
+    middlewares: suggestedProductController["delete"]["middlewares"],
+    controller: suggestedProductController["delete"]["controller"],
   },
 ];
 
