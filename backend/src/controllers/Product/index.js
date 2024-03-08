@@ -2,6 +2,7 @@ const { authenticateJwtToken } = require("../../core/middlewares/jwt");
 const { upload } = require("../../core/middlewares/multer");
 const { baseResults } = require("../../core/utils/Results");
 const { generateFileName } = require("../../core/utils/multer");
+const Category = require("../../models/Category");
 const HotOffer = require("../../models/HotOffer");
 
 const Product = require("../../models/Product");
@@ -51,11 +52,32 @@ const productController = {
     controller: async (req, res, next) => {
       try {
         console.log("get list");
+        let category = req.query.relatedCategory;
         let output = [];
         let products = await Product.find(req.query)
           .sort("-created_date")
           .sort("ordering")
           .populate("relatedCategory");
+
+        let subCats = await Category.find({ parent: category });
+        subCats.map(async (item) => {
+          let foundSubCatPrs = await Product.find({ relatedCategory: item._id })
+            .sort("-created_date")
+            .sort("ordering")
+            .populate("relatedCategory");
+          foundSubCatPrs.map((fscpr) => products.push(fscpr));
+          let subSubCategories = await Category.find({ parent: item?._id });
+
+          subSubCategories.map(async (ssc) => {
+            let foundSubSubCatPrs = await Product.find({
+              relatedCategory: ssc._id,
+            })
+              .sort("-created_date")
+              .sort("ordering")
+              .populate("relatedCategory");
+            foundSubSubCatPrs.map((fsscpr) => products.push(fsscpr));
+          });
+        });
 
         for (let i = 0; i < products.length; i++) {
           let hotOffer = await HotOffer.findOne({

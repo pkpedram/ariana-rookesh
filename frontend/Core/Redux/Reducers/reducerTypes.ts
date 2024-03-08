@@ -136,6 +136,7 @@ export type Category = {
   name: string;
   en_name: string;
   showOnHomePage: boolean;
+  parent?: Category;
   slug: string;
   showProductPrices: boolean;
   catalog?: string | null;

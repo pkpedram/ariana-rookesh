@@ -9,6 +9,7 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { publicActions } from "../../Redux/Actions";
 import { type } from "os";
 import { IoClose, IoMenu } from "react-icons/io5";
+import MegaMenu from "../MegaMenu";
 
 export interface HeaderPorps {
   isMobile: boolean;
@@ -26,13 +27,9 @@ const Header = ({
   lan,
 }: HeaderPorps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [openMegaMenu, setOpenMegaMenu] = useState(false);
   const items = useMemo(() => {
     return [
-      {
-        title: "محصولات آریانا روکش",
-        en_title: "Products",
-        link: "/products",
-      },
       {
         title: "درباره ما",
         en_title: "About Us",
@@ -146,6 +143,19 @@ const Header = ({
             <Link href={"/"} className="ml-6">
               <img src={apiConfig.domain + generalSetting?.logo} />
             </Link>
+            <div className="relative">
+              <p
+                onClick={() => setOpenMegaMenu(!openMegaMenu)}
+                className="text-white cursor-pointer"
+              >
+                {lan ? "Products" : "محصولات آریاناروکش"}
+              </p>
+              {openMegaMenu && (
+                <div onMouseLeave={() => setOpenMegaMenu(false)}>
+                  <MegaMenu />
+                </div>
+              )}
+            </div>
             {items.map((item, idx) => (
               <Link href={item.link} passHref>
                 <p className="text-white">{lan ? item.en_title : item.title}</p>

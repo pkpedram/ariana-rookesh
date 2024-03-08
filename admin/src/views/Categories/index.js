@@ -10,6 +10,7 @@ import PdfInput from "../../components/PdfInput";
 import CheckBox from "../../components/CheckBox";
 import { publicActions } from "../../redux/actions";
 import TextBox from "../../components/TextBox";
+import Select from "../../components/Select";
 
 const Categories = ({
   getProductCategory,
@@ -37,6 +38,7 @@ const Categories = ({
     aboutUsImage: null,
     description: "",
     en_description: "",
+    parent: null,
   });
 
   const [contactCatModal, setContactCatModal] = useState(false);
@@ -73,11 +75,20 @@ const Categories = ({
               slug: "",
               showProductPrices: false,
               aboutUsImage: null,
+              parent: null,
             });
           }}
         >
           <div className="flex flex-col gap-4">
             <h1 className="text-white">افزودن / تغییر دسته بندی</h1>
+            <Select
+              onChange={(e) =>
+                setProductCatValue({ ...productCatValue, parent: e })
+              }
+              title={"دسته بندی مادر"}
+              items={productCategories}
+              keyOfOption={"name"}
+            />
             <Input
               name={"name"}
               label={"عنوان"}
@@ -212,6 +223,9 @@ const Categories = ({
                 Object.keys(productCatValue).map((item) =>
                   formData.append(item, productCatValue[item])
                 );
+                if (!productCatValue.parent) {
+                  formData.delete("parent");
+                }
                 if (productCatModal?._id) {
                   editProductCategory(formData, productCatModal?._id);
                 } else {
@@ -288,6 +302,10 @@ const Categories = ({
             {
               title: "عنوان انگلیسی",
               properties: [["en_name"]],
+            },
+            {
+              title: "دسته بندی مادر",
+              properties: [["parent", "name"]],
             },
             {
               title: "نمایش در صفحه اصلی",

@@ -17,6 +17,9 @@ const productActions = {
            }
         }
 
+    },
+    getCategories: () => async (dispatch:Dispatch) => {
+        await _dataManager.get('category', {}, {dispatch}, {}, false)
     }
 
 }

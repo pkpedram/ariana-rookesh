@@ -11,6 +11,7 @@ const model = {
   en_description: String,
   showProductPrices: Boolean,
   aboutUsImage: String,
+  parent: { type: mongoose.Types.ObjectId, ref: "Category" },
   isActive: { type: Boolean, default: true },
   created_date: { type: Date, default: new Date() },
 };

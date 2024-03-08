@@ -24,6 +24,7 @@ const categoryController = {
           showOnHomePage: req.body.showOnHomePage,
           slug: req.body.slug,
           showProductPrices: req.body.showProductPrices,
+          ...(req.body.parent ? { parent: req.body.parent ?? null } : {}),
           banner: req.files.banner
             ? generateFileName(req.files.banner[0], "category")
             : null,
@@ -59,9 +60,8 @@ const categoryController = {
     middlewares: [authenticateJwtToken(["admin"])],
     controller: async (req, res, next) => {
       try {
-        console.log(await baseResults(Category, "list", req.query, true, []));
         return res.send(
-          await baseResults(Category, "list", req.query, true, [])
+          await baseResults(Category, "list", req.query, true, ["parent"])
         );
       } catch (error) {
         if (process.env.NODE_ENV !== "production") {
