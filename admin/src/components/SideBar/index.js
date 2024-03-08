@@ -10,6 +10,7 @@ import {
   FaTextHeight,
   FaBoxOpen,
   FaWpforms,
+  FaBookOpen,
 } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { BiWindows, BiSolidCategory } from "react-icons/bi";
@@ -17,6 +18,7 @@ import { PiCodepenLogoBold } from "react-icons/pi";
 import { MdSpaceDashboard } from "react-icons/md";
 import { LuReplace, LuSettings2 } from "react-icons/lu";
 import { BsPencilSquare, BsShop } from "react-icons/bs";
+import { GrCatalog } from "react-icons/gr";
 
 const SideBar = ({ sidebarOpen, setSidebarOpen, logout, client, userData }) => {
   const location = useLocation();
@@ -51,6 +53,11 @@ const SideBar = ({ sidebarOpen, setSidebarOpen, logout, client, userData }) => {
       link: "/forms",
       icon: <FaWpforms />,
       text: "فرم ها",
+    },
+    {
+      link: "/catalogue",
+      icon: <FaBookOpen />,
+      text: "کاتالوگ ها",
     },
     {
       link: "/users",

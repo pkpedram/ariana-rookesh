@@ -615,6 +615,24 @@ let routes = [
     middlewares: productController["getHotOfferList"]["middlewares"],
     controller: productController["getHotOfferList"]["controller"],
   },
+  {
+    route: "/catalogue",
+    type: "get",
+    middlewares: publicController["getCatalogueList"]["middlewares"],
+    controller: publicController["getCatalogueList"]["controller"],
+  },
+  {
+    route: "/catalogue",
+    type: "post",
+    middlewares: publicController["postCatalogue"]["middlewares"],
+    controller: publicController["postCatalogue"]["controller"],
+  },
+  {
+    route: "/catalogue/:id",
+    type: "delete",
+    middlewares: publicController["deleteCatalogue"]["middlewares"],
+    controller: publicController["deleteCatalogue"]["controller"],
+  },
 ];
 
 module.exports = routes;

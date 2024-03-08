@@ -186,6 +186,19 @@ const publicActions = {
       error: "مشکلی پیش آمده است",
     });
   },
+  addCatalogue:
+    (data = {}) =>
+    async (dispatch) => {
+      await _dataManager.post("catalogue", data, {}, {}, true);
+    },
+  getCatalogueList: () => async (dispatch) => {
+    await _dataManager.get("catalogue", {}, { dispatch }, {});
+  },
+  deleteCatalogue:
+    (id = "") =>
+    async (dispatch) => {
+      await _dataManager.delete(`catalogue/${id}`, {}, {}, {}, true);
+    },
 };
 
 export default publicActions;

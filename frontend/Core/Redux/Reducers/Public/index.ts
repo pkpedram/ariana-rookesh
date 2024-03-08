@@ -31,6 +31,7 @@ let initialState: PublicState = {
   lan: false,
   cityList: [],
   sellers: [],
+  catalogues: []
 };
 
 const publicState = (state: PublicState = initialState, action: AnyAction) => {
@@ -94,6 +95,12 @@ const publicState = (state: PublicState = initialState, action: AnyAction) => {
         ...state,
         sellers: JSON.parse(payload),
       };
+
+    case 'catalogues':
+      return {
+        ...state,
+        catalogues: JSON.parse(payload)
+      }  
     default:
       return state;
   }

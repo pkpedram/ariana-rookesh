@@ -20,6 +20,8 @@ const initialState = {
   sellersCount: 0,
   contactUsForms: [],
   contactUsFormsCount: 0,
+  catalogueList: [],
+  catalogueListCount: 0,
 };
 
 export default function publicState(state = initialState, action) {
@@ -123,6 +125,13 @@ export default function publicState(state = initialState, action) {
         ...state,
         sellers: payload.result,
         sellersCount: payload.count,
+      };
+
+    case "catalogue":
+      return {
+        ...state,
+        catalogueList: payload.result,
+        catalogueListCount: payload.count,
       };
 
     default:

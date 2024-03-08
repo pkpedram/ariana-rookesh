@@ -51,6 +51,7 @@ export interface PublicState {
   lan: boolean;
   cityList: Array<Object>;
   sellers: Array<Object>;
+  catalogues: Array<Object>
 }
 
 type authors = {

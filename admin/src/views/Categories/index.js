@@ -282,10 +282,6 @@ const Categories = ({
           totals={productCategoriesCount}
           cols={[
             {
-              title: "شناسه",
-              properties: [["_id"]],
-            },
-            {
               title: "عنوان",
               properties: [["name"]],
             },
@@ -320,10 +316,6 @@ const Categories = ({
           items={contactCategories}
           totals={contactCategoriesCount}
           cols={[
-            {
-              title: "شناسه",
-              properties: [["_id"]],
-            },
             {
               title: "عنوان",
               properties: [["title"]],
