@@ -34,7 +34,8 @@ const productActions = {
       atts,
       images,
       sellers = [],
-      suggestedProducts = []
+      suggestedProducts = [],
+      hotOffer = {}
     ) =>
     async (dispatch) => {
       try {
@@ -181,12 +182,35 @@ const productActions = {
             })
           ).then((re) => re);
 
+          const hotOfferRes = new Promise(async () => {
+            try {
+              let htRes = await axios.post(
+                ApiConfig.baseUrl + "/hotOffer",
+                { ...hotOffer, relatedProduct: res.data?.result?._id },
+                {
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem("access")}`,
+                  },
+                }
+              );
+              return htRes;
+            } catch (error) {
+              console.error(error);
+              toast.error(
+                `  ${error?.response?.data?.message}` ??
+                  `مشکلی در درخواست مربوط به پیشنهاد ویژه وجود دارد`
+              );
+              return false;
+            }
+          });
+
           Promise.all([
             staticAttributes,
             sellersRes,
             attsRes,
             imagesRes,
             sugPrsRes,
+            hotOfferRes,
           ])
             .then((i) => {
               dispatch({ type: "LOADING_END" });
@@ -338,6 +362,8 @@ const productActions = {
       }
       return res;
     },
+  addHotOffer: (data) => async (dispatch) =>
+    await _dataManager.post("/hotOffer", data, {}, {}, false),
 };
 
 export default productActions;

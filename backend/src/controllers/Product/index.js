@@ -2,6 +2,7 @@ const { authenticateJwtToken } = require("../../core/middlewares/jwt");
 const { upload } = require("../../core/middlewares/multer");
 const { baseResults } = require("../../core/utils/Results");
 const { generateFileName } = require("../../core/utils/multer");
+const HotOffer = require("../../models/HotOffer");
 
 const Product = require("../../models/Product");
 const ProductAttribute = require("../../models/ProductAttribute");
@@ -57,6 +58,9 @@ const productController = {
           .populate("relatedCategory");
 
         for (let i = 0; i < products.length; i++) {
+          let hotOffer = await HotOffer.findOne({
+            relatedProduct: products[i]?._id,
+          });
           let image = await ProductImage.findOne({
             relatedProduct: products[i]?._id,
           });
@@ -68,6 +72,7 @@ const productController = {
             ...product,
             image: image?.image ?? null,
             sellerCount: sellers,
+            ...(hotOffer ? { offerPrice: hotOffer.offerPrice } : {}),
           });
         }
 
@@ -149,6 +154,7 @@ const productController = {
           },
         });
 
+        const hotOffer = await HotOffer.findOne({ relatedProduct: id });
         return res.send({
           product,
           productImages,
@@ -156,6 +162,7 @@ const productController = {
           productAttributes,
           productStaticAttributes,
           suggestedProducts,
+          hotOffer,
         });
       } catch (error) {
         if (process.env.NODE_ENV !== "production") {
@@ -208,6 +215,89 @@ const productController = {
         } else {
           res.status(404).send({ message: "Product Not Found" });
         }
+      } catch (error) {
+        if (process.env.NODE_ENV !== "production") {
+          console.log(error);
+        }
+        res.status(500).send({ message: error });
+        next();
+      }
+    },
+  },
+  createHotOffer: {
+    middlewares: [authenticateJwtToken(["admin"])],
+    controller: async (req, res, next) => {
+      try {
+        const product = await Product.findById(req.body.relatedProduct);
+        if (product) {
+          const foundHotOffer = await HotOffer.findOne({
+            relatedProduct: req.body.relatedProduct,
+          });
+          if (foundHotOffer) {
+            await foundHotOffer.deleteOne({ _id: foundHotOffer._id });
+          }
+          const hotOffer = new HotOffer({
+            created_date: new Date(),
+            from_date: new Date(req.body.from_date),
+            to_date: new Date(req.body.to_date),
+            relatedProduct: req.body.relatedProduct,
+            isActive: true,
+            offerPrice: req.body.offerPrice,
+          });
+          await hotOffer.save();
+
+          return res.send({ result: hotOffer });
+        } else {
+          res.status(404).send({ message: "Product Not Found" });
+        }
+      } catch (error) {
+        if (process.env.NODE_ENV !== "production") {
+          console.log(error);
+        }
+        res.status(500).send({ message: error });
+        next();
+      }
+    },
+  },
+  getHotOfferList: {
+    middlewares: [],
+    controller: async (req, res, next) => {
+      try {
+        const category = req.query.category;
+        const today = new Date();
+        const foundOffers = await HotOffer.find().populate({
+          path: "relatedProduct",
+          model: "Product",
+          populate: {
+            path: "relatedCategory",
+            model: "Category",
+          },
+        });
+
+        Promise.all(
+          foundOffers
+            .filter(
+              (item) =>
+                new Date(item.from_date).getTime() < today.getTime() &&
+                today.getTime() < new Date(item.to_date).getTime() &&
+                item?.relatedProduct?.relatedCategory?.id === category
+            )
+            .map(async (item) => {
+              let image = await ProductImage.findOne({
+                relatedProduct: item.relatedProduct?._id,
+              });
+
+              return {
+                ...item.relatedProduct.toJSON(),
+                offerPrice: item.offerPrice,
+                image: image?.image ?? null,
+              };
+            })
+        ).then((r) => {
+          res.send({
+            result: r,
+          });
+        });
       } catch (error) {
         if (process.env.NODE_ENV !== "production") {
           console.log(error);

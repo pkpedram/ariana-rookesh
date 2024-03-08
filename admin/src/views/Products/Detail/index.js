@@ -13,6 +13,7 @@ import productActions from "../../../redux/actions/Products";
 import { ApiConfig } from "../../../redux/constants";
 import Swal from "sweetalert2";
 import SuggestedProducts from "../../../components/SuggestedProducts";
+import HotOffer from "../../../components/HotOffer";
 
 const ProductDetail = ({
   getStaticAttributes,
@@ -35,7 +36,7 @@ const ProductDetail = ({
   addProductImage,
 }) => {
   const { id } = useParams();
-  const [tempSugs, setTempSugs] = useState([])
+  const [tempSugs, setTempSugs] = useState([]);
   const [productVal, setProductVal] = useState({
     name: "",
     en_name: "",
@@ -50,6 +51,12 @@ const ProductDetail = ({
   const [images, setImages] = useState([]);
   const [selectedStaticAtts, setSelectedStaticAtts] = useState([]);
   const [selectedSellers, setSelectedSellers] = useState([]);
+  const [hotOffer, setHotOffer] = useState({
+    relatedProduct: null,
+    offerPrice: "",
+    from_date: new Date(),
+    to_date: new Date(),
+  });
   const [tempAtts, setTempAtts] = useState({
     title: "",
     value: "",
@@ -85,6 +92,12 @@ const ProductDetail = ({
       setAtts(productFullDetail?.productAttributes);
       setSelectedSellers(productFullDetail?.productSellers);
       setImages(productFullDetail?.productImages);
+      setHotOffer({
+        from_date: productFullDetail?.hotOffer?.from_date,
+        to_date: productFullDetail?.hotOffer?.to_date,
+        offerPrice: productFullDetail?.hotOffer?.offerPrice,
+        relatedProduct: id,
+      });
     }
   }, [productFullDetail]);
   console.log(productVal);
@@ -109,8 +122,8 @@ const ProductDetail = ({
                 title={
                   id
                     ? categories?.find(
-                      (itm) => itm._id === productVal?.relatedCategory
-                    )?.name
+                        (itm) => itm._id === productVal?.relatedCategory
+                      )?.name
                     : "انتخاب دسته بندی"
                 }
               />
@@ -174,6 +187,7 @@ const ProductDetail = ({
             </div>
           )}
         </div>
+        <HotOffer hotOffer={hotOffer} setHotOffer={setHotOffer} edit={id} />
         <div className="w-full p-6 rounded-lg bg-gray-800 mt-8">
           <h2 className="text-white text-xl mb-8">ویژگی محصول</h2>
           <div className="w-full grid grid-cols-2 gap-8 mt-4">
@@ -207,7 +221,7 @@ const ProductDetail = ({
                       {item?._id
                         ? item.relatedStaticAttribute?.title
                         : staticAttributes?.find((itm) => itm._id === item)
-                          .title}
+                            .title}
                     </p>
                     <p
                       className="text-red-500 text-xl cursor-pointer"
@@ -528,22 +542,25 @@ const ProductDetail = ({
             ))}
           </div>
         </div>
-        <SuggestedProducts edit={id} tempSuggestedProducts={tempSugs} setTempSuggestedProducts={(e) => setTempSugs(e)} />
+        <SuggestedProducts
+          edit={id}
+          tempSuggestedProducts={tempSugs}
+          setTempSuggestedProducts={(e) => setTempSugs(e)}
+        />
         {!id && (
           <div className="w-full flex justify-end mt-4">
             <Button
               className={"!w-max px-8 text-xl"}
               onClick={() => {
-
                 addProduct(
                   productVal,
                   selectedStaticAtts,
                   atts,
                   images,
                   selectedSellers,
-                  tempSugs
+                  tempSugs,
+                  hotOffer
                 );
-
               }}
             >
               تایید ثبت

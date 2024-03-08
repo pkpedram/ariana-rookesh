@@ -603,6 +603,18 @@ let routes = [
     middlewares: suggestedProductController["delete"]["middlewares"],
     controller: suggestedProductController["delete"]["controller"],
   },
+  {
+    route: "/hotoffer",
+    type: "post",
+    middlewares: productController["createHotOffer"]["middlewares"],
+    controller: productController["createHotOffer"]["controller"],
+  },
+  {
+    route: "/hotoffers",
+    type: "get",
+    middlewares: productController["getHotOfferList"]["middlewares"],
+    controller: productController["getHotOfferList"]["controller"],
+  },
 ];
 
 module.exports = routes;

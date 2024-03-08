@@ -9,11 +9,13 @@ const Input = ({
   name,
   label,
   required = false,
+  ...rest
 }) => {
   return (
     <div>
       {label && <label className="mb-1 text-gray-200">{label}</label>}
       <input
+        {...rest}
         value={value}
         onChange={onChange}
         type={type ? type : "text"}
