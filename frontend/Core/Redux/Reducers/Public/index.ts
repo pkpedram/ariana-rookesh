@@ -31,7 +31,8 @@ let initialState: PublicState = {
   lan: false,
   cityList: [],
   sellers: [],
-  catalogues: []
+  catalogues: [],
+  staticAttributes: [],
 };
 
 const publicState = (state: PublicState = initialState, action: AnyAction) => {
@@ -87,20 +88,37 @@ const publicState = (state: PublicState = initialState, action: AnyAction) => {
     case "city":
       return {
         ...state,
-        cityList: JSON.parse(payload)?.result,
+        cityList:
+          typeof payload === "string"
+            ? JSON.parse(payload)?.result
+            : payload.result,
       };
 
     case "sellers":
       return {
         ...state,
-        sellers: JSON.parse(payload),
+        sellers:
+          typeof payload === "string" ? JSON.parse(payload) : payload.result,
       };
-
-    case 'catalogues':
+    case "seller":
       return {
         ...state,
-        catalogues: JSON.parse(payload)
-      }  
+        sellers:
+          typeof payload === "string" ? JSON.parse(payload) : payload.result,
+      };
+
+    case "catalogues":
+      return {
+        ...state,
+        catalogues: JSON.parse(payload),
+      };
+
+    case "staticAttribute":
+      return {
+        ...state,
+        staticAttributes: payload.result,
+      };
+
     default:
       return state;
   }

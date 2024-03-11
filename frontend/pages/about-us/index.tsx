@@ -20,22 +20,24 @@ const AboutUs = ({
 }) => {
   return (
     <div className="w-full mb-20 !px-0 !max-w-full [&>*]:max-w-[90rem] [&>*]:mx-auto">
-      <h1 className={`${lan ? "ltr" : ""} text-xl font-bold`}>
-        {lan ? "About Ariana Holding" : "درباره هلدینگ آریانا"}
-      </h1>
-      <Image
-        src={aboutImage}
-        alt="عکس چوب"
-        className="w-full my-6 rounded-2xl"
-      />
-      <div
-        className={`${lan ? "ltr" : ""} mb-8`}
-        dangerouslySetInnerHTML={{
-          __html: lan
-            ? generalSetting.en_aboutUs_full
-            : generalSetting.aboutUs_full,
-        }}
-      ></div>
+      <div className="w-full px-8">
+        <h1 className={`${lan ? "ltr" : ""} text-xl font-bold `}>
+          {lan ? "About Ariana Holding" : "درباره هلدینگ آریانا"}
+        </h1>
+        <Image
+          src={aboutImage}
+          alt="عکس چوب"
+          className="w-full my-6 rounded-2xl"
+        />
+        <div
+          className={`${lan ? "ltr" : ""} mb-8`}
+          dangerouslySetInnerHTML={{
+            __html: lan
+              ? generalSetting.en_aboutUs_full
+              : generalSetting.aboutUs_full,
+          }}
+        ></div>
+      </div>
 
       {categories.map((item, idx) =>
         idx % 2 === 0 ? (
@@ -77,7 +79,7 @@ const AboutUs = ({
             </div>
           </div>
         ) : (
-          <div className="w-full ">
+          <div className="w-full max-w-[90rem] mx-auto px-8">
             <h1 className={`${lan ? "text-left" : ""} mb-4 text-xl font-bold`}>
               {" "}
               {lan
@@ -94,7 +96,7 @@ const AboutUs = ({
           </div>
         )
       )}
-      <div className="w-full mt-8">
+      <div className="w-full mt-8 px-8">
         <ContactUsForm />
       </div>
     </div>

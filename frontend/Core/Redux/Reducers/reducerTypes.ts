@@ -51,7 +51,8 @@ export interface PublicState {
   lan: boolean;
   cityList: Array<Object>;
   sellers: Array<Object>;
-  catalogues: Array<Object>
+  catalogues: Array<Object>;
+  staticAttributes: Array<Object>;
 }
 
 type authors = {
@@ -162,7 +163,7 @@ export interface ProductState {
   productAtts: Array<object>;
   productSellers: Array<object>;
   suggestedProducts: Array<Object>;
-  hotOffers: Array<ProductListItem | object>
+  hotOffers: Array<ProductListItem | object>;
 }
 
 export type BlogList = {

@@ -195,13 +195,13 @@ const Header = ({
               {lan ? "فا" : "En"}
             </button>
 
-            <a
-              href={apiConfig.domain + generalSetting?.catalog}
+            <Link
+              href={"/catalogues"}
               target="_blank"
               className="text-black bg-white p-3 rounded-lg font-semibold md:text-xs text-xs"
             >
               {lan ? "Catalogue" : " دانلود کاتالوگ"}
-            </a>
+            </Link>
           </div>
         </div>
       </div>

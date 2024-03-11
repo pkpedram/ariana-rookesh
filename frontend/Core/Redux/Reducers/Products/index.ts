@@ -33,7 +33,7 @@ let initialState: ProductState = {
   productStaticAtts: [],
   productSellers: [],
   suggestedProducts: [],
-  hotOffers: []
+  hotOffers: [],
 };
 
 const productState = (
@@ -75,6 +75,12 @@ const productState = (
         ...state,
         productList: productListData.result,
       };
+
+    case "product":
+      return {
+        ...state,
+        productList: payload.result,
+      };
     case "productInfo":
       let pIdata = typeof payload === "string" ? JSON.parse(payload) : payload;
 
@@ -84,12 +90,12 @@ const productState = (
       };
 
     case "suggestedProducts":
-      let sgPr = typeof payload === 'string' ? JSON.parse(payload) : payload
-      
+      let sgPr = typeof payload === "string" ? JSON.parse(payload) : payload;
+
       return {
         ...state,
-        suggestedProducts: sgPr
-      }
+        suggestedProducts: sgPr,
+      };
 
     case "productImages":
       let pImages = typeof payload === "string" ? JSON.parse(payload) : payload;
@@ -118,13 +124,13 @@ const productState = (
         productSellers: psData.result,
       };
 
-    case 'hotOffers': 
-    let hoData = typeof payload === 'string' ? JSON.parse(payload) : payload;
-    return {
-      ...state,
-      hotOffers: hoData
-    } 
-      
+    case "hotOffers":
+      let hoData = typeof payload === "string" ? JSON.parse(payload) : payload;
+      return {
+        ...state,
+        hotOffers: hoData,
+      };
+
     default:
       return state;
   }

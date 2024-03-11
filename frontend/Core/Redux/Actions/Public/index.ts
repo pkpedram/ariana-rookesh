@@ -48,6 +48,15 @@ const publicActions = {
         }
       );
     },
+  getSellers: () => async (dispatch: Dispatch) => {
+    await _dataManager.get("seller", {}, { dispatch }, {}, false);
+  },
+  getCities: () => async (dispatch: Dispatch) => {
+    await _dataManager.get("city", {}, { dispatch }, {}, false);
+  },
+  getStaticAttributes: () => async (dispatch: Dispatch) => {
+    await _dataManager.get("staticAttribute", {}, { dispatch }, {}, false);
+  },
 };
 
 export default publicActions;
