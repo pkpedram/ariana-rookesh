@@ -1,33 +1,110 @@
-import React, { Suspense, useState } from 'react'
-import Header from './components/Header'
-import SideBar from './components/SideBar'
-import Loading from './components/Loading'
-import { connect } from 'react-redux'
+import React, { Suspense, useState } from "react";
+import Header from "./components/Header";
+import SideBar from "./components/SideBar";
+import Loading from "./components/Loading";
+import { connect } from "react-redux";
+import Modal from "./components/Modal";
 
-const Layout = ({children, isLoading}) => {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+const Layout = ({ children, isLoading }) => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [showModal, setShowModal] = useState(true);
   return (
-    
-    <div className='w-full h-screen bg-dark flex flex-col '>
-      <Header setSideBarOpen={setSidebarOpen} sidebarOpen={sidebarOpen}/>
-        <div className='w-full flex-1 flex overflow-hidden'>
-          <SideBar  setSidebarOpen={setSidebarOpen} sidebarOpen={sidebarOpen}/>
-        
-           
-        <div  className='w-full flex-1 relative overflow-x-hidden overflow-scroll p-6'>
-        {isLoading && <Loading />}
-        {children}
+    <div className="w-full h-screen bg-dark flex flex-col ">
+      {showModal && (
+        <Modal
+          closeModal={() => setShowModal(false)}
+          title={"ورژن جدید"}
+          className={"!w-1/2"}
+        >
+          <div className="[&>p]:text-white [&>p]:mt-3 [&>p]:leading-relaxed mt-10 ">
+            <h2 className="text-xl text-white">با سلام و عرض احترام</h2>
+            <p>
+              بدین وسیله تغییرات انجام شده در ورژن جدید را به استحضار مدیریت
+              شرکت آریاناروکش میرسانیم{" "}
+            </p>
+            <p>تغییرات انجام شده شامل موارد زیر است:</p>
+            <p>
+              دسته بندی ها: مدل دسته بندی ها دارای والد شده و از این به بعد هر
+              دسته بندی میتواند زیر دسته بندی خود را داشته باشد. در وبسایت لینک
+              محصولات آریاناروکش تبدیل به مگا منوی سته بندی ها شده و از آنجا
+              میتوان به صفحات محصول هر دسته بندی رفت
+            </p>
+            <p>
+              محصولات مشابه: محصولات مشابه از مدل ساخت اتوماتیک نسبت به دسته
+              بندی تبدیل به ماژول شده و ادمین میتواند در صفحه ویرایش یا افزودن
+              هر محصول محصولات مشابه انتخابی خود را به محصول اصلی پیوست کند.
+            </p>
+            <p>
+              پیشنهادات ویژه: در صفحه هر دسته بندی پیشنهادات ویژه ی آن دسته بندی
+              با توجه به اینکه چه محصولی در تخفیف هست یا خیر به صورت اتوماتیک
+              ساخته میشد که این امر تغییر پیدا کرد. از این پس ادمین میتواند در
+              صفحه مربوط به هر محصول آن محصول را در بازه زمانی مشخص به ماژول
+              پیشنهادات ویژه اضافه کند. مطلع باشید که اعمال تخفیف برای محصول
+              همچنان پابرجاست اما اهمیت پیشنهاد ویژه در اعمال تخفیف در آن بازه
+              بیشتر از فیلد تخفیف است.
+            </p>
+            <p>
+              ماژول کاتالوگ ها: در ورژن قبلی امکان آپلود یک کاتالوگ در قسمت
+              تنظیمات اصلی بود. در ورژن جدید امکان آپلود لیستی از کاتالوگ ها با
+              نام و شناسه خود است. در وبسایت صفحه ای جدا برای کاتالوگ ها اختصاص
+              دیده شده که با کلیک بر روی دکمه دانلود کاتالوگ در هدر میتوان به آن
+              دسترسی پیدا کرد. برای مشاهده ماژول کاتالوگ ها میتوانید از ساید بار
+              پنل ادمین به مدیریت آن بپردازید.
+            </p>
+            <p>
+              ماژول فیلتر ها: زین پس در صفحه محصولات هر دسته بندی در وبسایت
+              قسمتی به عنوان فیلتر ها داریم که بخش های زیر را داراست
+              <br />
+              جستجو: فیلدی به عنوان جستجوی محصولات در آن دسته بندی قرار گرفته که
+              سوای جستجو در نام محصول در محتوای وارد شده محصول هم جستجو میکند و
+              لیست پیدا شده را نمایش میدهد.
+              <br />
+              فیلتر بر اساس بازه قیمت: کاربر میتواند بازه قیمتی مشخص کرده یا
+              هرکدام از فیلد های از یا تا را خالی بگذارد این فیلتر با احتساب
+              قیمت تخفیف دار و یا قیمت پیشنهاد ویژه اعمال میشود.
+              <br />
+              قیلتر بر اساس فروشنده: این فیلتر به کاربر این امکان را میدهد که از
+              لیست فروشنده ها تا چند فروشنده را نتخاب کند و محصولات مربوط به
+              آنها را مشاهده کند.
+              <br />
+              فیلتر بر اساس شهر: کاربر میتواند با انتخاب شهر ها محصولات فروشنده
+              های شهر مورد نظر را ببیند: این فیلتر نیز چند انتخابی است.
+              <br />
+              فیلتر بر اساس ویژگی ثابت: ویژگی های ثابت مختص به هر محصول نیستند و
+              چند محصول میتواند یک ویژگی ثابت را داشته باشد. همانند تولید ملی
+              بودن یا ارسال رایگان و... به همین دلیل کاربر میتواند با انتخاب
+              ویژگی های ثابت محصولات مورد نظر خود را از آن ویژگی ها پیدا کند.
+              این فیلتر نیز چند انتخابی است. برای افزودن ویژگی ثابت به بخش
+              محتوای پنل و برای افزودن آن به محصول به صفحه ویرایش یا افزودن
+              محصول بروید.
+            </p>
+            <p>
+              کلام آخر: بدیهی است که پس از هر تغییری امکان وجود مشکلاتی که تیم
+              فنی آنها را پیدا نکرده باشد. لطفا پس از مشاهده مشکلات سریعا با
+              پشتیبان خود ارتباط بگیرید و مورد را با او در میان بگذارید. تیم فنی
+              نوآو استودیو در اسرع وقت مشکل بوجود آمده را حل کرده و به شما از
+              طریق پشتیبان اطلاع خواهد داد.
+            </p>
+            <p>روزگار خوشی را برای شما آرزومندیم.</p>
+            <p>تیم فنی نوآو استودیو</p>
+          </div>
+        </Modal>
+      )}
+      <Header setSideBarOpen={setSidebarOpen} sidebarOpen={sidebarOpen} />
+      <div className="w-full flex-1 flex overflow-hidden">
+        <SideBar setSidebarOpen={setSidebarOpen} sidebarOpen={sidebarOpen} />
 
+        <div className="w-full flex-1 relative overflow-x-hidden overflow-scroll p-6">
+          {isLoading && <Loading />}
+          {children}
         </div>
-      
-        </div>
+      </div>
     </div>
+  );
+};
 
-  )
-}
+const mapStateToProps = (state) => ({
+  isLoading: state.publicState.loading,
+});
 
-const mapStateToProps = state => ({
-  isLoading: state.publicState.loading
-})
-
-export default connect(mapStateToProps)(Layout)
+export default connect(mapStateToProps)(Layout);
